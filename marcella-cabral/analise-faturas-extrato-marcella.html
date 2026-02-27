@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análise Fatura & Extrato — Dra. Marcella Cabral</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--bg:#0c0f14;--surface:#141820;--surface2:#1a2030;--accent:#c9a55c;--accent2:#e8c97a;--accent-dim:rgba(201,165,92,.15);--red:#e85d5d;--red-dim:rgba(232,93,93,.12);--green:#5dbe8a;--green-dim:rgba(93,190,138,.12);--blue:#5d8ee8;--blue-dim:rgba(93,142,232,.12);--purple:#a07de8;--purple-dim:rgba(160,125,232,.12);--pink:#e88bc4;--orange:#e8a85d;--text:#e8e4dd;--text2:#9b978f;--text3:#5e5b55;--border:rgba(201,165,92,.1);--font-display:'Playfair Display',Georgia,serif;--font-body:'DM Sans',-apple-system,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--font-body);line-height:1.6;overflow-x:hidden}::selection{background:var(--accent);color:var(--bg)}::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--accent-dim);border-radius:3px}
+
+/* Header */
+.header{padding:3rem 2rem 2rem;max-width:1200px;margin:auto;border-bottom:1px solid var(--border)}
+.header-label{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent);font-weight:500}
+.header h1{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:600;margin:.5rem 0}
+.header-sub{color:var(--text2);font-size:.9rem}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:100;background:rgba(12,15,20,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 2rem}.nav-inner{max-width:1200px;margin:auto;display:flex;gap:.25rem;overflow-x:auto;scrollbar-width:none}.nav-inner::-webkit-scrollbar{display:none}.nav a{padding:.85rem 1rem;font-size:.72rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--text3);text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:.3s}.nav a:hover,.nav a.active{color:var(--accent);border-bottom-color:var(--accent)}
+
+section{padding:4rem 2rem;max-width:1200px;margin:auto}
+.section-label{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem;font-weight:500}
+.section-title{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:600;margin-bottom:.3rem}
+.section-desc{color:var(--text2);font-size:.9rem;max-width:700px;margin-bottom:2.5rem}
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--border),transparent);margin:0 auto;max-width:1200px}
+
+/* Cards & grids */
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.25rem}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem;transition:.3s;position:relative;overflow:hidden}
+.card:hover{border-color:rgba(201,165,92,.25);transform:translateY(-2px)}
+.card-label{font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem;font-weight:500}
+.card-value{font-family:var(--font-display);font-size:1.8rem;font-weight:700;line-height:1.2}
+.card-sub{font-size:.82rem;color:var(--text2);margin-top:.4rem}
+.tag{display:inline-block;padding:.2rem .6rem;border-radius:16px;font-size:.68rem;font-weight:500;letter-spacing:.3px}
+.tag-red{background:var(--red-dim);color:var(--red)}.tag-green{background:var(--green-dim);color:var(--green)}.tag-blue{background:var(--blue-dim);color:var(--blue)}.tag-accent{background:var(--accent-dim);color:var(--accent)}.tag-purple{background:var(--purple-dim);color:var(--purple)}.tag-orange{background:rgba(232,168,93,.12);color:var(--orange)}
+
+/* Alert */
+.alert{padding:1.25rem;border-radius:12px;margin-top:1.25rem;display:flex;gap:.75rem;align-items:flex-start}
+.alert-red{background:var(--red-dim);border:1px solid rgba(232,93,93,.2)}.alert-accent{background:var(--accent-dim);border:1px solid rgba(201,165,92,.2)}.alert-blue{background:var(--blue-dim);border:1px solid rgba(93,142,232,.2)}.alert-orange{background:rgba(232,168,93,.08);border:1px solid rgba(232,168,93,.2)}
+.alert-icon{font-size:1.2rem;flex-shrink:0}.alert-text{font-size:.85rem;color:var(--text2)}.alert-text strong{color:var(--text)}
+
+/* Chart */
+.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-top:1.25rem}
+.chart-card h3{font-family:var(--font-display);font-size:1.1rem;margin-bottom:1.25rem}
+.chart-container{position:relative;height:280px}
+
+/* Table */
+.table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border);margin-top:1.25rem}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th{padding:.75rem 1rem;text-align:left;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);background:var(--surface);border-bottom:1px solid var(--border);font-weight:500}
+td{padding:.7rem 1rem;border-bottom:1px solid rgba(255,255,255,.03)}
+tr:hover td{background:rgba(201,165,92,.03)}
+.text-right{text-align:right}
+.row-highlight{background:rgba(232,93,93,.04)}
+.row-total{font-weight:600;background:var(--surface2)}
+
+/* Discovery cards */
+.discovery{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.25rem;display:flex;gap:1rem;align-items:flex-start;margin-bottom:.75rem;transition:.3s}
+.discovery:hover{border-color:rgba(201,165,92,.25)}
+.disc-num{font-family:var(--font-display);font-size:1.5rem;font-weight:700;min-width:32px;text-align:center;line-height:1}
+.disc-content h4{font-family:var(--font-display);font-size:.95rem;margin-bottom:.25rem}
+.disc-content p{font-size:.8rem;color:var(--text2);line-height:1.4}
+
+/* Compare table */
+.compare-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:0;border-bottom:1px solid rgba(255,255,255,.03);align-items:center;padding:.5rem 1rem;font-size:.82rem}
+.compare-row:hover{background:rgba(201,165,92,.03)}
+.compare-header{font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);font-weight:500;background:var(--surface);border-bottom:1px solid var(--border);padding:.7rem 1rem}
+.compare-item{color:var(--text2)}.compare-check{color:var(--green)}.compare-warn{color:var(--orange)}.compare-alert{color:var(--red)}
+.compare-wrap{border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:1.25rem}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(25px);transition:all .7s cubic-bezier(.16,1,.3,1)}.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Footer */
+.footer{text-align:center;padding:3rem 2rem;color:var(--text3);font-size:.75rem;border-top:1px solid var(--border)}.footer .brand{font-family:var(--font-display);font-size:1.1rem;color:var(--accent);margin-bottom:.4rem}
+
+@media(max-width:768px){section{padding:2.5rem 1.25rem}.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}.compare-row{grid-template-columns:1fr;gap:.2rem;padding:.6rem 1rem}.compare-header{display:none}.nav a{padding:.75rem .6rem;font-size:.6rem}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-label">Análise Detalhada — Cruzamento de Fontes</div>
+  <h1 style="font-family:var(--font-display)">Raio-X Financeiro: Fatura + Extrato + Planilha</h1>
+  <p class="header-sub">Dra. Marcella Cabral · Período: Nov/2025 a Fev/2026 · Preparado por Laysa Corrêa, CFP®</p>
+</div>
+
+<nav class="nav"><div class="nav-inner">
+  <a href="#resumo" class="active">Resumo</a>
+  <a href="#faturas">Faturas Cartão</a>
+  <a href="#extrato">Extrato Itaú</a>
+  <a href="#descobertas">Descobertas</a>
+  <a href="#comparativo">Planilha vs Real</a>
+  <a href="#fluxo">Fluxo Real</a>
+  <a href="#acoes">Perguntas Abertas</a>
+</div></nav>
+
+<!-- RESUMO -->
+<section id="resumo">
+  <div class="section-label reveal">01 — Visão Geral</div>
+  <h2 class="section-title reveal">O dinheiro está indo para onde?</h2>
+  <p class="section-desc reveal">Cruzamos 3 faturas do cartão Itaú Mastercard Black, o extrato bancário de 3 meses e a planilha feita em reunião. Resultado: há pelo menos R$ 4.000 a R$ 6.000 em gastos mensais que não estavam mapeados.</p>
+
+  <div class="grid-4 reveal">
+    <div class="card" style="border-left:3px solid var(--green)"><div class="card-label">Entradas (média/mês)</div><div class="card-value" style="color:var(--green)">R$ 21k</div><div class="card-sub">PJ→PF + Pacientes PF (excl. resgate Warren)</div></div>
+    <div class="card" style="border-left:3px solid var(--red)"><div class="card-label">Saídas (média/mês)</div><div class="card-value" style="color:var(--red)">R$ 31-35k</div><div class="card-sub">CC + Cartão incluído</div></div>
+    <div class="card" style="border-left:3px solid var(--red)"><div class="card-label">Déficit Real</div><div class="card-value" style="color:var(--red)">- R$ 10-12k</div><div class="card-sub">Coberto com resgate Warren. ~R$ 2k/mês em espécie não aparece no extrato.</div></div>
+    <div class="card" style="border-left:3px solid var(--orange)"><div class="card-label">Gastos Ocultos</div><div class="card-value" style="color:var(--orange)">R$ 4-6k</div><div class="card-sub">Não estavam na planilha</div></div>
+  </div>
+
+  <div class="alert alert-red reveal"><div class="alert-icon">🔥</div><div class="alert-text"><strong>Fato confirmado:</strong> Em 15/01/2026 houve um resgate de R$ 20.000 da Warren (TED Renascença) para cobrir despesas do mês. Ou seja, a reserva está sendo consumida ativamente.</div></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FATURAS -->
+<section id="faturas">
+  <div class="section-label reveal">02 — Faturas do Cartão Itaú Black</div>
+  <h2 class="section-title reveal">3 meses de cartão sob o microscópio</h2>
+  <p class="section-desc reveal">Cartão final 9926 (Mastercard Black) + adicionais 7074 e 5633. Limite: R$ 42.080. Todos pagos integralmente.</p>
+
+  <div class="grid-3 reveal">
+    <div class="card"><div class="card-label">Dez/2025</div><div class="card-value" style="color:var(--accent)">R$ 14.248</div><div class="card-sub">Vencimento 02/12 · Paga 01/12</div></div>
+    <div class="card" style="border-left:3px solid var(--red)"><div class="card-label">Jan/2026 ⚠️ PICO</div><div class="card-value" style="color:var(--red)">R$ 18.143</div><div class="card-sub">Vencimento 02/01 · Paga 30/12</div></div>
+    <div class="card"><div class="card-label">Fev/2026</div><div class="card-value" style="color:var(--green)">R$ 12.180</div><div class="card-sub">Vencimento 02/02 · Paga 03/02</div></div>
+  </div>
+
+  <div class="chart-card reveal">
+    <h3>Composição das Faturas por Categoria</h3>
+    <div class="chart-container"><canvas id="chartCategoria"></canvas></div>
+  </div>
+
+  <div class="table-wrap reveal">
+    <table>
+      <thead><tr><th>Estabelecimento/Despesa</th><th>Categoria</th><th>Tipo</th><th class="text-right">Valor (3 meses)</th><th class="text-right">~Mensal</th></tr></thead>
+      <tbody>
+        <tr class="row-highlight"><td>BIO MEDS PHARMACEUTICA (vários parcelamentos)</td><td><span class="tag tag-blue">Insumos PJ</span></td><td>PJ</td><td class="text-right" style="color:var(--red);font-weight:600">R$ 13.395</td><td class="text-right">R$ 4.465</td></tr>
+        <tr><td>BPG*CISPay / Método CIS / Febracis</td><td><span class="tag tag-purple">Curso</span></td><td>Misto</td><td class="text-right">R$ 10.672</td><td class="text-right">R$ 3.557</td></tr>
+        <tr><td>DOM*YMCURSOSE (Yuri Motomura)</td><td><span class="tag tag-purple">Curso</span></td><td>PJ</td><td class="text-right">R$ 6.600</td><td class="text-right">R$ 2.200</td></tr>
+        <tr><td>LATAM + Azul (passagens aéreas)</td><td><span class="tag tag-orange">Viagem</span></td><td>PJ</td><td class="text-right">R$ 1.753</td><td class="text-right">R$ 584</td></tr>
+        <tr><td>CLINICA DRA IVANA (parcelamento pessoal)</td><td><span class="tag tag-accent">Saúde PF</span></td><td>PF</td><td class="text-right">R$ 1.600</td><td class="text-right">R$ 533</td></tr>
+        <tr><td>RIOSKIN MEDICAL (estética consultório)</td><td><span class="tag tag-blue">Insumos PJ</span></td><td>PJ</td><td class="text-right">R$ 538</td><td class="text-right">R$ 179</td></tr>
+        <tr><td>AKAD SEGUROS (RC profissional)</td><td><span class="tag tag-green">Seguro</span></td><td>PJ</td><td class="text-right">R$ 489</td><td class="text-right">R$ 163</td></tr>
+        <tr><td>PORTO SEGURO (equipamentos)</td><td><span class="tag tag-green">Seguro</span></td><td>PJ</td><td class="text-right">R$ 491</td><td class="text-right">R$ 164</td></tr>
+        <tr><td>Microsoft Store</td><td><span class="tag tag-accent">Serviço</span></td><td>PF</td><td class="text-right">R$ 509</td><td class="text-right">R$ 170</td></tr>
+        <tr><td>HTM*Pandora Treina + PR Academy + Reservatório</td><td><span class="tag tag-purple">Cursos</span></td><td>Misto</td><td class="text-right">R$ 695</td><td class="text-right">R$ 232</td></tr>
+        <tr><td>PG*ALMEIDA CURSOS</td><td><span class="tag tag-purple">Curso</span></td><td>PJ</td><td class="text-right">R$ 600</td><td class="text-right">R$ 200</td></tr>
+        <tr><td>BENDITA CHICA / SHEIN / Jalecochic (vestuário)</td><td><span class="tag tag-accent">Vestuário</span></td><td>PJ/PF</td><td class="text-right">R$ 740</td><td class="text-right">R$ 247</td></tr>
+        <tr><td>SHOPEE / MercadoLivre / outros</td><td><span class="tag tag-accent">Diversos</span></td><td>Misto</td><td class="text-right">R$ 674</td><td class="text-right">R$ 225</td></tr>
+        <tr><td>Combustível + Uber + Estacionamento (no cartão)</td><td><span class="tag tag-accent">Veículo</span></td><td>PF</td><td class="text-right">R$ 1.550</td><td class="text-right">R$ 517</td></tr>
+        <tr><td>Alimentação (restaurantes, café)</td><td><span class="tag tag-accent">Alimentação</span></td><td>PF</td><td class="text-right">R$ 2.200</td><td class="text-right">R$ 733</td></tr>
+        <tr><td>Farmácias PF (Drogasil, Venancio, Pacheco)</td><td><span class="tag tag-accent">Saúde PF</span></td><td>PF</td><td class="text-right">R$ 340</td><td class="text-right">R$ 113</td></tr>
+        <tr><td>Eventos/turismo (2M*BNI, MundoRio)</td><td><span class="tag tag-orange">Lazer</span></td><td>PF</td><td class="text-right">R$ 610</td><td class="text-right">R$ 203</td></tr>
+        <tr><td>Apple.com / assinaturas</td><td><span class="tag tag-accent">Assinatura</span></td><td>PF</td><td class="text-right">R$ 67</td><td class="text-right">R$ 22</td></tr>
+        <tr class="row-total"><td colspan="3">SOMA IDENTIFICADA (cartão)</td><td class="text-right" style="color:var(--accent);font-family:var(--font-display)">~R$ 44.570</td><td class="text-right" style="color:var(--accent)">~R$ 14.857</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-accent reveal"><div class="alert-icon">🎯</div><div class="alert-text"><strong>Insight do Cartão:</strong> Aproximadamente 55% da fatura são despesas ligadas ao consultório (Bio Meds, cursos, seguros PJ, insumos). Os cursos sozinhos representam ~R$ 6.200/mês (Febracis + YM + Pandora + Almeida). Esse é o maior "ralo" — mais do que o aluguel+condomínio.</div></div>
+
+  <div class="alert alert-orange reveal"><div class="alert-icon">⚠️</div><div class="alert-text"><strong>Bio Meds Pharmaceutica:</strong> R$ 13.395 em 3 meses (~R$ 4.465/mês). São insumos/medicações para o consultório. Parcelados no cartão PF. Se o consultório fatura R$ 3-5k, só esse fornecedor já consome quase todo o faturamento. É onde está o "buraco" principal.</div></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXTRATO -->
+<section id="extrato">
+  <div class="section-label reveal">03 — Extrato Bancário Itaú</div>
+  <h2 class="section-title reveal">O que a conta corrente revela</h2>
+  <p class="section-desc reveal">Período: 15/11/2025 a 13/02/2026 (~3 meses). Saldo final: R$ 2.617. Limite de conta: R$ 10.700 (não utilizado).</p>
+
+  <div class="chart-card reveal">
+    <h3>Maiores Saídas Recorrentes (via CC - excluindo cartão)</h3>
+    <div class="chart-container"><canvas id="chartExtrato"></canvas></div>
+  </div>
+
+  <div class="table-wrap reveal">
+    <table>
+      <thead><tr><th>Pagamento (CC)</th><th>Frequência</th><th>Observação</th><th class="text-right">~Valor/mês</th></tr></thead>
+      <tbody>
+        <tr class="row-highlight"><td><strong>Fatura Cartão Crédito</strong></td><td>Mensal</td><td>Já detalhado acima</td><td class="text-right" style="color:var(--red)">R$ 14.857</td></tr>
+        <tr><td><strong>BRUNO A</strong> (PIX todo dia ~02)</td><td>Mensal</td><td><span class="tag tag-orange">Identificar ⚠️</span> Aluguel+condo?</td><td class="text-right">R$ 2.892</td></tr>
+        <tr><td><strong>AMIL Plano de Saúde</strong></td><td>Mensal</td><td>Valor variou: R$ 1.007 a R$ 2.154</td><td class="text-right">R$ 2.161</td></tr>
+        <tr><td><strong>Personal NAYARA</strong></td><td>Mensal</td><td>✅ Confere planilha. + R$ 4.000 em Jan</td><td class="text-right">R$ 1.080*</td></tr>
+        <tr><td><strong>SEFAZ RJ (impostos)</strong></td><td>Eventual</td><td>R$ 3.590 de uma vez em Jan/26</td><td class="text-right">R$ 1.197</td></tr>
+        <tr><td><strong>M A CON / Contador</strong></td><td>Mensal</td><td>Variou R$ 600 a R$ 1.575</td><td class="text-right">R$ 925</td></tr>
+        <tr><td><strong>ALMEIDA</strong> (curso/mentoria)</td><td>Mensal</td><td>R$ 1.500-1.575/mês</td><td class="text-right">R$ 1.025</td></tr>
+        <tr><td><strong>VIVO</strong> (2 linhas)</td><td>Mensal</td><td><span class="tag tag-red">Planilha: R$ 470, real: R$ 899</span></td><td class="text-right">R$ 899</td></tr>
+        <tr><td><strong>LUCIANA</strong> (PIX semanal)</td><td>Semanal</td><td><span class="tag tag-orange">Não estava na planilha ⚠️</span></td><td class="text-right">R$ 747</td></tr>
+        <tr><td><strong>DRA. IS</strong> (supervisão?)</td><td>Mensal</td><td><span class="tag tag-orange">Não estava na planilha ⚠️</span></td><td class="text-right">R$ 733</td></tr>
+        <tr><td><strong>PARCELAMOS</strong> (app parcelas)</td><td>Mensal</td><td><span class="tag tag-orange">Parcelas não identificadas ⚠️</span></td><td class="text-right">R$ 577</td></tr>
+        <tr><td><strong>RAFAELA</strong> (gravação vídeos?)</td><td>Mensal</td><td>~R$ 797/mês, confere com planilha R$ 798</td><td class="text-right">R$ 531</td></tr>
+        <tr><td><strong>BRUNO F</strong></td><td>Quinzenal</td><td><span class="tag tag-orange">Não identificado ⚠️</span></td><td class="text-right">R$ 533</td></tr>
+        <tr><td><strong>BRADESCO Seguro Auto</strong></td><td>Mensal</td><td>✅ Confere planilha R$ 489</td><td class="text-right">R$ 490</td></tr>
+        <tr><td><strong>Simples Nacional</strong></td><td>Mensal</td><td>Muito irregular: R$ 302 a R$ 2.442</td><td class="text-right">R$ 915</td></tr>
+        <tr><td><strong>DARF</strong></td><td>Mensal</td><td>R$ 566 + R$ 414 = R$ 980 em Dez</td><td class="text-right">R$ 327</td></tr>
+        <tr><td><strong>LIGHT + CEG</strong> (energia + gás)</td><td>Mensal</td><td>✅ Próximo da planilha</td><td class="text-right">R$ 384</td></tr>
+        <tr><td><strong>Supermercado</strong> (PIX)</td><td>Semanal</td><td>Amoedo, Casas Guanabara, etc</td><td class="text-right">R$ 300</td></tr>
+        <tr><td><strong>Pedágio Sem Parar</strong></td><td>Mensal</td><td>R$ 70-102</td><td class="text-right">R$ 84</td></tr>
+        <tr><td>Estacionamentos (TRM, Estapar, Indigo)</td><td>Vários</td><td>Além dos do cartão</td><td class="text-right">R$ 65</td></tr>
+        <tr><td>Doações (Igreja, etc)</td><td>Mensal</td><td>~R$ 50/mês</td><td class="text-right">R$ 50</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid-2 reveal">
+    <div class="chart-card"><h3>Entradas na CC (por tipo)</h3><div class="chart-container"><canvas id="chartEntradas"></canvas></div></div>
+    <div class="chart-card"><h3>Saldo Diário — Montanha-Russa</h3><div class="chart-container"><canvas id="chartSaldo"></canvas></div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DESCOBERTAS -->
+<section id="descobertas">
+  <div class="section-label reveal">04 — As 10 Descobertas</div>
+  <h2 class="section-title reveal">O que o extrato revelou que a planilha não mostrava</h2>
+
+  <div class="reveal">
+    <div class="discovery" style="border-left:3px solid var(--red)"><div class="disc-num" style="color:var(--red)">1</div><div class="disc-content"><h4>Bio Meds: R$ 4.465/mês no cartão PF para insumos do consultório</h4><p>Maior fornecedor. Consome quase toda a receita do consultório. Parcelamentos longos (3-6x). Misturado no cartão PF — impossível ver o real custo do consultório.</p></div></div>
+    <div class="discovery" style="border-left:3px solid var(--red)"><div class="disc-num" style="color:var(--red)">2</div><div class="disc-content"><h4>Cursos somam ~R$ 6.200/mês (cartão + extrato)</h4><p>Febracis/CIS (~R$ 3.500/mês) + YM Cursos (~R$ 2.200/mês) + Pandora + Almeida + PR Academy. É o 2º maior gasto. Mais do que aluguel+condomínio.</p></div></div>
+    <div class="discovery" style="border-left:3px solid var(--orange)"><div class="disc-num" style="color:var(--orange)">3</div><div class="disc-content"><h4>VIVO: planilha dizia R$ 470, real é R$ 899 (2 linhas)</h4><p>São duas linhas de ~R$ 449 cada. Quase o dobro do que constava. Oportunidade de renegociar.</p></div></div>
+    <div class="discovery" style="border-left:3px solid var(--orange)"><div class="disc-num" style="color:var(--orange)">4</div><div class="disc-content"><h4>LUCIANA: R$ 320/semana (~R$ 1.280/mês) não estava mapeada</h4><p>PIX semanal recorrente. Possível faxineira/diarista? Despesa fixa significativa completamente fora do radar.</p></div></div>
+    <div class="discovery" style="border-left:3px solid var(--orange)"><div class="disc-num" style="color:var(--orange)">5</div><div class="disc-content"><h4>DRA. IS: ~R$ 1.050-1.150/mês não mapeada</h4><p>Pagamento mensal via PIX. Supervisão médica? Mentoria clínica? Não consta na planilha.</p></div></div>
+    <div class="discovery" style="border-left:3px solid var(--orange)"><div class="disc-num" style="color:var(--orange)">6</div><div class="disc-content"><h4>BRUNO FERNANDES: R$ 400/mês (nutricionista parceiro)</h4><p>Pagamento recorrente quinzenal/mensal. Nutricionista parceiro - atendimentos conjuntos (R$ 1.280)? Ou outro serviço?</p></div></div>
+    <div class="discovery" style="border-left:3px solid var(--blue)"><div class="disc-num" style="color:var(--blue)">7</div><div class="disc-content"><h4>R$ 20.000 resgatados da Warren em Janeiro</h4><p>TED de Renascença (Warren) em 15/01 confirma que a reserva está financiando o déficit. Reserva de liquidez na Warren já está em apenas R$ 1.163,80. O patrimônio total Warren é R$ 346.479.</p></div></div>
+    <div class="discovery" style="border-left:3px solid var(--blue)"><div class="disc-num" style="color:var(--blue)">8</div><div class="disc-content"><h4>SEFAZ RJ: R$ 3.590 de impostos estaduais de uma vez (Jan)</h4><p>4 boletos pagos juntos em 22/01 — possível acerto de meses atrasados. Eventualidade que destruiu o caixa do mês.</p></div></div>
+    <div class="discovery" style="border-left:3px solid var(--blue)"><div class="disc-num" style="color:var(--blue)">9</div><div class="disc-content"><h4>Simples Nacional oscila violentamente: R$ 302 a R$ 2.442</h4><p>Em dezembro foi R$ 302, em fevereiro saltou para R$ 2.442. Precisa alinhar com contadora a previsibilidade.</p></div></div>
+    <div class="discovery" style="border-left:3px solid var(--accent)"><div class="disc-num" style="color:var(--accent)">10</div><div class="disc-content"><h4>Pacientes PF somam ~R$ 14.000/mês — mas quem é paciente?</h4><p>Dezenas de PIX recebidos (Katia, Beatriz, Daniel, Romulo, Celeste, Tatiana...). Mas são todos pacientes? Precisamos confirmar para saber o real faturamento do consultório.</p></div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPARATIVO -->
+<section id="comparativo">
+  <div class="section-label reveal">05 — Planilha vs Realidade</div>
+  <h2 class="section-title reveal">O que ela pensava vs o que ela gasta de fato</h2>
+
+  <div class="compare-wrap reveal">
+    <div class="compare-row compare-header"><div>Despesa</div><div class="text-right">Planilha</div><div class="text-right">Real</div><div class="text-right">Status</div></div>
+    <div class="compare-row"><div>Aluguel+Condo+IPTU (Bruno A?)</div><div class="text-right">R$ 2.960</div><div class="text-right">~R$ 2.900</div><div class="text-right compare-check">✅ OK</div></div>
+    <div class="compare-row"><div>Plano Saúde Amil (total)</div><div class="text-right">R$ 2.100</div><div class="text-right">R$ 2.100-2.150</div><div class="text-right compare-check">✅ OK</div></div>
+    <div class="compare-row"><div>VIVO (telecomunicações)</div><div class="text-right" style="color:var(--text)">R$ 470</div><div class="text-right" style="color:var(--red)">R$ 899</div><div class="text-right compare-alert">⚠️ +91%</div></div>
+    <div class="compare-row"><div>Personal (Nayara)</div><div class="text-right">R$ 1.080</div><div class="text-right">R$ 1.080</div><div class="text-right compare-check">✅ OK</div></div>
+    <div class="compare-row"><div>Psicóloga</div><div class="text-right">R$ 1.280</div><div class="text-right">?</div><div class="text-right compare-warn">❓ Confirmar</div></div>
+    <div class="compare-row"><div>Contador</div><div class="text-right">R$ 1.000</div><div class="text-right">R$ 600-1.575</div><div class="text-right compare-warn">❓ Variável</div></div>
+    <div class="compare-row"><div>Seguro Carro</div><div class="text-right">R$ 489</div><div class="text-right">R$ 490</div><div class="text-right compare-check">✅ OK</div></div>
+    <div class="compare-row"><div>Gravação (Rafaela)</div><div class="text-right">R$ 798</div><div class="text-right">R$ 797</div><div class="text-right compare-check">✅ OK</div></div>
+    <div class="compare-row"><div>Luz + Gás</div><div class="text-right">R$ 520</div><div class="text-right">~R$ 400</div><div class="text-right compare-check">✅ OK</div></div>
+    <div class="compare-row"><div>Simples Nacional</div><div class="text-right">R$ 2.000</div><div class="text-right">R$ 300-2.440</div><div class="text-right compare-warn">❓ Irregular</div></div>
+    <div class="compare-row"><div>DARF</div><div class="text-right" style="color:var(--text)">R$ 450</div><div class="text-right" style="color:var(--red)">R$ 980</div><div class="text-right compare-alert">⚠️ +118%</div></div>
+    <div class="compare-row"><div>Cartão de Crédito</div><div class="text-right" style="color:var(--text)">R$ 12.100</div><div class="text-right" style="color:var(--red)">R$ 12-18k</div><div class="text-right compare-alert">⚠️ até +50%</div></div>
+    <div class="compare-row" style="background:var(--surface2);font-weight:600;color:var(--accent)"><div>TOTAL Planilha vs Real</div><div class="text-right">R$ 24.000</div><div class="text-right" style="color:var(--red)">R$ 30-35k</div><div class="text-right" style="color:var(--red)">+ R$ 6-11k</div></div>
+  </div>
+
+  <h3 style="font-family:var(--font-display);margin:2rem 0 1rem;font-size:1.1rem" class="reveal">Despesas que NÃO estavam na planilha:</h3>
+  <div class="grid-3 reveal">
+    <div class="card" style="border-left:3px solid var(--orange)"><div class="card-label">Luciana (faxina?)</div><div class="card-value" style="font-size:1.4rem;color:var(--orange)">R$ 1.280/mês</div></div>
+    <div class="card" style="border-left:3px solid var(--orange)"><div class="card-label">Dra. IS (supervisão?)</div><div class="card-value" style="font-size:1.4rem;color:var(--orange)">R$ 1.100/mês</div></div>
+    <div class="card" style="border-left:3px solid var(--orange)"><div class="card-label">Parcelamos (app)</div><div class="card-value" style="font-size:1.4rem;color:var(--orange)">R$ 577/mês</div></div>
+    <div class="card" style="border-left:3px solid var(--orange)"><div class="card-label">Bruno F</div><div class="card-value" style="font-size:1.4rem;color:var(--orange)">R$ 400/mês</div></div>
+    <div class="card" style="border-left:3px solid var(--orange)"><div class="card-label">Supermercado (PIX)</div><div class="card-value" style="font-size:1.4rem;color:var(--orange)">R$ 300/mês</div></div>
+    <div class="card" style="border-left:3px solid var(--orange)"><div class="card-label">Sem Parar + Estac.</div><div class="card-value" style="font-size:1.4rem;color:var(--orange)">R$ 150/mês</div></div>
+  </div>
+  <div class="alert alert-orange reveal"><div class="alert-icon">📎</div><div class="alert-text"><strong>Total de gastos "invisíveis":</strong> Aproximadamente R$ 3.800 a R$ 5.500/mês em despesas que não constavam no mapeamento original. Isso explica boa parte do porquê o déficit é maior do que o esperado.</div></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FLUXO REAL -->
+<section id="fluxo">
+  <div class="section-label reveal">06 — Fluxo de Caixa Real</div>
+  <h2 class="section-title reveal">O filme completo dos 3 meses</h2>
+
+  <div class="chart-card reveal">
+    <h3>Entradas vs Saídas Mensais</h3>
+    <div class="chart-container" style="height:320px"><canvas id="chartFluxo"></canvas></div>
+  </div>
+
+  <div class="grid-2 reveal">
+    <div class="card" style="border-left:3px solid var(--green)">
+      <div class="card-label">De onde vem o dinheiro</div>
+      <div style="margin-top:.75rem;font-size:.85rem;color:var(--text2)">
+        <div style="display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid var(--border)"><span>PJ → PF (MCS Cuidado e Saúde)</span><span style="color:var(--accent);font-weight:600">~R$ 14.000/mês</span></div>
+        <div style="display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid var(--border)"><span>PIX de pacientes / terceiros</span><span style="color:var(--accent);font-weight:600">~R$ 14.000/mês</span></div>
+        <div style="display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid var(--border)"><span>Resgate Warren (Jan)</span><span style="color:var(--red);font-weight:600">R$ 20.000</span></div>
+        <div style="display:flex;justify-content:space-between;padding:.5rem 0;font-weight:600"><span>Total médio/mês</span><span style="color:var(--green);font-family:var(--font-display);font-size:1.1rem">~R$ 35.500</span></div>
+      </div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red)">
+      <div class="card-label">Peso das categorias de gasto</div>
+      <div style="margin-top:.75rem;font-size:.85rem;color:var(--text2)">
+        <div style="display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid var(--border)"><span>Cartão (inclui PJ+PF+cursos)</span><span style="color:var(--red);font-weight:600">~R$ 14.900</span></div>
+        <div style="display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid var(--border)"><span>Moradia (aluguel+luz+gás+condo)</span><span style="color:var(--red);font-weight:600">~R$ 3.500</span></div>
+        <div style="display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid var(--border)"><span>Saúde (Amil + tratamentos)</span><span style="color:var(--red);font-weight:600">~R$ 2.700</span></div>
+        <div style="display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid var(--border)"><span>Impostos (Simples+DARF+SEFAZ)</span><span style="color:var(--red);font-weight:600">~R$ 2.400</span></div>
+        <div style="display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid var(--border)"><span>Serviços pessoais + ocultos</span><span style="color:var(--red);font-weight:600">~R$ 5.500</span></div>
+        <div style="display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid var(--border)"><span>Demais (veículo, alimentação...)</span><span style="color:var(--red);font-weight:600">~R$ 2.500</span></div>
+        <div style="display:flex;justify-content:space-between;padding:.5rem 0;font-weight:600"><span>Total médio/mês</span><span style="color:var(--red);font-family:var(--font-display);font-size:1.1rem">~R$ 30.000</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PERGUNTAS -->
+<section id="acoes">
+  <div class="section-label reveal">07 — Perguntas para Marcella</div>
+  <h2 class="section-title reveal">Precisamos confirmar antes de fechar o diagnóstico</h2>
+  <p class="section-desc reveal">Esses são os pontos que precisam de resposta da cliente para completar o mapeamento.</p>
+
+  <div class="reveal">
+    <div class="discovery" style="border-left:3px solid var(--accent)"><div class="disc-num" style="color:var(--accent)">❓</div><div class="disc-content"><h4>Quem é BRUNO A? (~R$ 2.900/mês todo dia 02)</h4><p>Acreditamos ser o aluguel+condomínio. Se sim, confere com planilha (R$ 2.960).</p></div></div>
+    <div class="discovery" style="border-left:3px solid var(--accent)"><div class="disc-num" style="color:var(--accent)">❓</div><div class="disc-content"><h4>Psicóloga LUCIANA? (~R$ 320/semana = R$ 1.280+/mês)</h4><p>Pagamento semanal via PIX. Psicóloga (confirmado pela cliente). Constava no mapeamento.</p></div></div>
+    <div class="discovery" style="border-left:3px solid var(--accent)"><div class="disc-num" style="color:var(--accent)">❓</div><div class="disc-content"><h4>Quem é DRA. IS? (~R$ 1.050-1.150/mês)</h4><p>Aluguel do consultório onde atende às terças-feiras Tratamento pessoal?</p></div></div>
+    <div class="discovery" style="border-left:3px solid var(--accent)"><div class="disc-num" style="color:var(--accent)">❓</div><div class="disc-content"><h4>Quem é BRUNO F? (R$ 400/mês)</h4><p>Pagamento recorrente. Qual serviço?</p></div></div>
+    <div class="discovery" style="border-left:3px solid var(--accent)"><div class="disc-num" style="color:var(--accent)">❓</div><div class="disc-content"><h4>PARCELAMOS.COM (R$ 1.190 + R$ 271/mês)</h4><p>App de parcelamento de boletos. Quais boletos estão sendo parcelados por lá?</p></div></div>
+    <div class="discovery" style="border-left:3px solid var(--accent)"><div class="disc-num" style="color:var(--accent)">❓</div><div class="disc-content"><h4>Os PIX recebidos são todos de pacientes?</h4><p>Katia, Beatriz, Daniel, Romulo, Celeste, Tatiana, Marcell, Thais, Luana, Alessandro, etc — são pacientes do consultório ou transferências pessoais? Essencial para calcular receita real do consultório.</p></div></div>
+    <div class="discovery" style="border-left:3px solid var(--accent)"><div class="disc-num" style="color:var(--accent)">❓</div><div class="disc-content"><h4>R$ 4.000 para Nayara em 16/01 — o que foi?</h4><p>O normal é R$ 1.080/mês. O que gerou o pagamento extra de R$ 4.000?</p></div></div>
+    <div class="discovery" style="border-left:3px solid var(--accent)"><div class="disc-num" style="color:var(--accent)">❓</div><div class="disc-content"><h4>Psicóloga (R$ 1.280) — como paga?</h4><p>Não apareceu no extrato Itaú nem no cartão. Paga pelo Inter PJ? Ou é a Luciana/Bruno F?</p></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="brand">GW9 Capital</div>
+  <p>Análise preparada por Laysa Corrêa — CFP® — Planejadora Financeira</p>
+  <p style="margin-top:.4rem">Documento confidencial · Fontes: 3 faturas Itaú (Dez/25 a Fev/26) + Extrato CC Itaú (15/11/25 a 13/02/26) + Planilha reunião</p>
+</div>
+
+<script>
+Chart.defaults.color='#9b978f';Chart.defaults.borderColor='rgba(201,165,92,.08)';Chart.defaults.font.family="'DM Sans',sans-serif";Chart.defaults.font.size=11;
+const gold='#c9a55c',goldL='#e8c97a',red='#e85d5d',green='#5dbe8a',blue='#5d8ee8',purple='#a07de8',pink='#e88bc4',orange='#e8a85d';
+
+// Categorias fatura
+new Chart(document.getElementById('chartCategoria'),{type:'bar',
+  data:{labels:['Dez/25','Jan/26','Fev/26'],datasets:[
+    {label:'Insumos PJ (Bio Meds, Rioskin)',data:[5700,4100,3595],backgroundColor:blue},
+    {label:'Cursos (Febracis, YM, outros)',data:[4100,8500,5700],backgroundColor:purple},
+    {label:'Seguros PJ (Akad, Porto)',data:[327,327,327],backgroundColor:green},
+    {label:'Transporte (Uber, gasolina)',data:[600,850,500],backgroundColor:orange},
+    {label:'Alimentação',data:[900,1200,400],backgroundColor:goldL},
+    {label:'Saúde PF + Vestuário + Outros',data:[2620,3166,1658],backgroundColor:gold},
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:10}}},tooltip:{callbacks:{label:c=>`${c.dataset.label}: R$ ${c.raw.toLocaleString('pt-BR')}`}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:'rgba(255,255,255,.03)'},ticks:{callback:v=>`R$ ${(v/1000)}k`}}}}
+});
+
+// Extrato saídas
+new Chart(document.getElementById('chartExtrato'),{type:'bar',
+  data:{labels:['Bruno A\n(aluguel?)','AMIL','Nayara\n(personal)','SEFAZ RJ','M A CON\n(contador)','VIVO\n(2 linhas)','Luciana\n(???)', 'Dra. IS\n(???)','Parcela-\nmos','Bruno F\n(???)','Rafaela\n(vídeos)','Bradesco\nSeguro'],
+  datasets:[{data:[2892,2161,2413,1197,925,899,747,733,577,533,531,490],backgroundColor:[gold,blue,green,red,purple,orange,orange,orange,orange,orange,blue,green],borderRadius:6,barThickness:24}]},
+  options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`~R$ ${c.raw.toLocaleString('pt-BR')}/mês`}}},scales:{x:{grid:{display:false},ticks:{callback:v=>`R$ ${v}`}},y:{grid:{display:false}}}}
+});
+
+// Entradas
+new Chart(document.getElementById('chartEntradas'),{type:'doughnut',
+  data:{labels:['PJ→PF (MCS)','PIX Pacientes/Terceiros','Resgate Warren'],datasets:[{data:[41807,44619,20000],backgroundColor:[gold,blue,red],borderWidth:0,hoverOffset:8}]},
+  options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'bottom',labels:{padding:14,usePointStyle:true,font:{size:10}}},tooltip:{callbacks:{label:c=>`${c.label}: R$ ${(c.raw/1000).toFixed(1)}k (3 meses)`}}}}
+});
+
+// Saldo diário aproximado
+const saldoDatas=['15/11','22/11','01/12','09/12','15/12','22/12','29/12','05/01','13/01','19/01','26/01','03/02','10/02','13/02'];
+const saldoVals=[1038,-396,2119,-1252,872,329,19077,1144,2164,17395,10942,-4696,7339,2617];
+new Chart(document.getElementById('chartSaldo'),{type:'line',
+  data:{labels:saldoDatas,datasets:[{label:'Saldo CC',data:saldoVals,borderColor:gold,backgroundColor:'rgba(201,165,92,.06)',fill:true,tension:.3,pointRadius:3,pointBackgroundColor:saldoVals.map(v=>v<0?red:gold)},{label:'Zero',data:saldoVals.map(()=>0),borderColor:'rgba(232,93,93,.3)',borderDash:[4,4],pointRadius:0}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`R$ ${c.raw.toLocaleString('pt-BR')}`}}},scales:{y:{grid:{color:'rgba(255,255,255,.03)'},ticks:{callback:v=>`R$ ${(v/1000).toFixed(0)}k`}},x:{grid:{display:false}}}}
+});
+
+// Fluxo mensal
+new Chart(document.getElementById('chartFluxo'),{type:'bar',
+  data:{labels:['Nov/25*','Dez/25','Jan/26','Fev/26*'],datasets:[
+    {label:'Entradas',data:[24000,37000,42000,30000],backgroundColor:green+'cc',borderRadius:6},
+    {label:'Saídas',data:[26000,42000,48000,28000],backgroundColor:red+'cc',borderRadius:6}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true}},tooltip:{callbacks:{label:c=>`${c.dataset.label}: R$ ${(c.raw/1000).toFixed(0)}k`}},annotation:{}},scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(255,255,255,.03)'},ticks:{callback:v=>`R$ ${(v/1000)}k`}}}}
+});
+
+// Reveal
+document.querySelectorAll('.reveal').forEach(r=>new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('visible')})},{threshold:.1}).observe(r));
+const sects=document.querySelectorAll('section'),navAs=document.querySelectorAll('.nav a');
+window.addEventListener('scroll',()=>{let c='';sects.forEach(s=>{if(scrollY>=s.offsetTop-140)c=s.id});navAs.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+c))});
+</script>
+</body>
+</html>
