@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico Financeiro — Dra. Marcella Cabral</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #0c0f14;
+  --surface: #141820;
+  --surface2: #1a2030;
+  --accent: #c9a55c;
+  --accent2: #e8c97a;
+  --accent-dim: rgba(201,165,92,0.15);
+  --red: #e85d5d;
+  --red-dim: rgba(232,93,93,0.12);
+  --green: #5dbe8a;
+  --green-dim: rgba(93,190,138,0.12);
+  --blue: #5d8ee8;
+  --blue-dim: rgba(93,142,232,0.12);
+  --purple: #a07de8;
+  --text: #e8e4dd;
+  --text2: #9b978f;
+  --text3: #5e5b55;
+  --border: rgba(201,165,92,0.1);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { background:var(--bg); color:var(--text); font-family:var(--font-body); font-weight:400; line-height:1.6; overflow-x:hidden; }
+::selection { background:var(--accent); color:var(--bg); }
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--accent-dim); border-radius:3px; }
+
+/* Hero */
+.hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:2rem; position:relative; overflow:hidden; }
+.hero::before { content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%; background:radial-gradient(ellipse at 30% 50%, rgba(201,165,92,0.06) 0%, transparent 50%), radial-gradient(ellipse at 70% 30%, rgba(93,142,232,0.04) 0%, transparent 50%); animation: heroGlow 15s ease infinite; }
+@keyframes heroGlow { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-3%,2%)} }
+.hero-label { font-family:var(--font-body); font-weight:500; letter-spacing:4px; text-transform:uppercase; font-size:0.75rem; color:var(--accent); margin-bottom:2rem; opacity:0; animation: fadeUp 0.8s 0.3s forwards; }
+.hero h1 { font-family:var(--font-display); font-size:clamp(2.5rem,6vw,4.5rem); font-weight:700; color:var(--text); line-height:1.15; max-width:800px; opacity:0; animation: fadeUp 0.8s 0.5s forwards; }
+.hero h1 span { color:var(--accent); font-style:italic; }
+.hero-sub { font-size:1.1rem; color:var(--text2); margin-top:1.5rem; max-width:500px; opacity:0; animation: fadeUp 0.8s 0.7s forwards; }
+.hero-date { margin-top:3rem; font-size:0.8rem; color:var(--text3); letter-spacing:2px; text-transform:uppercase; opacity:0; animation: fadeUp 0.8s 0.9s forwards; }
+.hero-scroll { position:absolute; bottom:3rem; display:flex; flex-direction:column; align-items:center; gap:0.5rem; opacity:0; animation: fadeUp 0.8s 1.2s forwards; cursor:pointer; }
+.hero-scroll span { font-size:0.7rem; color:var(--text3); letter-spacing:2px; text-transform:uppercase; }
+.hero-scroll .arrow { width:1px; height:40px; background:linear-gradient(to bottom, var(--accent), transparent); animation: scrollPulse 2s infinite; }
+@keyframes scrollPulse { 0%,100%{opacity:0.3;transform:scaleY(0.7)} 50%{opacity:1;transform:scaleY(1)} }
+@keyframes fadeUp { to{opacity:1;transform:translateY(0)} from{opacity:0;transform:translateY(20px)} }
+
+/* Nav */
+.nav { position:sticky; top:0; z-index:100; background:rgba(12,15,20,0.85); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); padding:0 2rem; }
+.nav-inner { max-width:1200px; margin:auto; display:flex; gap:0.25rem; overflow-x:auto; scrollbar-width:none; }
+.nav-inner::-webkit-scrollbar{display:none;}
+.nav a { padding:1rem 1.2rem; font-size:0.75rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text3); text-decoration:none; white-space:nowrap; border-bottom:2px solid transparent; transition:all 0.3s; }
+.nav a:hover, .nav a.active { color:var(--accent); border-bottom-color:var(--accent); }
+
+/* Sections */
+section { padding:5rem 2rem; max-width:1200px; margin:auto; }
+.section-label { font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:0.75rem; font-weight:500; }
+.section-title { font-family:var(--font-display); font-size:clamp(1.8rem,4vw,2.8rem); font-weight:600; margin-bottom:0.5rem; }
+.section-desc { color:var(--text2); font-size:0.95rem; max-width:600px; margin-bottom:3rem; }
+
+/* Cards */
+.grid-2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1.5rem; }
+.grid-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; }
+.grid-4 { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1.25rem; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.75rem; transition:all 0.4s ease; position:relative; overflow:hidden; }
+.card:hover { border-color:rgba(201,165,92,0.25); transform:translateY(-2px); }
+.card-label { font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color:var(--text3); margin-bottom:0.75rem; font-weight:500; }
+.card-value { font-family:var(--font-display); font-size:2rem; font-weight:700; line-height:1.2; }
+.card-sub { font-size:0.85rem; color:var(--text2); margin-top:0.5rem; }
+.card-accent { border-left:3px solid var(--accent); }
+.card-red { border-left:3px solid var(--red); }
+.card-green { border-left:3px solid var(--green); }
+.card-blue { border-left:3px solid var(--blue); }
+
+/* KPI row */
+.kpi-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem; margin-bottom:3rem; }
+.kpi { text-align:center; padding:1.5rem 1rem; background:var(--surface); border:1px solid var(--border); border-radius:12px; }
+.kpi-number { font-family:var(--font-display); font-size:1.6rem; font-weight:700; }
+.kpi-label { font-size:0.72rem; color:var(--text2); margin-top:0.35rem; letter-spacing:1px; text-transform:uppercase; }
+
+/* Tags */
+.tag { display:inline-block; padding:0.25rem 0.75rem; border-radius:20px; font-size:0.72rem; font-weight:500; letter-spacing:0.5px; }
+.tag-red { background:var(--red-dim); color:var(--red); }
+.tag-green { background:var(--green-dim); color:var(--green); }
+.tag-blue { background:var(--blue-dim); color:var(--blue); }
+.tag-accent { background:var(--accent-dim); color:var(--accent); }
+
+/* Tables */
+.table-wrap { overflow-x:auto; border-radius:12px; border:1px solid var(--border); }
+table { width:100%; border-collapse:collapse; font-size:0.88rem; }
+th { padding:0.85rem 1.2rem; text-align:left; font-size:0.7rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text3); background:var(--surface); border-bottom:1px solid var(--border); font-weight:500; }
+td { padding:0.85rem 1.2rem; border-bottom:1px solid rgba(255,255,255,0.03); }
+tr:hover td { background:rgba(201,165,92,0.03); }
+.text-right { text-align:right; }
+.text-red { color:var(--red); }
+.text-green { color:var(--green); }
+.text-accent { color:var(--accent); }
+
+/* Chart containers */
+.chart-card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:2rem; }
+.chart-card h3 { font-family:var(--font-display); font-size:1.2rem; margin-bottom:1.5rem; }
+.chart-container { position:relative; height:300px; }
+
+/* Timeline */
+.timeline { position:relative; padding-left:2rem; }
+.timeline::before { content:''; position:absolute; left:0; top:0; bottom:0; width:1px; background:linear-gradient(to bottom, var(--accent), var(--accent-dim), transparent); }
+.timeline-item { position:relative; margin-bottom:2.5rem; }
+.timeline-item::before { content:''; position:absolute; left:-2rem; top:0.5rem; width:9px; height:9px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px rgba(201,165,92,0.4); transform:translateX(-4px); }
+.timeline-item h4 { font-family:var(--font-display); font-size:1.1rem; margin-bottom:0.25rem; }
+.timeline-item .time { font-size:0.75rem; color:var(--accent); letter-spacing:1px; text-transform:uppercase; margin-bottom:0.5rem; }
+.timeline-item p { font-size:0.9rem; color:var(--text2); }
+.timeline-item .amount { font-family:var(--font-display); font-size:1.3rem; font-weight:600; color:var(--accent2); }
+
+/* Simulator */
+.sim-controls { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; margin-bottom:2rem; }
+.sim-group label { display:block; font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text3); margin-bottom:0.5rem; }
+.sim-group input[type="range"] { width:100%; -webkit-appearance:none; height:4px; background:var(--surface2); border-radius:2px; outline:none; }
+.sim-group input[type="range"]::-webkit-slider-thumb { -webkit-appearance:none; width:18px; height:18px; border-radius:50%; background:var(--accent); cursor:pointer; box-shadow:0 0 10px rgba(201,165,92,0.4); }
+.sim-value { font-family:var(--font-display); font-size:1.4rem; font-weight:600; color:var(--accent2); margin-top:0.5rem; }
+
+/* Divider */
+.divider { height:1px; background:linear-gradient(to right, transparent, var(--border), transparent); margin:3rem 0; }
+
+/* Alert box */
+.alert { padding:1.5rem; border-radius:12px; margin-bottom:1.5rem; display:flex; gap:1rem; align-items:flex-start; }
+.alert-red { background:var(--red-dim); border:1px solid rgba(232,93,93,0.2); }
+.alert-green { background:var(--green-dim); border:1px solid rgba(93,190,138,0.2); }
+.alert-accent { background:var(--accent-dim); border:1px solid rgba(201,165,92,0.2); }
+.alert-icon { font-size:1.3rem; flex-shrink:0; }
+.alert-text { font-size:0.9rem; color:var(--text2); }
+.alert-text strong { color:var(--text); }
+
+/* Footer */
+.footer { text-align:center; padding:4rem 2rem; color:var(--text3); font-size:0.8rem; border-top:1px solid var(--border); }
+.footer .brand { font-family:var(--font-display); font-size:1.1rem; color:var(--accent); margin-bottom:0.5rem; }
+
+/* Responsive */
+@media(max-width:768px) {
+  section { padding:3rem 1.25rem; }
+  .grid-2,.grid-3,.grid-4 { grid-template-columns:1fr; }
+  .kpi-row { grid-template-columns:repeat(2,1fr); }
+  .nav a { padding:0.85rem 0.8rem; font-size:0.65rem; }
+}
+
+/* Animate on scroll */
+.reveal { opacity:0; transform:translateY(30px); transition:all 0.8s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="hero-label">Diagnóstico Financeiro Pessoal</div>
+  <h1>Dra. Marcella <span>Cabral</span></h1>
+  <p class="hero-sub">Mapeamento completo da sua vida financeira — patrimônio, fluxo de caixa, seguros, objetivos e projeções.</p>
+  <div class="hero-date">Preparado por Laysa Corrêa — CFP® &nbsp;|&nbsp; 26 de Fevereiro de 2026</div>
+  <div class="hero-scroll" onclick="document.getElementById('perfil').scrollIntoView()">
+    <span>Explorar</span>
+    <div class="arrow"></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#perfil" class="active">Perfil</a>
+    <a href="#patrimonio">Patrimônio</a>
+    <a href="#fluxo">Fluxo de Caixa</a>
+    <a href="#seguros">Seguros</a>
+    <a href="#dividas">Dívidas</a>
+    <a href="#objetivos">Objetivos</a>
+    <a href="#simulador">Simulador</a>
+    <a href="#checkup-investimentos">Check-up Investimentos</a>
+    <a href="#recomendacoes">Recomendações</a>
+  </div>
+</nav>
+
+<!-- PERFIL -->
+<section id="perfil">
+  <div class="section-label reveal">01 — Perfil</div>
+  <h2 class="section-title reveal">Quem é a Marcella</h2>
+  <p class="section-desc reveal">Médica Nutróloga, 37 anos, em transição de funcionária para empresária. Solteira, sem dependentes diretos, mas auxilia família com plano de saúde.</p>
+  
+  <div class="kpi-row reveal">
+    <div class="kpi">
+      <div class="kpi-number" style="color:var(--accent)">37</div>
+      <div class="kpi-label">Anos</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-number" style="color:var(--green)">13</div>
+      <div class="kpi-label">Anos de Medicina</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-number" style="color:var(--blue)">2</div>
+      <div class="kpi-label">Fontes de Renda</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-number" style="color:var(--red)">~12</div>
+      <div class="kpi-label">Meses de Reserva</div>
+    </div>
+  </div>
+
+  <div class="grid-2 reveal">
+    <div class="card card-accent">
+      <div class="card-label">Renda Principal</div>
+      <div class="card-value">R$ 15.000</div>
+      <div class="card-sub">Telemedicina Sírio-Libanês (líquido após Simples Nacional ~7,95%)</div>
+    </div>
+    <div class="card card-blue">
+      <div class="card-label">Renda Variável</div>
+      <div class="card-value">R$ 3.000 <span style="font-size:0.9rem;color:var(--text3)">a 5.000</span></div>
+      <div class="card-sub">Consultório particular — terças e quintas (pior cenário R$ 3k)</div>
+    </div>
+  </div>
+</section>
+
+<!-- PATRIMÔNIO -->
+<section id="patrimonio">
+  <div class="section-label reveal">02 — Patrimônio</div>
+  <h2 class="section-title reveal">O que você construiu</h2>
+  <p class="section-desc reveal">Apesar do momento desafiador, você tem uma base sólida. Patrimônio total estimado em ~R$ 758 mil entre investimentos, previdência e bens. <span style="color:var(--red);font-size:0.85rem">(Warren R$ 346.479 em 30/01/2026, pós-resgate R$ 20k)</span></p>
+
+  <div class="kpi-row reveal">
+    <div class="kpi">
+      <div class="kpi-number text-accent">R$ 758k</div>
+      <div class="kpi-label">Patrimônio Total</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-number text-green">R$ 354k</div>
+      <div class="kpi-label">Previdência Porto</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-number" style="color:var(--blue)">R$ 346k</div>
+      <div class="kpi-label">Investimentos Warren</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-number" style="color:var(--purple)">~R$ 55k</div>
+      <div class="kpi-label">Honda Fit 2016</div>
+    </div>
+  </div>
+
+  <div class="grid-2 reveal">
+    <div class="chart-card">
+      <h3>Composição do Patrimônio</h3>
+      <div class="chart-container">
+        <canvas id="chartPatrimonio"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <h3>Previdência Porto — Por Fundo</h3>
+      <div class="chart-container">
+        <canvas id="chartPrevidencia"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.5rem" class="reveal">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Carteira Warren</th><th>Finalidade</th><th class="text-right">Saldo Estimado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Longo Prazo + Congelamento</td><td><span class="tag tag-accent">Crescimento</span></td><td class="text-right">~R$ 210.000</td></tr>
+          <tr><td>Carteira Carro</td><td><span class="tag tag-blue">Troca veículo</span></td><td class="text-right">~R$ 50.000</td></tr>
+          <tr><td>Reserva de Emergência</td><td><span class="tag tag-green">Segurança</span></td><td class="text-right">~R$ 10.000 <span style="font-size:0.75rem;color:var(--red)">(resgatou R$ 20k Jan/26)</span></td></tr>
+          <tr><td>Carteira Viagem</td><td><span class="tag tag-accent">Lazer</span></td><td class="text-right">~R$ 10.000</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="alert alert-red reveal" style="margin-top:1.5rem">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-text"><strong>Atenção — Confirmado pelo extrato:</strong> Em 15/01/2026, R$ 20.000 foram resgatados da Warren (TED Renascença) para cobrir despesas. A reserva de emergência está sendo consumida ativamente para financiar o déficit mensal.</div>
+  </div>
+</section>
+
+<!-- FLUXO DE CAIXA -->
+<section id="fluxo">
+  <div class="section-label reveal">03 — Fluxo de Caixa</div>
+  <h2 class="section-title reveal">Para onde vai o dinheiro</h2>
+  <p class="section-desc reveal">Suas despesas totais (~R$ 30.000/mês) superam a receita líquida (~R$ 20k). Déficit de ~R$ 12k/mês desde novembro/2025, coberto com resgates Warren. Atenção: ~R$ 2k/mês entram em espécie (pacientes ortopedista) e não aparecem no extrato — usados para combustível e mercado.</p>
+
+  <div class="grid-3 reveal">
+    <div class="card card-green">
+      <div class="card-label">Receita Líquida Mensal</div>
+      <div class="card-value text-green">R$ 20.000</div>
+      <div class="card-sub">R$ 15k Sírio (líquido) + ~R$ 3k Consultório + ~R$ 2k Espécie (ortopedista — não aparece no extrato)</div>
+    </div>
+    <div class="card card-red">
+      <div class="card-label">Despesas Totais (confirmado)</div>
+      <div class="card-value text-red">R$ 30.000</div>
+      <div class="card-sub">Extrato + faturas cartão cruzados + espécie (~R$ 1.500 combustível + R$ 500 mercado)</div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red)">
+      <div class="card-label">Déficit Mensal</div>
+      <div class="card-value text-red">- R$ 12.000</div>
+      <div class="card-sub">Coberto com resgate Warren (R$ 20k em Jan). Desde nov/2025.</div>
+    </div>
+  </div>
+
+  <div class="grid-2 reveal" style="margin-top:1.5rem">
+    <div class="chart-card">
+      <h3>Receita vs Despesas</h3>
+      <div class="chart-container">
+        <canvas id="chartFluxo"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <h3>Distribuição das Despesas</h3>
+      <div class="chart-container">
+        <canvas id="chartDespesas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal" style="margin-top:1.5rem">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Despesa</th><th>Fonte</th><th>Tipo</th><th class="text-right">Valor Mensal</th></tr>
+        </thead>
+        <tbody>
+          <tr style="background:rgba(232,93,93,0.04)"><td><strong>Cartão de Crédito</strong> (insumos PJ, cursos, seguros, alimentação, combustível, vestuário, farmácia, viagens)</td><td><span class="tag tag-red">Cartão</span></td><td>PF+PJ</td><td class="text-right text-red" style="font-weight:600">R$ 14.900</td></tr>
+          <tr><td>Aluguel + Condomínio + IPTU (Bruno A — PIX dia 02)</td><td><span class="tag tag-accent">Extrato</span></td><td>PF</td><td class="text-right">R$ 2.900</td></tr>
+          <tr><td>Plano de Saúde Amil (Marcella + sobrinha + ex)</td><td><span class="tag tag-accent">Extrato</span></td><td>PF</td><td class="text-right">R$ 1.100</td></tr>
+          <tr><td>Plano de Saúde Amil Família (irmão + cunhada)</td><td><span class="tag tag-accent">Extrato</span></td><td>PF</td><td class="text-right">R$ 1.000</td></tr>
+          <tr><td>Simples Nacional + DARF + SEFAZ + Parcelamento</td><td><span class="tag tag-blue">Extrato</span></td><td>PJ</td><td class="text-right">R$ 2.750</td></tr>
+          <tr><td>Aluguel Consultório (via PJ/Inter)</td><td><span class="tag tag-blue">Declarado</span></td><td>PJ</td><td class="text-right">R$ 2.000</td></tr>
+          <tr><td>Pró-labore PJ</td><td><span class="tag tag-blue">Declarado</span></td><td>PJ</td><td class="text-right">R$ 1.621</td></tr>
+          <tr><td>Parcelamento dívidas tributárias</td><td><span class="tag tag-blue">Declarado</span></td><td>PJ</td><td class="text-right">R$ 1.300</td></tr>
+          <tr><td>Psicóloga</td><td><span class="tag tag-accent">Declarado</span></td><td>PF</td><td class="text-right">R$ 1.280</td></tr>
+          <tr><td>Personal Trainer (Nayara)</td><td><span class="tag tag-accent">Extrato ✅</span></td><td>PF</td><td class="text-right">R$ 1.080</td></tr>
+          <tr><td>Vivo Celular + Fibra + TV (2 linhas — R$ 449 cada) <span class="tag tag-red" style="font-size:0.6rem">REVER ⚠️</span></td><td><span class="tag tag-accent">Extrato ✅</span></td><td>PF</td><td class="text-right">R$ 899</td></tr>
+          <tr><td>Gravação/Filmagem (Rafaela)</td><td><span class="tag tag-accent">Extrato ✅</span></td><td>PJ</td><td class="text-right">R$ 798</td></tr>
+          <tr style="background:rgba(232,168,93,0.06)"><td>Psicóloga (Luciana) <span class="tag tag-green">Confirmado ✅</span></span></td><td><span class="tag tag-orange">Extrato</span></td><td>PF?</td><td class="text-right" style="color:var(--orange)">R$ 747</td></tr>
+          <tr style="background:rgba(232,168,93,0.06)"><td>Dra. IS — supervisão/mentoria? <span class="tag tag-orange" style="font-size:0.6rem">NOVO ⚠️</span></td><td><span class="tag tag-orange">Extrato</span></td><td>PJ?</td><td class="text-right" style="color:var(--orange)">R$ 733</td></tr>
+          <tr><td>Parcelamos.com (parcelas de boletos)</td><td><span class="tag tag-orange">Extrato</span></td><td>?</td><td class="text-right">R$ 577</td></tr>
+          <tr style="background:rgba(232,168,93,0.06)"><td>Bruno F — pagamento recorrente <span class="tag tag-orange" style="font-size:0.6rem">NOVO ⚠️</span></td><td><span class="tag tag-orange">Extrato</span></td><td>PF?</td><td class="text-right" style="color:var(--orange)">R$ 533</td></tr>
+          <tr><td>Seg. Vida Mongeral (anual R$6.978)</td><td><span class="tag tag-red">ATRASADO</span></td><td>PF/PJ</td><td class="text-right">R$ 582</td></tr>
+          <tr><td>Seguro Carro Bradesco (10x)</td><td><span class="tag tag-accent">Extrato ✅</span></td><td>PF</td><td class="text-right">R$ 490</td></tr>
+          <tr><td>Supermercado (PIX — fora do cartão)</td><td><span class="tag tag-accent">Extrato</span></td><td>PF</td><td class="text-right">R$ 300</td></tr>
+          <tr><td>Luz (Light)</td><td><span class="tag tag-accent">Extrato ✅</span></td><td>PF</td><td class="text-right">R$ 281</td></tr>
+          <tr><td>Seg. Bioimpedância (anual R$2.300)</td><td><span class="tag tag-blue">Cartão ✅</span></td><td>PJ</td><td class="text-right">R$ 192</td></tr>
+          <tr><td>Sem Parar + Pedágios</td><td><span class="tag tag-accent">Extrato ✅</span></td><td>PF</td><td class="text-right">R$ 84</td></tr>
+          <tr><td>Seg. Resp. Civil (anual R$1.628)</td><td><span class="tag tag-blue">Cartão ✅</span></td><td>PJ</td><td class="text-right">R$ 136</td></tr>
+          <tr><td>Gás (CEG)</td><td><span class="tag tag-accent">Extrato ✅</span></td><td>PF</td><td class="text-right">R$ 103</td></tr>
+          <tr><td>Estacionamentos (TRM, Estapar, Indigo)</td><td><span class="tag tag-accent">Extrato</span></td><td>PF</td><td class="text-right">R$ 65</td></tr>
+          <tr><td>Igreja (doação mensal)</td><td><span class="tag tag-accent">Extrato</span></td><td>PF</td><td class="text-right">R$ 50</td></tr>
+          <tr style="background:rgba(93,190,138,0.06)"><td>Mentoria Yuri (neutraliza custo medicamentos) <span class="tag tag-green" style="font-size:0.6rem">SESSÃO 26/02</span></td><td><span class="tag tag-green">Declarado</span></td><td>PJ</td><td class="text-right">R$ 3.300</td></tr>
+          <tr style="background:rgba(93,190,138,0.06)"><td>Dra. Viana — Mentoria (12x) <span class="tag tag-green" style="font-size:0.6rem">SESSÃO 26/02</span></td><td><span class="tag tag-green">Declarado</span></td><td>PJ</td><td class="text-right">R$ 550</td></tr>
+          <tr style="background:rgba(93,190,138,0.06)"><td>Espécie — Combustível + Mercado (não aparece no extrato) <span class="tag tag-green" style="font-size:0.6rem">SESSÃO 26/02</span></td><td><span class="tag tag-green">Declarado</span></td><td>PF</td><td class="text-right">R$ 2.000</td></tr>
+          <tr style="font-weight:600;background:var(--surface2)"><td colspan="3">TOTAL CONFIRMADO (extrato + faturas)</td><td class="text-right text-red" style="font-family:var(--font-display);font-size:1.1rem">~R$ 36.500</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.8rem;color:var(--text3);margin-top:0.75rem">* Valores cruzados entre extrato bancário Itaú (15/11/25–13/02/26), 3 faturas do cartão (Dez/Jan/Fev) e planilha da reunião. Itens em laranja são despesas descobertas no extrato que não constavam no mapeamento original. O cartão de R$ 14.900 já inclui insumos PJ (~R$ 4.500), cursos (~R$ 6.200), seguros, alimentação, vestuário, combustível e compras online.</p>
+    <p style="font-size:0.8rem;color:var(--orange);margin-top:0.5rem">⚠️ Nota: O total inclui itens que se sobrepõem (ex: aluguel consultório pode sair da MCS, seguros estão no cartão). O gasto líquido real é de ~R$ 30.000/mês. Itens em verde foram identificados na sessão de 26/02.</p>
+  </div>
+
+  <div class="alert alert-accent reveal" style="margin-top:1.5rem">
+    <div class="alert-icon">💡</div>
+    <div class="alert-text"><strong>Ponto-chave:</strong> Não há separação entre despesas PF e PJ. O cartão de crédito pessoal absorve ~R$ 8.000/mês em custos do consultório (insumos Bio Meds R$ 4.500 + cursos R$ 3.200 + seguros PJ R$ 327). A PJ depende da PF — precisa ser o contrário.</div>
+  </div>
+
+  <div class="alert alert-red reveal" style="margin-top:1rem">
+    <div class="alert-icon">🚨</div>
+    <div class="alert-text"><strong>Situação Thiago (ortopedista):</strong> R$ 100.000 em Mounjaro armazenados na geladeira de Marcella, com nota fiscal no CPF dela, pagos com dinheiro dele. Decisão da sessão: não mexer no que já foi feito, mas daqui para frente emitir nota de PRODUTO separada da nota de SERVIÇO, incluindo imposto na precificação. Risco fiscal relevante que precisa ser regularizado com o contador.</div>
+  </div>
+
+  <div class="alert alert-green reveal" style="margin-top:1rem">
+    <div class="alert-icon">📉</div>
+    <div class="alert-text"><strong>Redução à vista:</strong> As biomédicas Juliana (4x R$ 1.192,50) e Fernanda (4x R$ 1.987,50) estão nas últimas parcelas. Quando terminarem, ~R$ 3.180/mês saem das despesas — alívio significativo no fluxo de caixa. A Mentoria do Yuri (R$ 3.300/mês) reverte integralmente em produtos injetáveis que ela já compraria, neutralizando o custo de medicamentos.</div>
+  </div>
+
+  <div class="alert alert-accent reveal" style="margin-top:1rem">
+    <div class="alert-icon">👩‍💼</div>
+    <div class="alert-text"><strong>Custo da "Michele":</strong> Marcella faz sozinha o papel de secretária — agenda, NF, estoque, compras. Estimativa: ~R$ 10.000/mês em tempo desperdiçado. Amanda foi identificada como candidata. Contratar uma assistente (R$ 2-3k/mês) libera tempo para atender +1 paciente/dia, o que mais que cobre o custo.</div>
+  </div>
+</section>
+
+<!-- SEGUROS -->
+<section id="seguros">
+  <div class="section-label reveal">04 — Seguros & Proteção</div>
+  <h2 class="section-title reveal">Sua rede de proteção</h2>
+  <p class="section-desc reveal">Você tem uma cobertura razoável, mas precisa de revisão e atualização para acompanhar seu momento atual.</p>
+
+  <div class="grid-2 reveal">
+    <div class="card">
+      <div class="card-label">🛡️ Seguro de Vida — MAG (Mongeral)</div>
+      <div class="card-value text-accent">R$ 6.978<span style="font-size:0.9rem;color:var(--text3)">/ano</span></div>
+      <div class="card-sub">Inclui DIT (Diária por Incapacidade Temporária)</div>
+      <div style="margin-top:1rem"><span class="tag tag-red">ATRASADO — venceu 19/01/2026</span></div>
+      <div class="card-sub">Prazo máximo para regularizar: ~19/03/2026 (60 dias)</div>
+    </div>
+    <div class="card">
+      <div class="card-label">⚕️ Responsabilidade Civil Profissional — Akad</div>
+      <div class="card-value" style="color:var(--blue)">R$ 1.628<span style="font-size:0.9rem;color:var(--text3)">/ano</span></div>
+      <div class="card-sub">Cobertura: R$ 300.000 — Vigência até 27/10/2026</div>
+      <div style="margin-top:1rem"><span class="tag tag-green">EM DIA — 10x R$ 162,79 no cartão</span></div>
+    </div>
+    <div class="card">
+      <div class="card-label">🔬 Seguro Equipamentos — Porto Seguro</div>
+      <div class="card-value" style="color:var(--purple)">~R$ 2.300<span style="font-size:0.9rem;color:var(--text3)">/ano</span></div>
+      <div class="card-sub">Balança de bioimpedância (R$ 30.000) — Vigência até 04/09/2026</div>
+      <div style="margin-top:1rem"><span class="tag tag-green">EM DIA</span></div>
+    </div>
+    <div class="card">
+      <div class="card-label">🚗 Seguro Auto — Bradesco</div>
+      <div class="card-value" style="color:var(--green)">~R$ 4.890<span style="font-size:0.9rem;color:var(--text3)">/ano</span></div>
+      <div class="card-sub">Honda Fit EX 1.5 2015/2016 — Compreensivo + RC R$ 150k</div>
+      <div style="margin-top:1rem"><span class="tag tag-red">VENCIDO em 18/05/2025</span></div>
+    </div>
+    <div class="card" style="grid-column:1/-1">
+      <div class="card-label">🏥 Planos de Saúde — Amil</div>
+      <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-top:0.5rem">
+        <div>
+          <div class="card-value" style="font-size:1.5rem">R$ 1.100<span style="font-size:0.85rem;color:var(--text3)">/mês</span></div>
+          <div class="card-sub">Marcella + sobrinha + ex-namorado (Amil 750)</div>
+        </div>
+        <div>
+          <div class="card-value" style="font-size:1.5rem">R$ 1.000<span style="font-size:0.85rem;color:var(--text3)">/mês</span></div>
+          <div class="card-sub">Irmão + cunhada (Amil 450)</div>
+        </div>
+        <div>
+          <div class="card-value" style="font-size:1.5rem;color:var(--red)">R$ 25.200<span style="font-size:0.85rem;color:var(--text3)">/ano</span></div>
+          <div class="card-sub">Custo total planos de saúde</div>
+        </div>
+      </div>
+      <div style="margin-top:1rem"><span class="tag tag-accent">Obs: Ex-namorado completa 50 anos em 2027 — tabela pode subir</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DÍVIDAS -->
+<section id="dividas">
+  <div class="section-label reveal">05 — Dívidas & Pendências</div>
+  <h2 class="section-title reveal">O que está prendendo você</h2>
+
+  <div class="grid-3 reveal">
+    <div class="card card-red">
+      <div class="card-label">Parcelamento Tributário</div>
+      <div class="card-value text-red">~R$ 1.300<span style="font-size:0.9rem">/mês</span></div>
+      <div class="card-sub">Simples Nacional, INSS e DARF atrasados — renegociados e parcelados até 2026</div>
+    </div>
+    <div class="card card-red">
+      <div class="card-label">CREMERJ PF + PJ</div>
+      <div class="card-value text-red">Em atraso</div>
+      <div class="card-sub">Anuidades 2024 e 2025 com parcelas pendentes e juros acumulados</div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--accent)">
+      <div class="card-label">Multas de Trânsito</div>
+      <div class="card-value text-accent">~R$ 2.000</div>
+      <div class="card-sub">Necessário quitar para licenciar e vender o carro</div>
+    </div>
+  </div>
+
+  <div class="alert alert-red reveal" style="margin-top:1.5rem">
+    <div class="alert-icon">🚨</div>
+    <div class="alert-text"><strong>Urgente — Seguro de Vida MAG:</strong> Vencido em 19/01/2026. Faltam menos de 25 dias para o cancelamento definitivo (prazo de 60 dias). Prioridade máxima de regularização.</div>
+  </div>
+</section>
+
+<!-- OBJETIVOS -->
+<section id="objetivos">
+  <div class="section-label reveal">06 — Objetivos & Sonhos</div>
+  <h2 class="section-title reveal">Onde você quer chegar</h2>
+
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <div class="time">Próximos 6 meses — 2026</div>
+      <h4>Congelamento de Óvulos</h4>
+      <div class="amount">R$ 25.000</div>
+      <p>Aguardando ressonância mamária em 19/03 para liberar estímulo hormonal.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time">Abril 2026</div>
+      <h4>Curso Saúde da Mulher — SP</h4>
+      <div class="amount">R$ 10.000 <span style="font-size:0.85rem;color:var(--text3)">+ viagem ~R$ 3.000</span></div>
+      <p>3 dias em São Paulo — reposição hormonal e menopausa.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time">Junho 2026</div>
+      <h4>Curso Gestão Médica Empresarial — SP</h4>
+      <div class="amount">R$ 13.000 <span style="font-size:0.85rem;color:var(--text3)">+ viagem ~R$ 4.000</span></div>
+      <p>4 dias em São Paulo — gestão de negócios na medicina.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time">Julho 2026</div>
+      <h4>Troca de Carro</h4>
+      <div class="amount">R$ 50.000 a 100.000</div>
+      <p>Honda Fit 2016 (~R$ 55k) + complemento. Necessário quitar multas primeiro.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time">Curto prazo — 2 anos</div>
+      <h4>Ser Mãe & Consultório Lucrativo</h4>
+      <p>6 pacientes classe média/alta por dia, precificação adequada, construção de autoridade.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time">Médio prazo — 5 a 10 anos</div>
+      <h4>Própria Clínica como Gestora</h4>
+      <p>Atender 1-2 dias/semana pacientes selecionados a preço premium. Gestão do negócio.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time">Longo prazo — Aposentadoria</div>
+      <h4>Liberdade Financeira aos 50-55 anos</h4>
+      <div class="amount">R$ 50.000 a 60.000/mês</div>
+      <p>Incluindo custos com possível filho na faculdade.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time">Sonhos</div>
+      <h4>Casa na Praia em Florianópolis 🏖️</h4>
+      <p>Carro de luxo, ano sabático viajando — Paris, Itália, Espanha.</p>
+    </div>
+  </div>
+
+  <div class="reveal" style="margin-top:2rem">
+    <div class="alert alert-accent">
+      <div class="alert-icon">📊</div>
+      <div class="alert-text"><strong>Compromissos próximos 6 meses:</strong> R$ 25k (óvulos) + R$ 13k (viagem SP) + R$ 17k (curso+viagem SP) + R$ 50-100k (carro) + R$ 2k (multas) = <strong style="color:var(--accent)">R$ 107.000 a R$ 157.000</strong>. Isso representa 38-56% do patrimônio líquido em investimentos (Warren já com R$ 20k a menos após resgate de Jan/26).</div>
+    </div>
+  </div>
+</section>
+
+<!-- SIMULADOR -->
+<section id="simulador">
+  <div class="section-label reveal">07 — Simulador de Aposentadoria</div>
+  <h2 class="section-title reveal">Projeção de Patrimônio</h2>
+  <p class="section-desc reveal">Ajuste os parâmetros abaixo e veja como diferentes aportes mensais impactam sua aposentadoria.</p>
+
+  <div class="chart-card reveal">
+    <div class="sim-controls">
+      <div class="sim-group">
+        <label>Aporte Mensal</label>
+        <input type="range" id="simAporte" min="0" max="10000" step="500" value="2000">
+        <div class="sim-value" id="simAporteVal">R$ 2.000</div>
+      </div>
+      <div class="sim-group">
+        <label>Rentabilidade Real (% a.a.)</label>
+        <input type="range" id="simRent" min="3" max="12" step="0.5" value="6">
+        <div class="sim-value" id="simRentVal">6,0% a.a.</div>
+      </div>
+      <div class="sim-group">
+        <label>Idade de Aposentadoria</label>
+        <input type="range" id="simIdade" min="45" max="65" step="1" value="55">
+        <div class="sim-value" id="simIdadeVal">55 anos</div>
+      </div>
+    </div>
+
+    <div class="kpi-row" id="simResults">
+      <div class="kpi">
+        <div class="kpi-number text-accent" id="simPatri">—</div>
+        <div class="kpi-label">Patrimônio Projetado</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-number text-green" id="simRenda">—</div>
+        <div class="kpi-label">Renda Mensal (4% a.a.)</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-number" style="color:var(--blue)" id="simAnos">—</div>
+        <div class="kpi-label">Anos de Acumulação</div>
+      </div>
+    </div>
+
+    <div class="chart-container" style="height:350px">
+      <canvas id="chartSimulador"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- CHECK-UP INVESTIMENTOS -->
+<section>
+  <div class="section-label reveal">08 — Check-up dos Investimentos</div>
+  <h2 class="section-title reveal">Seu patrimônio está trabalhando <em>para</em> você — ou só <em>com</em> você?</h2>
+  <p class="section-desc reveal">Pense nos seus investimentos como a saúde de um paciente. Não basta estar "vivo" (rendendo) — precisa estar saudável: com os exames em dia, sem riscos ocultos, e com um plano de tratamento alinhado aos seus objetivos de vida.</p>
+
+  <!-- DADOS WARREN -->
+  <div class="grid-3 reveal">
+    <div class="card" style="border-left:3px solid var(--green)"><div class="card-label">Warren — Patrimônio</div><div class="card-value" style="font-size:1.4rem;color:var(--green)">R$ 346.479</div><div class="card-sub">Posição em 30/01/2026</div></div>
+    <div class="card" style="border-left:3px solid var(--green)"><div class="card-label">Rendimento 12 meses</div><div class="card-value" style="font-size:1.4rem;color:var(--green)">14,97%</div><div class="card-sub">103,27% do CDI — resultado ok</div></div>
+    <div class="card" style="border-left:3px solid var(--accent)"><div class="card-label">Rende por mês</div><div class="card-value" style="font-size:1.4rem;color:var(--accent)">~R$ 4.200</div><div class="card-sub">Mas o déficit consome R$ 12.000</div></div>
+  </div>
+
+  <div class="alert alert-accent reveal" style="margin-top:1.2rem"><div class="alert-icon">🩺</div><div class="alert-text"><strong>Diagnóstico geral:</strong> A carteira não está "doente", mas tem <strong>3 pontos de atenção</strong> que merecem segunda opinião — especialmente porque você vai precisar fazer resgates nos próximos meses e o patrimônio precisa trabalhar mais forte <em>e mais protegido</em> nesse cenário.</div></div>
+
+  <!-- PONTO 1 -->
+  <div class="card reveal" style="margin-top:1.5rem;border-left:4px solid var(--red)">
+    <div class="tag tag-red" style="margin-bottom:0.8rem">⚠️ Ponto de Atenção 1</div>
+    <h3 style="font-family:var(--font-display);font-size:1.15rem;margin-bottom:0.6rem">Concentração excessiva em crédito privado: 42% da carteira</h3>
+    <p style="font-size:0.88rem;color:var(--text2);line-height:1.7">
+      Imagine que 42% do sangue de um paciente passasse por um único órgão. Se esse órgão falhar, o risco é sistêmico.<br><br>
+      Crédito privado é quando você empresta dinheiro para empresas. Funciona bem quando a economia vai bem — mas com juros a 15% ao ano, empresas endividadas sofrem. Se uma delas tiver problemas (como aconteceu com Americanas em 2023), o impacto na sua carteira seria desproporcional.<br><br>
+      <strong>O ponto:</strong> O limite prudente recomendado pelo mercado é de no máximo 20%. Você está em mais que o dobro. Isso não é necessariamente um erro de quem montou, mas precisa de reavaliação dado o cenário atual.
+    </p>
+  </div>
+
+  <!-- PONTO 2 -->
+  <div class="card reveal" style="margin-top:1rem;border-left:4px solid var(--orange)">
+    <div class="tag tag-orange" style="margin-bottom:0.8rem">⚠️ Ponto de Atenção 2</div>
+    <h3 style="font-family:var(--font-display);font-size:1.15rem;margin-bottom:0.6rem">Fundo cambial perdendo dinheiro enquanto o dólar cai</h3>
+    <p style="font-size:0.88rem;color:var(--text2);line-height:1.7">
+      Você tem R$ 21.070 (6% da carteira) no Occam FI Cambial — um fundo que acompanha o dólar. Ele perdeu 3,94% só em janeiro e 5,63% em 12 meses.<br><br>
+      O dólar está caindo porque o Brasil está com a taxa de juros mais alta do mundo. Enquanto essa diferença existir, a tendência é o real continuar se valorizando. É como manter um remédio que está causando efeito colateral sem benefício terapêutico.<br><br>
+      <strong>O ponto:</strong> Ter proteção cambial pode fazer sentido, mas o <em>tamanho</em> e o <em>instrumento</em> precisam ser revistos. Há formas mais inteligentes de proteger seu patrimônio contra variação de moeda.
+    </p>
+  </div>
+
+  <!-- PONTO 3 -->
+  <div class="card reveal" style="margin-top:1rem;border-left:4px solid var(--blue)">
+    <div class="tag tag-blue" style="margin-bottom:0.8rem">💡 Ponto de Atenção 3</div>
+    <h3 style="font-family:var(--font-display);font-size:1.15rem;margin-bottom:0.6rem">Janela rara para travar juro real de 7%+ que pode mudar sua aposentadoria</h3>
+    <p style="font-size:0.88rem;color:var(--text2);line-height:1.7">
+      Hoje existe algo que aconteceu em menos de 12% dos dias de toda a história do Tesouro: títulos que pagam inflação + 7% ao ano de juro real. Isso significa que seu dinheiro <strong>dobra de valor</strong> em 8 anos, já descontada a inflação.<br><br>
+      Quando os juros começarem a cair (projeção: a partir de março), essa janela fecha. Quem travou na taxa alta, ganha; quem ficou parado, perdeu a oportunidade.<br><br>
+      <strong>O ponto:</strong> Sua carteira tem apenas 5,2% em IPCA+. Dado seus objetivos de aposentadoria aos 55 e o fato de que você vai precisar fazer resgates, existe um rebalanceamento estratégico que protegeria seu futuro <em>e</em> geraria mais renda agora — mas precisa ser feito com análise cuidadosa do seu fluxo de caixa, timing dos resgates e perfil tributário.
+    </p>
+  </div>
+
+  <!-- ANALOGIA MÉDICA FINAL -->
+  <div class="card reveal" style="margin-top:1.5rem;border:1px solid rgba(201,165,92,0.3);background:linear-gradient(135deg,var(--surface),rgba(201,165,92,0.06))">
+    <h3 style="font-family:var(--font-display);font-size:1.15rem;margin-bottom:0.8rem;color:var(--accent)">Resumindo na linguagem que você conhece bem</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem">
+      <div>
+        <p style="font-size:0.82rem;color:var(--text2);line-height:1.7">
+          <strong style="color:var(--text)">✅ O que está saudável:</strong><br>
+          • Patrimônio bruto robusto (R$ 346k)<br>
+          • Rentabilidade geral compatível com CDI<br>
+          • Diversificação entre classes existe<br>
+          • 92% resgatável em até 33 dias (boa liquidez)<br>
+          • Renda fixa como base (68%) é adequado
+        </p>
+      </div>
+      <div>
+        <p style="font-size:0.82rem;color:var(--text2);line-height:1.7">
+          <strong style="color:var(--text)">🔍 O que precisa de segunda opinião:</strong><br>
+          • Concentração em crédito privado (42% — risco alto)<br>
+          • Fundo cambial perdendo sem benefício claro (-5,6%)<br>
+          • Pouco IPCA+ (5%) numa janela histórica<br>
+          • Reserva de liquidez zerada (R$ 1.163)<br>
+          • Sem estratégia de renda passiva (FIIs, cupons)
+        </p>
+      </div>
+    </div>
+    <div style="margin-top:1.2rem;padding:1rem;background:rgba(201,165,92,0.08);border-radius:8px">
+      <p style="font-size:0.88rem;color:var(--accent);line-height:1.7;margin:0">
+        <strong>O próximo passo:</strong> Não é trocar tudo de lugar — é fazer o <strong>rebalanceamento certo, no timing certo</strong>, considerando seus resgates planejados, impostos sobre os fundos, e os objetivos que mapeamos juntas. Isso é trabalho de planejamento financeiro personalizado — não de produto prateleira.
+      </p>
+    </div>
+  </div>
+
+  <!-- GRÁFICO ALOCAÇÃO -->
+  <div class="grid-2 reveal" style="margin-top:1.5rem">
+    <div class="chart-card">
+      <h3 style="font-family:var(--font-display);font-size:0.95rem">Sua Carteira Hoje</h3>
+      <div style="position:relative;height:220px"><canvas id="chartAlocAtual"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3 style="font-family:var(--font-display);font-size:0.95rem">Onde Precisaria Estar</h3>
+      <div style="position:relative;height:220px"><canvas id="chartAlocIdeal"></canvas></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CHECK-UP PREVIDÊNCIA -->
+<section>
+  <div class="section-label reveal">08.B — Check-up da Previdência</div>
+  <h2 class="section-title reveal">Sua previdência: R$ 354 mil que precisam de atenção</h2>
+  <p class="section-desc reveal">Você tem um patrimônio relevante na previdência Porto Seguro que poucos profissionais analisam em conjunto com os investimentos livres. Essa visão integrada faz toda a diferença.</p>
+
+  <div class="grid-3 reveal">
+    <div class="card" style="border-left:3px solid var(--green)"><div class="card-label">Saldo Bruto</div><div class="card-value" style="font-size:1.3rem;color:var(--green)">R$ 353.985</div><div class="card-sub">VGBL Porto Seguro · 7 fundos</div></div>
+    <div class="card" style="border-left:3px solid var(--accent)"><div class="card-label">Saldo Líquido (após IR)</div><div class="card-value" style="font-size:1.3rem;color:var(--accent)">R$ 325.342</div><div class="card-sub">IR provisório: R$ 28.643</div></div>
+    <div class="card" style="border-left:3px solid var(--blue)"><div class="card-label">Contribuição Mensal</div><div class="card-value" style="font-size:1.3rem;color:var(--blue)">R$ 3.208</div><div class="card-sub">Status: ativa, mas suspensa na prática</div></div>
+  </div>
+
+  <div class="alert alert-green reveal" style="margin-top:1rem"><div class="alert-icon">✅</div><div class="alert-text"><strong>Acertos:</strong> Regime regressivo (ideal para longo prazo — alíquota cai até 10%). VGBL correto para quem faz declaração simplificada. Gestoras de primeira linha (Sparta, ARX, Adam, Claritas). Diversificação entre 7 fundos.</div></div>
+
+  <!-- Tabela de fundos -->
+  <div class="reveal" style="margin-top:1.2rem"><div class="table-wrap"><table>
+    <thead><tr><th>Fundo</th><th>Tipo</th><th class="text-right">Saldo</th><th class="text-right">%</th><th class="text-right">12 meses</th><th class="text-right">2025</th><th>Nota</th></tr></thead>
+    <tbody>
+      <tr><td>ARX Income 70</td><td>Multi Bolsa</td><td class="text-right">R$ 82.556</td><td class="text-right">23,3%</td><td class="text-right" style="color:var(--green)">+36,7%</td><td class="text-right" style="color:var(--green)">+29,6%</td><td><span class="tag tag-green">⭐ Destaque</span></td></tr>
+      <tr><td>Sparta CP</td><td>Crédito Priv.</td><td class="text-right">R$ 72.513</td><td class="text-right">20,5%</td><td class="text-right" style="color:var(--green)">+14,2%</td><td class="text-right" style="color:var(--green)">+14,1%</td><td><span class="tag tag-green">Sólido</span></td></tr>
+      <tr><td>Claritas Long Bias</td><td>Long Bias</td><td class="text-right">R$ 71.245</td><td class="text-right">20,1%</td><td class="text-right" style="color:var(--green)">+26,7%</td><td class="text-right" style="color:var(--green)">+24,3%</td><td><span class="tag tag-orange">Volátil</span></td></tr>
+      <tr><td>Adam PREV</td><td>Macro</td><td class="text-right">R$ 33.855</td><td class="text-right">9,6%</td><td class="text-right" style="color:var(--red)">+9,1%</td><td class="text-right">+9,7%</td><td><span class="tag tag-orange">Abaixo CDI</span></td></tr>
+      <tr><td>RF Diamante Plus</td><td>Pós-fixado</td><td class="text-right">R$ 33.559</td><td class="text-right">9,5%</td><td class="text-right" style="color:var(--green)">+13,4%</td><td class="text-right" style="color:var(--green)">+13,4%</td><td><span class="tag tag-green">OK</span></td></tr>
+      <tr><td>RF Juro Real</td><td>IPCA+</td><td class="text-right">R$ 30.749</td><td class="text-right">8,7%</td><td class="text-right">+12,0%</td><td class="text-right">+12,3%</td><td><span class="tag tag-blue">Bom p/ LP</span></td></tr>
+      <tr style="background:rgba(232,93,93,0.08)"><td>Giant Prev FIE</td><td>Quant/Intl</td><td class="text-right">R$ 29.508</td><td class="text-right">8,3%</td><td class="text-right" style="color:var(--red)">+9,5%</td><td class="text-right" style="color:var(--red)">+6,5%</td><td><span class="tag tag-red">❌ Pior</span></td></tr>
+    </tbody>
+  </table></div></div>
+
+  <!-- Pontos de atenção previdência -->
+  <div class="card reveal" style="margin-top:1.2rem;border-left:4px solid var(--orange)">
+    <h3 style="font-family:var(--font-display);font-size:1.05rem;margin-bottom:0.6rem">Pontos que merecem revisão</h3>
+    <p style="font-size:0.85rem;color:var(--text2);line-height:1.7">
+      <strong>1. Giant Prev (R$ 29.508):</strong> Nunca bateu o CDI em 3 anos. Em 2023 rendeu apenas 2,53%. São R$ 29k que poderiam render muito mais em outro fundo dentro da mesma previdência.<br><br>
+      <strong>2. Adam PREV (R$ 33.855):</strong> Últimos 12 meses: +9,09% vs CDI de ~14,5%. Perdeu 5 pontos percentuais. Adam é gestora renomada, mas este fundo não entregou resultado compatível com o risco.<br><br>
+      <strong>3. Perfil de risco elevado:</strong> ARX (70% bolsa) + Claritas (long bias) + Giant somam ~R$ 183k em fundos com exposição significativa a renda variável. Isso é 52% da previdência em ativos voláteis — incompatível com perfil moderado e fase de déficit.<br><br>
+      <strong>4. Crédito privado duplicado:</strong> Sparta CP na previdência (20%) + crédito privado na Warren (42%) = exposição combinada de ~31% do patrimônio total a crédito privado.<br><br>
+      <strong>5. IPCA+ subrepresentado:</strong> Apenas 8,7% em Juro Real. Para aposentadoria de longo prazo, essa deveria ser a maior alocação, especialmente com IPCA+ pagando 7%+ real.
+    </p>
+  </div>
+</section>
+
+<!-- CONSOLIDADO + SIMULAÇÃO -->
+<section>
+  <div class="section-label reveal">08.C — Visão Consolidada + Simulação</div>
+  <h2 class="section-title reveal">Seu patrimônio total: a visão que ninguém te mostrou</h2>
+  <p class="section-desc reveal">Quando juntamos Warren + Previdência + outros ativos, o panorama muda completamente. A maioria dos assessores analisa cada conta separada. Aqui está tudo junto — como deveria ser.</p>
+
+  <div class="kpi-row reveal">
+    <div class="kpi"><div class="kpi-number text-accent">R$ 712k</div><div class="kpi-label">Patrimônio Financeiro Bruto</div></div>
+    <div class="kpi"><div class="kpi-number text-green">R$ 683k</div><div class="kpi-label">Financeiro Líquido (após IR prev)</div></div>
+    <div class="kpi"><div class="kpi-number text-red">- R$ 12.000</div><div class="kpi-label">Déficit Mensal</div></div>
+    <div class="kpi"><div class="kpi-number" style="color:var(--blue)">18 anos</div><div class="kpi-label">Até meta (55 anos)</div></div>
+  </div>
+
+  <!-- Consolidado por classe -->
+  <div class="card reveal" style="margin-top:1.2rem">
+    <h3 style="font-family:var(--font-display);font-size:1.05rem;margin-bottom:0.8rem">Alocação Consolidada (Warren + Previdência)</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Classe</th><th class="text-right">Warren</th><th class="text-right">Previdência</th><th class="text-right">Total</th><th class="text-right">% Total</th><th>Diagnóstico</th></tr></thead>
+      <tbody>
+        <tr><td>Pós-fixado / CDI</td><td class="text-right">R$ 73.764</td><td class="text-right">R$ 33.559</td><td class="text-right"><strong>R$ 107.323</strong></td><td class="text-right">15,3%</td><td><span class="tag tag-orange">Baixo p/ liquidez</span></td></tr>
+        <tr><td>IPCA+ / Juro Real</td><td class="text-right">R$ 18.158</td><td class="text-right">R$ 30.749</td><td class="text-right"><strong>R$ 48.907</strong></td><td class="text-right">7,0%</td><td><span class="tag tag-red">Muito baixo</span></td></tr>
+        <tr><td>Crédito Privado</td><td class="text-right">R$ 145.671</td><td class="text-right">R$ 72.513</td><td class="text-right"><strong>R$ 218.184</strong></td><td class="text-right">31,1%</td><td><span class="tag tag-red">⚠️ Concentrado</span></td></tr>
+        <tr><td>Multimercado</td><td class="text-right">R$ 52.912</td><td class="text-right">R$ 33.855</td><td class="text-right"><strong>R$ 86.767</strong></td><td class="text-right">12,4%</td><td><span class="tag tag-orange">Misturado</span></td></tr>
+        <tr><td>Renda Variável / Bolsa</td><td class="text-right">R$ 33.499</td><td class="text-right">R$ 153.801</td><td class="text-right"><strong>R$ 187.300</strong></td><td class="text-right">26,7%</td><td><span class="tag tag-orange">Alto p/ perfil</span></td></tr>
+        <tr><td>Cambial / Internacional</td><td class="text-right">R$ 22.435</td><td class="text-right">R$ 29.508</td><td class="text-right"><strong>R$ 51.943</strong></td><td class="text-right">7,4%</td><td><span class="tag tag-orange">Revisar</span></td></tr>
+        <tr class="row-total"><td>TOTAL</td><td class="text-right">R$ 346.439</td><td class="text-right">R$ 353.985</td><td class="text-right"><strong>R$ 700.424</strong></td><td class="text-right">100%</td><td></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="alert alert-red reveal" style="margin-top:1rem"><div class="alert-icon">⚡</div><div class="alert-text"><strong>Achado principal:</strong> Quando juntamos tudo, 31% do patrimônio está em crédito privado (R$ 218k) — um risco concentrado que só aparece na visão consolidada. Nenhum assessor que olha só uma das contas vai enxergar isso.</div></div>
+
+  <!-- SIMULAÇÃO APOSENTADORIA -->
+  <div class="card reveal" style="margin-top:1.5rem;border:1px solid rgba(201,165,92,0.3);background:linear-gradient(135deg,var(--surface),rgba(201,165,92,0.06))">
+    <h3 style="font-family:var(--font-display);font-size:1.15rem;margin-bottom:0.5rem;color:var(--accent)">Você chega aos 55 com a carteira como está hoje?</h3>
+    <p style="font-size:0.85rem;color:var(--text2);margin-bottom:1rem">Marcella, 37 anos. Meta: independência financeira aos 55 (18 anos). Patrimônio investido: R$ 700k.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+      <div style="padding:1rem;border-radius:8px;background:rgba(232,93,93,0.08);border:1px solid rgba(232,93,93,0.2)">
+        <div style="font-family:var(--font-display);color:var(--red);font-size:0.9rem;margin-bottom:0.4rem">❌ Cenário A — Se continuar como está</div>
+        <p style="font-size:0.82rem;color:var(--text2);line-height:1.6;margin:0">Resgatando R$ 12.000/mês para cobrir déficit, o patrimônio de R$ 700k <strong>zera em ~5 anos</strong>. Chega aos 55 sem nada.</p>
+      </div>
+      <div style="padding:1rem;border-radius:8px;background:rgba(201,165,92,0.08);border:1px solid rgba(201,165,92,0.2)">
+        <div style="font-family:var(--font-display);color:var(--accent);font-size:0.9rem;margin-bottom:0.4rem">⚠️ Cenário B — Equilibra fluxo, sem aportes</div>
+        <p style="font-size:0.82rem;color:var(--text2);line-height:1.6;margin:0">Para de resgatar, patrimônio cresce sozinho. Em 18 anos: <strong>~R$ 1,3 mi em valor real</strong>. Renda de ~R$ 6.500/mês. Insuficiente.</p>
+      </div>
+      <div style="padding:1rem;border-radius:8px;background:rgba(93,142,232,0.08);border:1px solid rgba(93,142,232,0.2)">
+        <div style="font-family:var(--font-display);color:var(--blue);font-size:0.9rem;margin-bottom:0.4rem">⚠️ Cenário C — Retoma aportes R$ 3.200/mês</div>
+        <p style="font-size:0.82rem;color:var(--text2);line-height:1.6;margin:0">Equilibra fluxo + volta a contribuir na previdência. Em 18 anos: <strong>~R$ 2,1 mi em valor real</strong>. Renda de ~R$ 10.500/mês. Quase lá.</p>
+      </div>
+      <div style="padding:1rem;border-radius:8px;background:rgba(93,190,138,0.08);border:1px solid rgba(93,190,138,0.2)">
+        <div style="font-family:var(--font-display);color:var(--green);font-size:0.9rem;margin-bottom:0.4rem">✅ Cenário D — Planejamento integrado</div>
+        <p style="font-size:0.82rem;color:var(--text2);line-height:1.6;margin:0">Equilibra + aportes + carteira otimizada com visão consolidada. Ganho de 1-2% a.a. com rebalanceamento. <strong>~R$ 2,6-3,0 mi em valor real</strong>. Renda de R$ 13-15k/mês. <strong>Meta atingida.</strong></p>
+      </div>
+    </div>
+
+    <div style="margin-top:1.2rem;padding:1rem;background:rgba(201,165,92,0.1);border-radius:8px;border-left:3px solid var(--accent)">
+      <p style="font-size:0.88rem;color:var(--accent);line-height:1.7;margin:0">
+        <strong>A diferença entre o Cenário A e o Cenário D é exatamente o que um planejamento financeiro integrado faz.</strong> Não é sobre escolher "o melhor fundo" — é sobre ter alguém que enxerga todas as peças juntas: fluxo de caixa, previdência, investimentos livres, tributação, objetivos e timing de cada decisão.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+<div class="divider"></div>
+
+<!-- RECOMENDAÇÕES -->
+<section id="recomendacoes">
+  <div class="section-label reveal">10 — Recomendações</div>
+  <h2 class="section-title reveal">Plano de Ação</h2>
+  <p class="section-desc reveal">Priorizadas por urgência e impacto — o caminho para equilibrar seu fluxo de caixa e retomar o crescimento patrimonial.</p>
+
+  <div class="grid-2 reveal">
+    <div class="card" style="border:1px solid rgba(232,93,93,0.3);background:linear-gradient(135deg,var(--surface),rgba(232,93,93,0.05))">
+      <div class="tag tag-red" style="margin-bottom:1rem">Urgente</div>
+      <h3 style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.75rem">1. Regularizar Seguro de Vida MAG</h3>
+      <p style="font-size:0.9rem;color:var(--text2)">Pagar o boleto de R$ 6.978 ou converter para pagamento mensal ANTES de 19/03. Perder esse seguro com DIT seria muito prejudicial — você é o maior ativo da sua PJ.</p>
+    </div>
+    <div class="card" style="border:1px solid rgba(232,93,93,0.3);background:linear-gradient(135deg,var(--surface),rgba(232,93,93,0.05))">
+      <div class="tag tag-red" style="margin-bottom:1rem">Urgente</div>
+      <h3 style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.75rem">2. Separar Despesas PF e PJ</h3>
+      <p style="font-size:0.9rem;color:var(--text2)">Criar cartão exclusivo PJ. O cartão PF absorve R$ 8.000+/mês do consultório (Bio Meds ~R$ 4.500, cursos ~R$ 3.200, seguros PJ R$ 327). Definir pró-labore formal. Essencial para ver se o consultório dá lucro ou prejuízo.</p>
+    </div>
+    <div class="card" style="border:1px solid rgba(201,165,92,0.3);background:linear-gradient(135deg,var(--surface),rgba(201,165,92,0.05))">
+      <div class="tag tag-accent" style="margin-bottom:1rem">Alta Prioridade</div>
+      <h3 style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.75rem">3. Calcular Custo Operacional Real</h3>
+      <p style="font-size:0.9rem;color:var(--text2)">Só em Bio Meds são R$ 4.465/mês de insumos. Com aluguel R$ 2.000 + contador + impostos, o custo operacional do consultório pode ser R$ 8-10k/mês. Se fatura R$ 3-5k, há prejuízo operacional. Precificação mínima por procedimento é urgente.</p>
+    </div>
+    <div class="card" style="border:1px solid rgba(201,165,92,0.3);background:linear-gradient(135deg,var(--surface),rgba(201,165,92,0.05))">
+      <div class="tag tag-accent" style="margin-bottom:1rem">Alta Prioridade</div>
+      <h3 style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.75rem">4. Revisar Precificação</h3>
+      <p style="font-size:0.9rem;color:var(--text2)">Definir valor mínimo de consulta em R$ 500 (sem desconto abaixo desse piso — hoje cobra R$ 700 mas dá desconto de R$ 400-560 sem critério). Criar tabela de preços por procedimento incluindo custo + imposto + margem. NF de produto separada de NF de serviço. Não dar desconto — agregar valor (bônus, brindes).</p>
+    </div>
+    <div class="card" style="border:1px solid rgba(93,142,232,0.3);background:linear-gradient(135deg,var(--surface),rgba(93,142,232,0.05))">
+      <div class="tag tag-blue" style="margin-bottom:1rem">Médio Prazo</div>
+      <h3 style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.75rem">5. Contratar Assistente (Amanda)</h3>
+      <p style="font-size:0.9rem;color:var(--text2)">Amanda foi identificada como candidata. Investir R$ 2-3k/mês para cuidar de agenda, notas fiscais, estoque e aplicações. Hoje Marcella perde ~R$ 10k/mês em tempo sendo "Michele". Conta que resolve: +1 paciente a mais por semana = R$ 2-3k de receita extra, que já paga a assistente.</p>
+    </div>
+    <div class="card" style="border:1px solid rgba(93,142,232,0.3);background:linear-gradient(135deg,var(--surface),rgba(93,142,232,0.05))">
+      <div class="tag tag-blue" style="margin-bottom:1rem">Médio Prazo</div>
+      <h3 style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.75rem">6. Priorizar Compromissos 6 Meses</h3>
+      <p style="font-size:0.9rem;color:var(--text2)">Déficit confirmado de ~R$ 12.000/mês (desde nov/2025). Nem todos os objetivos cabem em 2026. Prioridades definidas na sessão: congelamento de óvulos (inegociável) e consultório lucrativo. A boa notícia: +1 paciente por semana fecha o gap. Adiar troca de carro até o consultório se pagar.</p>
+    </div>
+    <div class="card" style="border:1px solid rgba(93,190,138,0.3);background:linear-gradient(135deg,var(--surface),rgba(93,190,138,0.05));grid-column:1/-1">
+      <div class="tag tag-green" style="margin-bottom:1rem">Construção</div>
+      <h3 style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.75rem">7. Portabilidade Previdência Porto → XP e Retomar Aportes</h3>
+      <p style="font-size:0.9rem;color:var(--text2)">Portabilizar a previdência Porto Seguro (R$ 300k) para a XP, com abertura de conta e acompanhamento pela assessoria. Após equilibrar o fluxo de caixa, retomar contribuição (pode ser valor menor inicialmente). Manter a carteira Warren/K1 com o assessor atual Thiago — informar sobre a portabilidade com tranquilidade.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="brand">GW9 Capital</div>
+  <p>Diagnóstico preparado por Laysa Corrêa — CFP® — Planejadora Financeira</p>
+  <p style="margin-top:0.5rem">Documento confidencial — Uso exclusivo da cliente</p>
+  <p style="margin-top:1rem;font-size:0.7rem;color:var(--text3)">Fontes: Extrato CC Itaú (15/11/25–13/02/26) · 3 Faturas Cartão Itaú Black (Dez/25, Jan/26, Fev/26) · Planilha reunião diagnóstica 12/02/2026 · Sessão diagnóstico 26/02/2026 · Notas Notion · Relatório Warren (Jan/2026) · Extrato VGBL Porto Seguro (Fev/2026)<br>Atualizado em 26/02/2026 após sessão de apresentação. Este diagnóstico tem caráter educativo e informativo. Não constitui recomendação de investimento.</p>
+</div>
+
+<script>
+// Chart defaults
+Chart.defaults.color = '#9b978f';
+Chart.defaults.borderColor = 'rgba(201,165,92,0.08)';
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+Chart.defaults.font.size = 12;
+
+// Colors
+const gold = '#c9a55c';
+const goldLight = '#e8c97a';
+const red = '#e85d5d';
+const green = '#5dbe8a';
+const blue = '#5d8ee8';
+const purple = '#a07de8';
+const surface = '#1a2030';
+
+// 1. Patrimônio Pie
+new Chart(document.getElementById('chartPatrimonio'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Previdência Porto','Investimentos Warren','Honda Fit 2016','Conta Corrente'],
+    datasets: [{
+      data: [353985, 346479, 55000, 2617],
+      backgroundColor: [gold, blue, purple, green],
+      borderWidth: 0,
+      hoverOffset: 8
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    cutout: '65%',
+    plugins: {
+      legend: { position:'bottom', labels:{padding:16, usePointStyle:true, pointStyle:'circle'} },
+      tooltip: { callbacks:{ label: ctx => `${ctx.label}: R$ ${(ctx.raw/1000).toFixed(0)}k` }}
+    }
+  }
+});
+
+// 2. Previdência por fundo
+new Chart(document.getElementById('chartPrevidencia'), {
+  type: 'bar',
+  data: {
+    labels: ['ARX Income','Sparta','Adam','Claritas','RF Diamante','RF Juro Real','Giant Prev'],
+    datasets: [{
+      data: [82556, 72513, 33855, 71245, 33559, 30749, 29508],
+      backgroundColor: [gold, blue, green, purple, goldLight, '#7dc4e8', red],
+      borderRadius: 6,
+      barThickness: 24
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    indexAxis: 'y',
+    plugins: {
+      legend:{display:false},
+      tooltip:{callbacks:{label:ctx=>`R$ ${(ctx.raw/1000).toFixed(1)}k`}}
+    },
+    scales: {
+      x:{grid:{display:false}, ticks:{callback:v=>`${(v/1000)}k`}},
+      y:{grid:{display:false}}
+    }
+  }
+});
+
+// 3. Fluxo mensal
+new Chart(document.getElementById('chartFluxo'), {
+  type: 'bar',
+  data: {
+    labels: ['Receita Líquida','Despesas','Déficit'],
+    datasets: [{
+      data: [20000, 30000, -12000],
+      backgroundColor: [green, red, 'rgba(232,93,93,0.5)'],
+      borderRadius: 8,
+      barThickness: 50
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend:{display:false},
+      tooltip:{callbacks:{label:ctx=>`R$ ${ctx.raw.toLocaleString('pt-BR')}`}}
+    },
+    scales: {
+      y:{grid:{color:'rgba(255,255,255,0.03)'}, ticks:{callback:v=>`R$ ${(v/1000)}k`}},
+      x:{grid:{display:false}}
+    }
+  }
+});
+
+// 4. Despesas breakdown
+new Chart(document.getElementById('chartDespesas'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Cartão (insumos+cursos+PF)','Aluguel+Condo PF','Tributos PJ','Planos Saúde','Aluguel Consultório','Psicóloga','Personal','VIVO','Gravação','Psicóloga (Luciana)','Alug. Consult. Terças','Nutri (Bruno F)','Seguros','Outros (gás, luz, pedágio...)'],
+    datasets: [{
+      data: [14900, 2900, 2750, 2100, 2000, 1280, 1080, 899, 798, 747, 733, 533, 910, 870],
+      backgroundColor: [red, '#e8a05d', blue, purple, '#7dc4e8', gold, green, '#7de8c4', goldLight, '#e88bc4', '#e88bc4', '#e88bc4', '#5dbe8a', '#5e5b55'],
+      borderWidth: 0
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    cutout: '55%',
+    plugins: {
+      legend: {position:'bottom', labels:{padding:10, usePointStyle:true, pointStyle:'circle', font:{size:10}}},
+      tooltip: {callbacks:{label:ctx=>`${ctx.label}: R$ ${ctx.raw.toLocaleString('pt-BR')}`}}
+    }
+  }
+});
+
+// 5. Simulador
+const patrimInicial = 354000 + 346479; // Previdência + Warren (pós-resgate Jan/26)
+const simAporte = document.getElementById('simAporte');
+const simRent = document.getElementById('simRent');
+const simIdade = document.getElementById('simIdade');
+let simChart;
+
+function formatBR(v) {
+  if(v >= 1000000) return `R$ ${(v/1000000).toFixed(1)}M`;
+  if(v >= 1000) return `R$ ${(v/1000).toFixed(0)}k`;
+  return `R$ ${v.toFixed(0)}`;
+}
+
+function updateSim() {
+  const aporte = +simAporte.value;
+  const rent = +simRent.value / 100;
+  const idadeApos = +simIdade.value;
+  const anos = idadeApos - 37;
+  const rentMensal = Math.pow(1 + rent, 1/12) - 1;
+
+  document.getElementById('simAporteVal').textContent = `R$ ${aporte.toLocaleString('pt-BR')}`;
+  document.getElementById('simRentVal').textContent = `${simRent.value.replace('.',',')}% a.a.`;
+  document.getElementById('simIdadeVal').textContent = `${idadeApos} anos`;
+
+  const labels = [];
+  const data = [];
+  let saldo = patrimInicial;
+  for(let m = 0; m <= anos * 12; m++) {
+    if(m % 12 === 0) {
+      labels.push(`${37 + m/12}`);
+      data.push(saldo);
+    }
+    saldo = saldo * (1 + rentMensal) + aporte;
+  }
+
+  document.getElementById('simPatri').textContent = formatBR(saldo);
+  document.getElementById('simRenda').textContent = formatBR(saldo * 0.04 / 12);
+  document.getElementById('simAnos').textContent = `${anos} anos`;
+
+  if(simChart) simChart.destroy();
+  simChart = new Chart(document.getElementById('chartSimulador'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Patrimônio Projetado',
+        data,
+        borderColor: gold,
+        backgroundColor: 'rgba(201,165,92,0.08)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: 3,
+        pointBackgroundColor: gold
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend:{display:false},
+        tooltip:{callbacks:{label:ctx=>formatBR(ctx.raw)}}
+      },
+      scales: {
+        y:{grid:{color:'rgba(255,255,255,0.03)'}, ticks:{callback:v=>formatBR(v)}},
+        x:{grid:{display:false}, title:{display:true, text:'Idade', color:'#5e5b55'}}
+      }
+    }
+  });
+}
+
+simAporte.addEventListener('input', updateSim);
+simRent.addEventListener('input', updateSim);
+simIdade.addEventListener('input', updateSim);
+updateSim();
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); }});
+}, {threshold: 0.1});
+reveals.forEach(r => observer.observe(r));
+
+// Nav active state
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if(window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+// Allocation charts - Current vs Ideal
+new Chart(document.getElementById("chartAlocAtual"), {
+  type: "doughnut",
+  data: {
+    labels: ["Pós-fixado Liquidez","Crédito Privado","Inflação IPCA+","Multimercado","Ações Brasil","Ações Global","Cambial","Ouro/Comm"],
+    datasets: [{
+      data: [21.3, 42.0, 5.2, 15.3, 6.7, 3.0, 6.1, 0.4],
+      backgroundColor: ["#5dbe8a","#e85d5d","#5d8ee8","#a07de8","#e8a85d","#c9a55c","#e85d5d88","#c9a55c88"],
+      borderWidth: 0
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { position:"bottom", labels: { font:{size:9}, padding:6, usePointStyle:true, boxWidth:8 } },
+      tooltip: { callbacks: { label: c => c.label + ": " + c.raw + "%" } }
+    }
+  }
+});
+
+new Chart(document.getElementById("chartAlocIdeal"), {
+  type: "doughnut",
+  data: {
+    labels: ["Pós-fixado Liquidez","Crédito Privado","IPCA+ (travado)","Multimercado","FIIs + Dividendos","Ações","Internacional","Ouro/Hedge"],
+    datasets: [{
+      data: [35, 15, 22, 7, 8, 5, 4, 4],
+      backgroundColor: ["#5dbe8a","#e8a85d","#5d8ee8","#a07de8","#c9a55c","#e8a85daa","#c9a55c88","#c9a55c55"],
+      borderWidth: 0
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { position:"bottom", labels: { font:{size:9}, padding:6, usePointStyle:true, boxWidth:8 } },
+      tooltip: { callbacks: { label: c => c.label + ": " + c.raw + "%" } }
+    }
+  }
+});
+</script>
+</body>
+</html>
