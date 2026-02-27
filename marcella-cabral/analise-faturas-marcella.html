@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análise de Faturas — Dra. Marcella Cabral</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--bg:#0c0f14;--surface:#141820;--surface2:#1a2030;--accent:#c9a55c;--accent2:#e8c97a;--accent-dim:rgba(201,165,92,.15);--red:#e85d5d;--red-dim:rgba(232,93,93,.12);--green:#5dbe8a;--green-dim:rgba(93,190,138,.12);--blue:#5d8ee8;--blue-dim:rgba(93,142,232,.12);--purple:#a07de8;--purple-dim:rgba(160,125,232,.12);--pink:#e88bc4;--orange:#e8a85d;--text:#e8e4dd;--text2:#9b978f;--text3:#5e5b55;--border:rgba(201,165,92,.1);--font-display:'Playfair Display',Georgia,serif;--font-body:'DM Sans',-apple-system,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--font-body);line-height:1.6;overflow-x:hidden}::selection{background:var(--accent);color:var(--bg)}::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--accent-dim);border-radius:3px}
+
+.header{padding:3rem 2rem 2rem;max-width:1200px;margin:0 auto;border-bottom:1px solid var(--border)}
+.header-label{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem;font-weight:500}
+.header h1{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;margin-bottom:.5rem}
+.header h1 span{color:var(--accent);font-style:italic}
+.header-sub{color:var(--text2);font-size:.95rem}
+
+section{padding:3rem 2rem;max-width:1200px;margin:0 auto}
+.section-label{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem;font-weight:500}
+.section-title{font-family:var(--font-display);font-size:clamp(1.4rem,3vw,2rem);font-weight:600;margin-bottom:.5rem}
+.section-desc{color:var(--text2);font-size:.9rem;max-width:700px;margin-bottom:2rem}
+
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:2rem}
+.kpi{text-align:center;padding:1.5rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;transition:.3s}
+.kpi:hover{border-color:rgba(201,165,92,.25);transform:translateY(-2px)}
+.kpi-number{font-family:var(--font-display);font-size:1.6rem;font-weight:700}
+.kpi-label{font-size:.7rem;color:var(--text2);margin-top:.3rem;letter-spacing:1px;text-transform:uppercase}
+.kpi-sub{font-size:.75rem;color:var(--text3);margin-top:.2rem}
+
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.75rem;transition:.3s}
+.card:hover{border-color:rgba(201,165,92,.2);transform:translateY(-1px)}
+.card h3{font-family:var(--font-display);font-size:1.15rem;margin-bottom:1rem}
+.card-label{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:.75rem;font-weight:500}
+.card-value{font-family:var(--font-display);font-size:1.8rem;font-weight:700;line-height:1.2}
+.card-sub{font-size:.85rem;color:var(--text2);margin-top:.5rem}
+.chart-container{position:relative;height:300px}
+
+.tag{display:inline-block;padding:.2rem .6rem;border-radius:16px;font-size:.68rem;font-weight:500;letter-spacing:.3px}
+.tag-red{background:var(--red-dim);color:var(--red)}.tag-green{background:var(--green-dim);color:var(--green)}.tag-blue{background:var(--blue-dim);color:var(--blue)}.tag-accent{background:var(--accent-dim);color:var(--accent)}.tag-purple{background:var(--purple-dim);color:var(--purple)}.tag-orange{background:rgba(232,168,93,.12);color:var(--orange)}
+
+.alert{padding:1.25rem 1.5rem;border-radius:12px;display:flex;gap:1rem;align-items:flex-start;margin:1.5rem 0}
+.alert-red{background:var(--red-dim);border:1px solid rgba(232,93,93,.2)}.alert-accent{background:var(--accent-dim);border:1px solid rgba(201,165,92,.2)}.alert-blue{background:var(--blue-dim);border:1px solid rgba(93,142,232,.2)}
+.alert-icon{font-size:1.2rem;flex-shrink:0}.alert-text{font-size:.88rem;color:var(--text2)}.alert-text strong{color:var(--text)}
+
+.table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border);margin:1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th{padding:.75rem 1rem;text-align:left;font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);background:var(--surface);border-bottom:1px solid var(--border);font-weight:500;white-space:nowrap}
+td{padding:.7rem 1rem;border-bottom:1px solid rgba(255,255,255,.03)}
+tr:hover td{background:rgba(201,165,92,.03)}.text-right{text-align:right}
+.row-highlight{background:var(--surface2) !important}
+.row-highlight td{font-weight:600}
+
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--border),transparent);margin:1rem auto;max-width:1200px}
+
+/* Bars for PF/PJ breakdown */
+.pf-pj-bar{display:flex;height:28px;border-radius:8px;overflow:hidden;margin:.75rem 0}
+.pf-pj-bar .pj-seg{background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:600;color:#fff;min-width:40px}
+.pf-pj-bar .pf-seg{background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:600;color:var(--bg);min-width:40px}
+.pf-pj-bar .misto-seg{background:var(--purple);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:600;color:#fff;min-width:40px}
+
+.legend-row{display:flex;gap:1.5rem;flex-wrap:wrap;margin:.5rem 0}
+.legend-item{display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--text2)}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* Top spenders list */
+.top-item{display:flex;gap:1rem;align-items:center;padding:.85rem 0;border-bottom:1px solid rgba(255,255,255,.03)}
+.top-item:last-child{border-bottom:none}
+.top-rank{font-family:var(--font-display);font-size:1.4rem;font-weight:700;min-width:28px;color:var(--text3)}
+.top-info{flex:1}
+.top-info h4{font-size:.92rem;font-weight:600}
+.top-info p{font-size:.78rem;color:var(--text2)}
+.top-amount{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--accent2);white-space:nowrap}
+
+.footer{text-align:center;padding:3rem 2rem;color:var(--text3);font-size:.78rem;border-top:1px solid var(--border);margin-top:2rem}
+.footer .brand{font-family:var(--font-display);font-size:1.1rem;color:var(--accent);margin-bottom:.4rem}
+
+.reveal{opacity:0;transform:translateY(25px);transition:all .7s cubic-bezier(.16,1,.3,1)}.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){section{padding:2rem 1.25rem}.grid-2,.grid-3{grid-template-columns:1fr}.kpi-row{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-label">Análise Detalhada do Cartão de Crédito</div>
+  <h1>Raio-X das <span>Faturas</span></h1>
+  <p class="header-sub">Itaú Mastercard Black — 3 faturas analisadas: Dez/2025, Jan/2026, Fev/2026</p>
+</div>
+
+<!-- VISÃO GERAL -->
+<section>
+  <div class="section-label reveal">01 — Visão Geral</div>
+  <h2 class="section-title reveal">Os números que contam a história</h2>
+  <p class="section-desc reveal">O cartão Mastercard Black é usado para praticamente tudo — do jaleco ao supermercado, do seguro profissional ao Uber. É a "conta única" da Marcella, e esse é o problema.</p>
+
+  <div class="kpi-row reveal">
+    <div class="kpi"><div class="kpi-number" style="color:var(--red)">R$ 44.571</div><div class="kpi-label">Total 3 Faturas</div><div class="kpi-sub">Dez + Jan + Fev</div></div>
+    <div class="kpi"><div class="kpi-number" style="color:var(--accent)">R$ 14.857</div><div class="kpi-label">Média Mensal</div><div class="kpi-sub">no cartão</div></div>
+    <div class="kpi"><div class="kpi-number" style="color:var(--blue)">R$ 42.801</div><div class="kpi-label">Parcelas Futuras</div><div class="kpi-sub">já comprometido</div></div>
+    <div class="kpi"><div class="kpi-number" style="color:var(--red)">R$ 10.844</div><div class="kpi-label">Mín. Próx. Fatura</div><div class="kpi-sub">só parcelas</div></div>
+  </div>
+
+  <div class="grid-3 reveal">
+    <div class="card" style="border-left:3px solid var(--green)">
+      <div class="card-label">Dez/2025</div>
+      <div class="card-value" style="color:var(--accent)">R$ 14.248</div>
+      <div class="card-sub">Vencimento 02/12/2025 — paga em 03/11 ✅</div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red)">
+      <div class="card-label">Jan/2026 — Pico</div>
+      <div class="card-value" style="color:var(--red)">R$ 18.143</div>
+      <div class="card-sub">Vencimento 02/01/2026 — Método CIS + compras Natal</div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--accent)">
+      <div class="card-label">Fev/2026</div>
+      <div class="card-value" style="color:var(--accent2)">R$ 12.180</div>
+      <div class="card-sub">Vencimento 02/02/2026 — menor fatura (bom sinal)</div>
+    </div>
+  </div>
+
+  <div class="card reveal" style="margin-top:1.5rem">
+    <h3>Evolução Mensal</h3>
+    <div class="chart-container"><canvas id="chartEvolucao"></canvas></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TOP GASTOS -->
+<section>
+  <div class="section-label reveal">02 — Os 10 Maiores Vilões</div>
+  <h2 class="section-title reveal">Onde o dinheiro vai parar</h2>
+  <p class="section-desc reveal">Os 10 estabelecimentos que mais pesam na fatura. Muitos são parcelamentos que vão se repetir por meses.</p>
+
+  <div class="grid-2 reveal">
+    <div class="card">
+      <h3>Top 10 — Média Mensal</h3>
+      <div class="top-item"><div class="top-rank" style="color:var(--red)">1</div><div class="top-info"><h4>Bio Meds Pharmaceutical</h4><p>Insumos médicos/farmacêuticos — parcelado 3-4x</p></div><div class="top-amount">R$ 5.040/m</div></div>
+      <div class="top-item"><div class="top-rank" style="color:var(--red)">2</div><div class="top-info"><h4>BPG*CISPay / Método CIS</h4><p>Evento + alimentação — parcelado 5-12x</p></div><div class="top-amount">R$ 2.914/m</div></div>
+      <div class="top-item"><div class="top-rank" style="color:var(--orange)">3</div><div class="top-info"><h4>DOM*YMCursosE</h4><p>YM Cursos — formação profissional — 10x R$ 3.300</p></div><div class="top-amount">R$ 2.200/m</div></div>
+      <div class="top-item"><div class="top-rank">4</div><div class="top-info"><h4>Alimentação / Supermercados</h4><p>Amoedo, Guanabara, restaurantes, cafés</p></div><div class="top-amount">R$ 694/m</div></div>
+      <div class="top-item"><div class="top-rank">5</div><div class="top-info"><h4>Passagens Aéreas</h4><p>LATAM + Azul — viagens congressos/pessoal</p></div><div class="top-amount">R$ 584/m</div></div>
+      <div class="top-item"><div class="top-rank">6</div><div class="top-info"><h4>Clínica Dra. Ivana</h4><p>Tratamento pessoal — Teresópolis — 12x R$ 533</p></div><div class="top-amount">R$ 533/m</div></div>
+      <div class="top-item"><div class="top-rank">7</div><div class="top-info"><h4>Combustível + Uber + Pedágio</h4><p>Pontal Auto Posto, Uber, estacionamentos</p></div><div class="top-amount">R$ 461/m</div></div>
+      <div class="top-item"><div class="top-rank">8</div><div class="top-info"><h4>Seguros (Porto + Akad)</h4><p>Seguro equipamento + RC profissional</p></div><div class="top-amount">R$ 327/m</div></div>
+      <div class="top-item"><div class="top-rank">9</div><div class="top-info"><h4>Microsoft + Apple</h4><p>Licenças de software e assinaturas</p></div><div class="top-amount">R$ 315/m</div></div>
+      <div class="top-item"><div class="top-rank">10</div><div class="top-info"><h4>RioSkin Medical + Cosméticos</h4><p>Produtos dermatológicos profissionais</p></div><div class="top-amount">R$ 219/m</div></div>
+    </div>
+    <div class="card">
+      <h3>Distribuição por Categoria</h3>
+      <div class="chart-container"><canvas id="chartCategorias"></canvas></div>
+    </div>
+  </div>
+
+  <div class="alert alert-red reveal">
+    <div class="alert-icon">🔍</div>
+    <div class="alert-text"><strong>Descoberta crítica:</strong> Só 3 fornecedores (Bio Meds + CISPay + YM Cursos) representam <strong>R$ 10.154/mês</strong> — <strong style="color:var(--red)">68% da fatura média</strong>. E todos são parcelados de longo prazo que vão continuar pesando por meses.</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PF vs PJ -->
+<section>
+  <div class="section-label reveal">03 — PF vs PJ — A Grande Mistura</div>
+  <h2 class="section-title reveal">Estimativa de separação</h2>
+  <p class="section-desc reveal">Tudo está no mesmo cartão. Fizemos a melhor classificação possível baseada nos nomes dos estabelecimentos.</p>
+
+  <div class="card reveal">
+    <h3>Composição Estimada por Fatura</h3>
+    <div style="margin:1.5rem 0">
+      <div style="margin-bottom:1.5rem">
+        <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:.4rem"><span>Dez/2025 — R$ 14.248</span><span style="color:var(--text3)">PJ ~70% | PF ~25% | Misto ~5%</span></div>
+        <div class="pf-pj-bar"><div class="pj-seg" style="width:70%">PJ 70%</div><div class="pf-seg" style="width:25%">PF 25%</div><div class="misto-seg" style="width:5%">?</div></div>
+      </div>
+      <div style="margin-bottom:1.5rem">
+        <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:.4rem"><span>Jan/2026 — R$ 18.143</span><span style="color:var(--text3)">PJ ~65% | PF ~30% | Misto ~5%</span></div>
+        <div class="pf-pj-bar"><div class="pj-seg" style="width:65%">PJ 65%</div><div class="pf-seg" style="width:30%">PF 30%</div><div class="misto-seg" style="width:5%">?</div></div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:.4rem"><span>Fev/2026 — R$ 12.180</span><span style="color:var(--text3)">PJ ~72% | PF ~23% | Misto ~5%</span></div>
+        <div class="pf-pj-bar"><div class="pj-seg" style="width:72%">PJ 72%</div><div class="pf-seg" style="width:23%">PF 23%</div><div class="misto-seg" style="width:5%">?</div></div>
+      </div>
+    </div>
+    <div class="legend-row">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>PJ — Insumos, cursos, seguros profissionais</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>PF — Supermercado, combustível, vestuário, saúde pessoal</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>Misto/Incerto — Uber, farmácia, passagens</div>
+    </div>
+  </div>
+
+  <div class="grid-2 reveal" style="margin-top:1.5rem">
+    <div class="card" style="border-left:3px solid var(--blue)">
+      <div class="card-label">Estimativa PJ no Cartão PF</div>
+      <div class="card-value" style="color:var(--blue)">~R$ 10.000<span style="font-size:1rem;color:var(--text3)">/mês</span></div>
+      <div class="card-sub">Insumos médicos, cursos profissionais, seguros, jaleco, produtos dermatológicos — tudo pago pelo cartão pessoal</div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--accent)">
+      <div class="card-label">Despesas Genuinamente PF</div>
+      <div class="card-value" style="color:var(--accent)">~R$ 3.500<span style="font-size:1rem;color:var(--text3)">/mês</span></div>
+      <div class="card-sub">Supermercado, combustível, Uber, drogaria, vestuário pessoal, restaurantes, tratamento saúde</div>
+    </div>
+  </div>
+
+  <div class="alert alert-accent reveal">
+    <div class="alert-icon">💡</div>
+    <div class="alert-text"><strong>Implicação:</strong> Cerca de 70% da fatura do cartão pessoal são despesas da empresa. Isso significa que o "custo de vida pessoal" real da Marcella no cartão é ~R$ 3.500/mês — muito mais controlado do que parece. O problema é o consultório estar "sangrando" pelo cartão PF.</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PARCELADOS -->
+<section>
+  <div class="section-label reveal">04 — Raio-X dos Parcelamentos</div>
+  <h2 class="section-title reveal">A bola de neve que não para</h2>
+  <p class="section-desc reveal">Parcelamentos ativos que vão continuar impactando as próximas faturas — mesmo que ela não gaste mais nada.</p>
+
+  <div class="table-wrap reveal">
+    <table>
+      <thead><tr><th>Estabelecimento</th><th>Tipo</th><th>Parcela</th><th class="text-right">Valor/mês</th><th class="text-right">Restante</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr class="row-highlight"><td>Bio Meds Pharmaceutical</td><td><span class="tag tag-blue">PJ</span></td><td>Variado</td><td class="text-right" style="color:var(--red)">~R$ 4.120</td><td class="text-right">Múltiplas compras</td><td><span class="tag tag-red">⚠️ Maior gasto</span></td></tr>
+        <tr class="row-highlight"><td>BPG*CISPay (Método CIS)</td><td><span class="tag tag-purple">PJ?</span></td><td>5/12 a 12/12</td><td class="text-right" style="color:var(--red)">~R$ 1.524</td><td class="text-right">5 a 10 parcelas</td><td><span class="tag tag-orange">Em andamento</span></td></tr>
+        <tr class="row-highlight"><td>DOM*YM Cursos</td><td><span class="tag tag-blue">PJ</span></td><td>2/10</td><td class="text-right" style="color:var(--orange)">R$ 3.300</td><td class="text-right">8x = R$ 26.400</td><td><span class="tag tag-red">⚠️ Longo prazo</span></td></tr>
+        <tr><td>Clínica Dra. Ivana</td><td><span class="tag tag-accent">PF</span></td><td>~9/12</td><td class="text-right">R$ 533</td><td class="text-right">~3x = R$ 1.600</td><td><span class="tag tag-accent">Terminando</span></td></tr>
+        <tr><td>RioSkin Medical</td><td><span class="tag tag-blue">PJ</span></td><td>3/6</td><td class="text-right">R$ 179</td><td class="text-right">3x = R$ 538</td><td><span class="tag tag-green">Terminando</span></td></tr>
+        <tr><td>Porto Seguro (Equip)</td><td><span class="tag tag-blue">PJ</span></td><td>5/10</td><td class="text-right">R$ 164</td><td class="text-right">5x = R$ 819</td><td><span class="tag tag-accent">Normal</span></td></tr>
+        <tr><td>Akad Seguros (RC)</td><td><span class="tag tag-blue">PJ</span></td><td>4/10</td><td class="text-right">R$ 163</td><td class="text-right">6x = R$ 977</td><td><span class="tag tag-accent">Normal</span></td></tr>
+        <tr><td>HTM*Pandora Treinamento</td><td><span class="tag tag-blue">PJ</span></td><td>10/12</td><td class="text-right">R$ 40</td><td class="text-right">2x = R$ 79</td><td><span class="tag tag-green">Quase quitado</span></td></tr>
+        <tr><td>Bendita Chica Americas</td><td><span class="tag tag-accent">PF</span></td><td>3/6</td><td class="text-right">R$ 75</td><td class="text-right">3x = R$ 225</td><td><span class="tag tag-green">Terminando</span></td></tr>
+        <tr><td>HTM*Reservatório Digital</td><td><span class="tag tag-purple">PJ?</span></td><td>2/12</td><td class="text-right">R$ 20</td><td class="text-right">10x = R$ 199</td><td><span class="tag tag-accent">Longo prazo</span></td></tr>
+        <tr><td>LATAM + Azul (passagens)</td><td><span class="tag tag-purple">PF/PJ?</span></td><td>1/2</td><td class="text-right">R$ 1.753</td><td class="text-right">1x = R$ 1.753</td><td><span class="tag tag-green">Quitando</span></td></tr>
+        <tr style="font-weight:600;background:var(--surface2)"><td colspan="3">TOTAL MÍNIMO PARCELADOS</td><td class="text-right" style="color:var(--red);font-family:var(--font-display);font-size:1.1rem">~R$ 10.844</td><td class="text-right" style="color:var(--red)">R$ 42.801</td><td><span class="tag tag-red">Comprometido</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card reveal" style="margin-top:1.5rem">
+    <h3>Projeção: Faturas Futuras (só parcelas, sem novos gastos)</h3>
+    <div class="chart-container"><canvas id="chartProjecao"></canvas></div>
+  </div>
+
+  <div class="alert alert-red reveal">
+    <div class="alert-icon">🚨</div>
+    <div class="alert-text"><strong>Problema grave:</strong> As próximas faturas já nascem com ~R$ 10.800 comprometidos em parcelas. Somando os gastos correntes (~R$ 3-4k de PF), a fatura não sairá abaixo de R$ 13-15k nos próximos meses sem mudança de comportamento.</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LANÇAMENTOS DETALHADOS -->
+<section>
+  <div class="section-label reveal">05 — Lançamentos Detalhados por Fatura</div>
+  <h2 class="section-title reveal">Cada real, cada compra</h2>
+  <p class="section-desc reveal">Agrupamento dos principais lançamentos de cada fatura, com classificação PF/PJ.</p>
+
+  <!-- DEZ -->
+  <div class="card reveal" style="margin-bottom:1.5rem">
+    <h3 style="color:var(--accent)">Dez/2025 — R$ 14.247,73</h3>
+    <div style="font-size:.82rem;color:var(--text2);margin-bottom:1rem">Vencimento 02/12/2025 · 4 cartões utilizados (finais 7074, 5633, 9926, 9399)</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Estabelecimento</th><th>Tipo</th><th>Categoria</th><th class="text-right">Valor</th></tr></thead>
+        <tbody>
+          <tr><td>Bio Meds Pharmaceutical (parc)</td><td><span class="tag tag-blue">PJ</span></td><td>Insumos médicos</td><td class="text-right" style="color:var(--red)">R$ 5.500,00</td></tr>
+          <tr><td>Bio Meds Pharmaceutical (parc 2)</td><td><span class="tag tag-blue">PJ</span></td><td>Insumos médicos</td><td class="text-right" style="color:var(--red)">R$ 3.577,50</td></tr>
+          <tr><td>PG*Almeida Cursos (10/10)</td><td><span class="tag tag-blue">PJ</span></td><td>Educação</td><td class="text-right">R$ 599,70</td></tr>
+          <tr><td>Clínica Dra Ivana (7/12)</td><td><span class="tag tag-accent">PF</span></td><td>Saúde pessoal</td><td class="text-right">R$ 533,37</td></tr>
+          <tr><td>Microsoft*Store</td><td><span class="tag tag-purple">PF?</span></td><td>Tecnologia</td><td class="text-right">R$ 368,72</td></tr>
+          <tr><td>Health Tech Farmac (4/05)</td><td><span class="tag tag-blue">PJ</span></td><td>Farmácia</td><td class="text-right">R$ 368,72</td></tr>
+          <tr><td>Supermercados (Amoedo+Guanabara+outros)</td><td><span class="tag tag-accent">PF</span></td><td>Alimentação</td><td class="text-right">R$ 1.171,16</td></tr>
+          <tr><td>SHEIN *Caroline Alves</td><td><span class="tag tag-accent">PF</span></td><td>Vestuário</td><td class="text-right">R$ 327,00</td></tr>
+          <tr><td>Combustível + estacionamento + Uber</td><td><span class="tag tag-accent">PF</span></td><td>Veículos</td><td class="text-right">R$ 390,40</td></tr>
+          <tr><td>Drogarias (Raia+Venancio+Pacheco+Nova)</td><td><span class="tag tag-accent">PF</span></td><td>Saúde pessoal</td><td class="text-right">R$ 262,88</td></tr>
+          <tr><td>Seguros (Porto+Akad)</td><td><span class="tag tag-blue">PJ</span></td><td>Seguros prof</td><td class="text-right">R$ 326,64</td></tr>
+          <tr><td>Outros (RioSkin, Bendita Chica, etc)</td><td><span class="tag tag-purple">Misto</span></td><td>Diversos</td><td class="text-right">R$ ~820</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- JAN -->
+  <div class="card reveal" style="margin-bottom:1.5rem">
+    <h3 style="color:var(--red)">Jan/2026 — R$ 18.142,98 <span style="font-size:.85rem;color:var(--text3)">(pico)</span></h3>
+    <div style="font-size:.82rem;color:var(--text2);margin-bottom:1rem">Vencimento 02/01/2026 · Impacto do Método CIS + compras de dezembro</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Estabelecimento</th><th>Tipo</th><th>Categoria</th><th class="text-right">Valor</th></tr></thead>
+        <tbody>
+          <tr><td>Bio Meds Pharmaceutical (parc)</td><td><span class="tag tag-blue">PJ</span></td><td>Insumos médicos</td><td class="text-right" style="color:var(--red)">R$ 5.500,00</td></tr>
+          <tr><td>Bio Meds + CISPay (parcelas)</td><td><span class="tag tag-blue">PJ</span></td><td>Insumos + Evento</td><td class="text-right" style="color:var(--red)">R$ 3.577,50</td></tr>
+          <tr><td>DOM*YM Cursos (1/10)</td><td><span class="tag tag-blue">PJ</span></td><td>Educação</td><td class="text-right" style="color:var(--orange)">R$ 3.300,00</td></tr>
+          <tr><td>BPG*CISPay (parcelas)</td><td><span class="tag tag-purple">PJ?</span></td><td>Evento CIS</td><td class="text-right">R$ 1.523,82</td></tr>
+          <tr><td>Microsoft*Store</td><td><span class="tag tag-purple">PF?</span></td><td>Software</td><td class="text-right">R$ 509,00</td></tr>
+          <tr><td>Clínica Dra Ivana (8/12)</td><td><span class="tag tag-accent">PF</span></td><td>Saúde pessoal</td><td class="text-right">R$ 533,37</td></tr>
+          <tr><td>Combustível + Uber + Estac (14 lançamentos!)</td><td><span class="tag tag-accent">PF</span></td><td>Veículos</td><td class="text-right" style="color:var(--orange)">R$ 960,76</td></tr>
+          <tr><td>Alimentação (ZIG*CIS+restaurantes+supermercado)</td><td><span class="tag tag-accent">PF</span></td><td>Alimentação</td><td class="text-right">R$ 809,10</td></tr>
+          <tr><td>Saúde da Mulher</td><td><span class="tag tag-purple">PF/PJ?</span></td><td>Saúde</td><td class="text-right">R$ 300,00</td></tr>
+          <tr><td>Seguros (Porto+Akad)</td><td><span class="tag tag-blue">PJ</span></td><td>Seguros prof</td><td class="text-right">R$ 326,64</td></tr>
+          <tr><td>Outros (BNI, MundoRio, ML, etc)</td><td><span class="tag tag-purple">Misto</span></td><td>Diversos</td><td class="text-right">R$ ~800</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert alert-accent" style="margin-top:1rem;margin-bottom:0">
+      <div class="alert-icon">📍</div>
+      <div class="alert-text"><strong>Nota:</strong> Janeiro foi o pico porque coincidiu o início do parcelamento YM Cursos (R$ 3.300) com as parcelas do Método CIS e as compras de fim de ano — foram 14 lançamentos só de Uber/combustível/estacionamento (viagens de dezembro).</div>
+    </div>
+  </div>
+
+  <!-- FEV -->
+  <div class="card reveal">
+    <h3 style="color:var(--accent2)">Fev/2026 — R$ 12.180,10 <span style="font-size:.85rem;color:var(--text3)">(menor)</span></h3>
+    <div style="font-size:.82rem;color:var(--text2);margin-bottom:1rem">Vencimento 02/02/2026 · Fatura mais enxuta — menos compras avulsas</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Estabelecimento</th><th>Tipo</th><th>Categoria</th><th class="text-right">Valor</th></tr></thead>
+        <tbody>
+          <tr><td>Bio Meds (parcelas + avulso)</td><td><span class="tag tag-blue">PJ</span></td><td>Insumos médicos</td><td class="text-right" style="color:var(--red)">R$ 4.119,61</td></tr>
+          <tr><td>DOM*YM Cursos (2/10)</td><td><span class="tag tag-blue">PJ</span></td><td>Educação</td><td class="text-right" style="color:var(--orange)">R$ 3.300,00</td></tr>
+          <tr><td>LATAM passagem (1/2)</td><td><span class="tag tag-purple">PF/PJ?</span></td><td>Passagem aérea</td><td class="text-right">R$ 1.523,82</td></tr>
+          <tr><td>BPG*CISPay (parcelas)</td><td><span class="tag tag-purple">PJ?</span></td><td>Evento CIS</td><td class="text-right">R$ 1.721,71</td></tr>
+          <tr><td>Clínica Dra Ivana (9/12)</td><td><span class="tag tag-accent">PF</span></td><td>Saúde pessoal</td><td class="text-right">R$ 533,37</td></tr>
+          <tr><td>Mercado Livre (3 compras)</td><td><span class="tag tag-purple">Misto</span></td><td>Diversos</td><td class="text-right">R$ 573,41</td></tr>
+          <tr><td>Azul Linhas (1/2)</td><td><span class="tag tag-purple">PF/PJ?</span></td><td>Passagem aérea</td><td class="text-right">R$ 229,57</td></tr>
+          <tr><td>Seguros (Porto+Akad)</td><td><span class="tag tag-blue">PJ</span></td><td>Seguros prof</td><td class="text-right">R$ 326,64</td></tr>
+          <tr><td>Combustível + Uber + Estac</td><td><span class="tag tag-accent">PF</span></td><td>Veículos</td><td class="text-right">R$ 196,30</td></tr>
+          <tr><td>Alimentação (Rei do Mate+ASA RIO)</td><td><span class="tag tag-accent">PF</span></td><td>Alimentação</td><td class="text-right">R$ 101,90</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONCLUSÕES -->
+<section>
+  <div class="section-label reveal">06 — Diagnóstico</div>
+  <h2 class="section-title reveal">O que as faturas revelam</h2>
+
+  <div class="grid-2 reveal">
+    <div class="card" style="border-left:3px solid var(--red)">
+      <h3>🔴 O Problema Central</h3>
+      <p style="font-size:.9rem;color:var(--text2);line-height:1.6">A Marcella usa o cartão pessoal como "conta operacional" da PJ. Cerca de <strong style="color:var(--text)">70% da fatura</strong> são despesas do consultório — insumos (Bio Meds), cursos profissionais (CIS, YM), seguros, jalecos. Isso distorce completamente a percepção: parece que ela "gasta demais" com estilo de vida, mas na realidade o estilo de vida pessoal custa ~R$ 3.500/mês no cartão.</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--accent)">
+      <h3>🟡 A Bola de Neve dos Parcelamentos</h3>
+      <p style="font-size:.9rem;color:var(--text2);line-height:1.6">A fatura já nasce com <strong style="color:var(--text)">R$ 10.844 em parcelas fixas</strong> antes de qualquer gasto novo. São <strong style="color:var(--text)">R$ 42.801 comprometidos</strong> em faturas futuras. A Bio Meds sozinha responde por ~R$ 5.000/mês. Enquanto esses parcelamentos não terminarem, a fatura não terá alívio significativo.</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--blue)">
+      <h3>🔵 Cursos como Investimento — Mas a que custo?</h3>
+      <p style="font-size:.9rem;color:var(--text2);line-height:1.6">Educação consome ~R$ 5.444/mês na média (CIS + YM + Pandora + outros). São investimentos na carreira, mas com o consultório no vermelho, cada curso novo precisa passar pelo filtro: <strong style="color:var(--text)">"esse curso vai gerar quantas consultas a mais?"</strong></p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--green)">
+      <h3>🟢 Os Pontos Positivos</h3>
+      <p style="font-size:.9rem;color:var(--text2);line-height:1.6">A fatura caiu de R$ 18.143 (Jan) para R$ 12.180 (Fev) — <strong style="color:var(--green)">queda de 33%</strong>. As despesas pessoais são contidas. A Marcella não tem hábitos de consumo supérfluos: supermercado, combustível e alimentação fora são gastos normais e moderados.</p>
+    </div>
+  </div>
+
+  <div class="alert alert-blue reveal" style="margin-top:1.5rem">
+    <div class="alert-icon">🎯</div>
+    <div class="alert-text"><strong>Ação imediata:</strong> Criar cartão PJ exclusivo e migrar todos os gastos profissionais (Bio Meds, seguros, cursos, insumos, jaleco) para ele. Isso vai revelar o custo real do consultório e o custo real de vida pessoal — dois números completamente diferentes que hoje estão mascarados.</div>
+  </div>
+</section>
+
+<div class="footer">
+  <div class="brand">GW9 Capital</div>
+  <p>Análise preparada por Laysa Corrêa — CFP® — Planejadora Financeira</p>
+  <p style="margin-top:.5rem">Documento confidencial — Uso exclusivo da cliente</p>
+</div>
+
+<script>
+Chart.defaults.color='#9b978f';Chart.defaults.borderColor='rgba(201,165,92,.08)';Chart.defaults.font.family="'DM Sans',sans-serif";Chart.defaults.font.size=12;
+const gold='#c9a55c',goldL='#e8c97a',red='#e85d5d',green='#5dbe8a',blue='#5d8ee8',purple='#a07de8',pink='#e88bc4',orange='#e8a85d';
+
+// Evolução
+new Chart(document.getElementById('chartEvolucao'),{type:'bar',data:{labels:['Dez/2025','Jan/2026','Fev/2026'],datasets:[
+{label:'PJ estimado',data:[9980,11800,8770],backgroundColor:blue+'cc',borderRadius:6},
+{label:'PF estimado',data:[3560,5440,2810],backgroundColor:gold+'cc',borderRadius:6},
+{label:'Misto/?',data:[708,903,600],backgroundColor:purple+'88',borderRadius:6}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',padding:16}},tooltip:{callbacks:{label:c=>`${c.dataset.label}: R$ ${c.raw.toLocaleString('pt-BR')}`}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:'rgba(255,255,255,.03)'},ticks:{callback:v=>`R$ ${(v/1000).toFixed(0)}k`}}}}});
+
+// Categorias Doughnut
+new Chart(document.getElementById('chartCategorias'),{type:'doughnut',data:{
+labels:['Saúde/Insumos PJ','Educação/Cursos','Saúde Pessoal','Alimentação','Passagens','Veículos','Seguros Prof','Tecnologia','Vestuário'],
+datasets:[{data:[6775,5444,721,694,584,461,327,315,213],backgroundColor:[red,blue,pink,green,purple,orange,gold,goldL,'#7dc4e8'],borderWidth:0,hoverOffset:8}]
+},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'bottom',labels:{padding:10,usePointStyle:true,pointStyle:'circle',font:{size:10}}},tooltip:{callbacks:{label:c=>`${c.label}: R$ ${c.raw.toLocaleString('pt-BR')}/mês`}}}}});
+
+// Projeção parcelas futuras
+new Chart(document.getElementById('chartProjecao'),{type:'bar',data:{labels:['Mar/26','Abr/26','Mai/26','Jun/26','Jul/26','Ago/26','Set/26','Out/26','Nov/26','Dez/26'],datasets:[
+{label:'Bio Meds',data:[4120,4120,3578,3578,0,0,0,0,0,0],backgroundColor:red+'cc',borderRadius:4},
+{label:'YM Cursos',data:[3300,3300,3300,3300,3300,3300,3300,3300,0,0],backgroundColor:blue+'cc',borderRadius:4},
+{label:'CISPay',data:[1524,1524,1524,1524,1524,0,0,0,0,0],backgroundColor:purple+'cc',borderRadius:4},
+{label:'Dra Ivana',data:[533,533,533,0,0,0,0,0,0,0],backgroundColor:pink+'cc',borderRadius:4},
+{label:'Seguros+Outros',data:[550,550,450,450,350,200,200,164,0,0],backgroundColor:gold+'88',borderRadius:4}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',padding:12,font:{size:10}}},tooltip:{callbacks:{label:c=>c.raw?`${c.dataset.label}: R$ ${c.raw.toLocaleString('pt-BR')}`:''}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:'rgba(255,255,255,.03)'},ticks:{callback:v=>`R$ ${(v/1000).toFixed(0)}k`}}}}});
+
+// Reveal
+document.querySelectorAll('.reveal').forEach(r=>new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('visible')})},{threshold:.1}).observe(r));
+</script>
+</body>
+</html>
