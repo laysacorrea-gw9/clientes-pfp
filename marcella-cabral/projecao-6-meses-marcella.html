@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projeção 6 Meses — Dra. Marcella Cabral</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--bg:#0c0f14;--surface:#141820;--surface2:#1a2030;--accent:#c9a55c;--accent2:#e8c97a;--accent-dim:rgba(201,165,92,.15);--red:#e85d5d;--red-dim:rgba(232,93,93,.12);--green:#5dbe8a;--green-dim:rgba(93,190,138,.12);--blue:#5d8ee8;--blue-dim:rgba(93,142,232,.12);--purple:#a07de8;--purple-dim:rgba(160,125,232,.12);--orange:#e8a85d;--text:#e8e4dd;--text2:#9b978f;--text3:#5e5b55;--border:rgba(201,165,92,.1);--font-display:'Playfair Display',Georgia,serif;--font-body:'DM Sans',-apple-system,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:var(--text);font-family:var(--font-body);line-height:1.6}::selection{background:var(--accent);color:var(--bg)}::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--accent-dim);border-radius:3px}
+.header{padding:3rem 2rem 2rem;max-width:1100px;margin:auto;border-bottom:1px solid var(--border)}.header-label{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent);font-weight:500}.header h1{font-family:var(--font-display);font-size:clamp(1.6rem,3.5vw,2.5rem);font-weight:600;margin:.5rem 0}.header-sub{color:var(--text2);font-size:.85rem}
+section{padding:3rem 2rem;max-width:1100px;margin:auto}.section-label{font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem;font-weight:500}.section-title{font-family:var(--font-display);font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:600;margin-bottom:.25rem}.section-desc{color:var(--text2);font-size:.85rem;max-width:650px;margin-bottom:2rem}
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--border),transparent);margin:0 auto;max-width:1100px}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem}.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.8rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;transition:.3s}.card:hover{border-color:rgba(201,165,92,.2)}.card-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:.4rem;font-weight:500}.card-value{font-family:var(--font-display);font-size:1.6rem;font-weight:700;line-height:1.2}.card-sub{font-size:.78rem;color:var(--text2);margin-top:.3rem}
+.tag{display:inline-block;padding:.15rem .5rem;border-radius:14px;font-size:.65rem;font-weight:500}.tag-red{background:var(--red-dim);color:var(--red)}.tag-green{background:var(--green-dim);color:var(--green)}.tag-blue{background:var(--blue-dim);color:var(--blue)}.tag-accent{background:var(--accent-dim);color:var(--accent)}.tag-purple{background:var(--purple-dim);color:var(--purple)}.tag-orange{background:rgba(232,168,93,.12);color:var(--orange)}
+.alert{padding:1.1rem;border-radius:10px;margin-top:1.1rem;display:flex;gap:.7rem;align-items:flex-start}.alert-red{background:var(--red-dim);border:1px solid rgba(232,93,93,.2)}.alert-accent{background:var(--accent-dim);border:1px solid rgba(201,165,92,.2)}.alert-green{background:var(--green-dim);border:1px solid rgba(93,190,138,.2)}.alert-blue{background:var(--blue-dim);border:1px solid rgba(93,142,232,.2)}
+.alert-icon{font-size:1.1rem;flex-shrink:0}.alert-text{font-size:.82rem;color:var(--text2)}.alert-text strong{color:var(--text)}
+.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-top:1rem}.chart-card h3{font-family:var(--font-display);font-size:1rem;margin-bottom:1rem}.chart-container{position:relative;height:280px}
+.table-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--border);margin-top:1rem}table{width:100%;border-collapse:collapse;font-size:.78rem}th{padding:.6rem .8rem;text-align:left;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);background:var(--surface);border-bottom:1px solid var(--border);font-weight:500}td{padding:.55rem .8rem;border-bottom:1px solid rgba(255,255,255,.03)}.text-right{text-align:right}.text-center{text-align:center}tr:hover td{background:rgba(201,165,92,.02)}.row-dead{opacity:.4;text-decoration:line-through}.row-total{font-weight:600;background:var(--surface2)}
+.scenario{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-top:1rem}.scenario h3{font-family:var(--font-display);font-size:1.1rem;margin-bottom:1rem}.scenario-row{display:flex;justify-content:space-between;padding:.35rem 0;font-size:.82rem;border-bottom:1px solid rgba(255,255,255,.03)}.scenario-row:last-child{border:none;padding-top:.6rem;font-weight:600;font-size:.95rem}
+.footer{text-align:center;padding:2.5rem 2rem;color:var(--text3);font-size:.72rem;border-top:1px solid var(--border)}.footer .brand{font-family:var(--font-display);font-size:1rem;color:var(--accent);margin-bottom:.3rem}
+@media(max-width:768px){section{padding:2rem 1.1rem}.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-label">Projeção Financeira · Mar — Ago 2026</div>
+  <h1>Próximos 6 Meses: O Que Já Está Comprometido</h1>
+  <p class="header-sub">Dra. Marcella Cabral · Preparado por Laysa Corrêa, CFP® · 26/02/2026</p>
+</div>
+
+<!-- RESUMO -->
+<section>
+  <div class="section-label">01 — Visão Geral</div>
+  <h2 class="section-title">Quanto você vai precisar nos próximos 6 meses?</h2>
+  <p class="section-desc">Projeção baseada nas parcelas ativas do cartão, despesas fixas confirmadas pelo extrato e compromissos que você sinalizou.</p>
+
+  <div class="grid-3">
+    <div class="card" style="border-left:3px solid var(--red)"><div class="card-label">Total necessário (6 meses)</div><div class="card-value" style="color:var(--red)">R$ 204k</div><div class="card-sub">Com todos os compromissos</div></div>
+    <div class="card" style="border-left:3px solid var(--orange)"><div class="card-label">Sem cursos + óvulos</div><div class="card-value" style="color:var(--orange)">R$ 142k</div><div class="card-sub">Só despesas recorrentes</div></div>
+    <div class="card" style="border-left:3px solid var(--green)"><div class="card-label">Receita estimada (6m)</div><div class="card-value" style="color:var(--green)">R$ 108-120k</div><div class="card-sub">R$ 18-22k/mês (excl. resgates)</div></div>
+  </div>
+
+  <div class="alert alert-red"><div class="alert-icon">🔥</div><div class="alert-text"><strong>Realidade:</strong> Mesmo SEM os compromissos extras (cursos + óvulos), há um déficit de ~R$ 34k em 6 meses que precisará vir da Warren. COM tudo, o déficit sobe para R$ 84-96k — o que consumiria 25-28% do que tem na Warren hoje.</div></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PARCELAS CARTÃO -->
+<section>
+  <div class="section-label">02 — Parcelas do Cartão</div>
+  <h2 class="section-title">O que já está parcelado e quando acaba</h2>
+  <p class="section-desc">Boa notícia: vários parcelamentos grandes terminam entre março e maio. A fatura vai aliviando gradualmente.</p>
+
+  <div class="chart-card">
+    <h3>Previsão da Fatura Mês a Mês (parcelas + compras novas)</h3>
+    <div class="chart-container"><canvas id="chartFatura"></canvas></div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Parcelamento</th><th class="text-right">Valor/mês</th><th class="text-center">Parcela</th><th class="text-center">Mar</th><th class="text-center">Abr</th><th class="text-center">Mai</th><th class="text-center">Jun</th><th class="text-center">Jul</th><th class="text-center">Ago</th></tr></thead>
+      <tbody>
+        <tr><td><strong>DOM*YMCURSOSE</strong> (Yuri Motomura)</td><td class="text-right" style="color:var(--red)">R$ 3.300</td><td class="text-center">3/10</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center">✓</td></tr>
+        <tr><td><strong>BPG*CISPay</strong> (Febracis 2)</td><td class="text-right" style="color:var(--red)">R$ 1.524</td><td class="text-center">3/5</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td></tr>
+        <tr><td>BIO MEDS (2ª compra)</td><td class="text-right">R$ 542</td><td class="text-center">2/3</td><td class="text-center">✓</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td></tr>
+        <tr><td>CLINICA DRA IVANA</td><td class="text-right">R$ 533</td><td class="text-center">10/12</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td></tr>
+        <tr><td>BPG*CISPay (Febracis 1)</td><td class="text-right">R$ 198</td><td class="text-center">4/12</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center">✓</td></tr>
+        <tr><td>RIOSKIN MEDICAL</td><td class="text-right">R$ 179</td><td class="text-center">4/6</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td></tr>
+        <tr><td>PORTO SEGURO (equip)</td><td class="text-right">R$ 164</td><td class="text-center">6/10</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td></tr>
+        <tr><td>AKAD SEGUROS (RC)</td><td class="text-right">R$ 163</td><td class="text-center">5/10</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center" style="color:var(--text3)">—</td></tr>
+        <tr><td>ECOMMERCE UN*Under</td><td class="text-right">R$ 105</td><td class="text-center">2/6</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td></tr>
+        <tr><td>BENDITA CHICA AMER</td><td class="text-right">R$ 75</td><td class="text-center">4/6</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td></tr>
+        <tr><td>HTM*Pandora Treina</td><td class="text-right">R$ 40</td><td class="text-center">11/12</td><td class="text-center">✓</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td><td class="text-center" style="color:var(--text3)">—</td></tr>
+        <tr><td>HTM*RESERVATORIO D</td><td class="text-right">R$ 20</td><td class="text-center">3/12</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center">✓</td><td class="text-center">✓</td></tr>
+        <tr class="row-total"><td colspan="2">TOTAL PARCELAS</td><td></td>
+          <td class="text-center" style="color:var(--red)">R$ 6.843</td>
+          <td class="text-center" style="color:var(--red)">R$ 6.261</td>
+          <td class="text-center" style="color:var(--orange)">R$ 3.950</td>
+          <td class="text-center" style="color:var(--orange)">R$ 3.950</td>
+          <td class="text-center" style="color:var(--green)">R$ 3.681</td>
+          <td class="text-center" style="color:var(--green)">R$ 3.518</td>
+        </tr>
+        <tr style="color:var(--text3)"><td colspan="2"><em>+ Compras novas estimadas</em></td><td></td>
+          <td class="text-center">~R$ 4.000</td><td class="text-center">~R$ 4.000</td><td class="text-center">~R$ 4.000</td><td class="text-center">~R$ 4.000</td><td class="text-center">~R$ 4.000</td><td class="text-center">~R$ 4.000</td>
+        </tr>
+        <tr class="row-total"><td colspan="2" style="color:var(--accent)">FATURA ESTIMADA TOTAL</td><td></td>
+          <td class="text-center" style="color:var(--accent);font-family:var(--font-display)">R$ 10.843</td>
+          <td class="text-center" style="color:var(--accent);font-family:var(--font-display)">R$ 10.261</td>
+          <td class="text-center" style="color:var(--accent);font-family:var(--font-display)">R$ 7.950</td>
+          <td class="text-center" style="color:var(--accent);font-family:var(--font-display)">R$ 7.950</td>
+          <td class="text-center" style="color:var(--accent);font-family:var(--font-display)">R$ 7.681</td>
+          <td class="text-center" style="color:var(--accent);font-family:var(--font-display)">R$ 7.518</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-green"><div class="alert-icon">📉</div><div class="alert-text"><strong>Alívio gradual:</strong> A fatura cai de ~R$ 14.900 (atual) para ~R$ 7.500 até agosto. A Bio Meds grande (R$ 3.577) já acabou, a LATAM e Azul acabam em março, o CIS grande (R$ 1.524) acaba em abril. SE não parcelar nada novo, a fatura vai ficando mais leve.</div></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DESPESAS FIXAS -->
+<section>
+  <div class="section-label">03 — Despesas Fixas Mensais (fora do cartão)</div>
+  <h2 class="section-title">O que sai da conta corrente todo mês</h2>
+
+  <div class="chart-card">
+    <h3>Composição Mensal — Via CC/PIX</h3>
+    <div class="chart-container"><canvas id="chartFixas"></canvas></div>
+  </div>
+
+  <div class="grid-2" style="margin-top:1rem">
+    <div class="card"><div class="card-label">Total fixo mensal (CC)</div><div class="card-value" style="color:var(--accent)">R$ 14.971</div><div class="card-sub">Sem incluir fatura do cartão</div></div>
+    <div class="card"><div class="card-label">Fixo + Cartão = Gasto total</div><div class="card-value" style="color:var(--red)">R$ 22-26k/mês</div><div class="card-sub">Diminuindo conforme parcelas acabam</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPROMISSOS EVENTUAIS -->
+<section>
+  <div class="section-label">04 — Compromissos Extras</div>
+  <h2 class="section-title">O que você sinalizou que quer fazer</h2>
+
+  <div class="chart-card">
+    <h3>Timeline de Compromissos (Mar–Ago 2026)</h3>
+    <div class="chart-container" style="height:220px"><canvas id="chartCompromissos"></canvas></div>
+  </div>
+
+  <div class="grid-2" style="margin-top:1rem">
+    <div class="card" style="border-left:3px solid var(--red)"><div class="card-label">Mar/26</div><div class="card-value" style="font-size:1.3rem;color:var(--red)">R$ 6.978</div><div class="card-sub">Seguro Vida MAG — URGENTE (prazo 19/03)</div></div>
+    <div class="card" style="border-left:3px solid var(--purple)"><div class="card-label">Abr/26</div><div class="card-value" style="font-size:1.3rem;color:var(--purple)">R$ 13.000</div><div class="card-sub">Curso Saúde da Mulher R$ 10k + viagem R$ 3k</div></div>
+    <div class="card" style="border-left:3px solid var(--blue)"><div class="card-label">Jun/26</div><div class="card-value" style="font-size:1.3rem;color:var(--blue)">R$ 17.000</div><div class="card-sub">Curso Gestão Médica R$ 13k + viagem R$ 4k</div></div>
+    <div class="card" style="border-left:3px solid var(--accent)"><div class="card-label">1º Semestre 2026</div><div class="card-value" style="font-size:1.3rem;color:var(--accent)">R$ 25.000</div><div class="card-sub">Congelamento de óvulos (após ressonância 19/03)</div></div>
+  </div>
+
+  <div class="alert alert-accent"><div class="alert-icon">⚡</div><div class="alert-text"><strong>Total de compromissos extras:</strong> R$ 61.978 em 6 meses. É mais do que a receita de 3 meses inteiros. Se tudo entrar, a Warren perde ~R$ 96k (de R$ 346k cai para R$ 250k).</div></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CENÁRIOS -->
+<section>
+  <div class="section-label">05 — Três Cenários</div>
+  <h2 class="section-title">O que acontece em cada caminho</h2>
+
+  <div class="grid-2">
+    <div class="scenario" style="border-left:3px solid var(--red)">
+      <h3 style="color:var(--red)">Cenário A — Tudo Entra</h3>
+      <p style="font-size:.78rem;color:var(--text3);margin-bottom:.8rem">Mantém despesas + faz todos os cursos + congela óvulos</p>
+      <div class="scenario-row"><span>Despesas recorrentes (6m)</span><span>R$ 142.000</span></div>
+      <div class="scenario-row"><span>Cursos + viagens</span><span>R$ 30.000</span></div>
+      <div class="scenario-row"><span>Congelamento óvulos</span><span>R$ 25.000</span></div>
+      <div class="scenario-row"><span>Seguro MAG</span><span>R$ 6.978</span></div>
+      <div class="scenario-row"><span style="font-weight:600">Total necessário</span><span style="color:var(--red)">R$ 204.000</span></div>
+      <div class="scenario-row"><span>Receita (R$ 20k × 6)</span><span style="color:var(--green)">R$ 120.000</span></div>
+      <div class="scenario-row" style="font-size:1rem"><span style="color:var(--red)">Resgate da Warren</span><span style="color:var(--red);font-family:var(--font-display)">R$ 96.000</span></div>
+      <div style="margin-top:.7rem;padding:.6rem;background:var(--red-dim);border-radius:8px;font-size:.78rem;color:var(--red)">Warren cai de R$ 346k → R$ 250k. Perde 28% do patrimônio investido em 6 meses.</div>
+    </div>
+
+    <div class="scenario" style="border-left:3px solid var(--orange)">
+      <h3 style="color:var(--orange)">Cenário B — Prioriza Óvulos</h3>
+      <p style="font-size:.78rem;color:var(--text3);margin-bottom:.8rem">Mantém despesas + congela óvulos + MAG. Adia cursos.</p>
+      <div class="scenario-row"><span>Despesas recorrentes (6m)</span><span>R$ 142.000</span></div>
+      <div class="scenario-row"><span style="text-decoration:line-through;opacity:.4">Cursos + viagens</span><span style="text-decoration:line-through;opacity:.4">R$ 30.000</span></div>
+      <div class="scenario-row"><span>Congelamento óvulos</span><span>R$ 25.000</span></div>
+      <div class="scenario-row"><span>Seguro MAG</span><span>R$ 6.978</span></div>
+      <div class="scenario-row"><span style="font-weight:600">Total necessário</span><span style="color:var(--orange)">R$ 174.000</span></div>
+      <div class="scenario-row"><span>Receita (R$ 20k × 6)</span><span style="color:var(--green)">R$ 120.000</span></div>
+      <div class="scenario-row" style="font-size:1rem"><span style="color:var(--orange)">Resgate da Warren</span><span style="color:var(--orange);font-family:var(--font-display)">R$ 66.000</span></div>
+      <div style="margin-top:.7rem;padding:.6rem;background:rgba(232,168,93,.1);border-radius:8px;font-size:.78rem;color:var(--orange)">Warren cai de R$ 346k → R$ 280k. Mais administrável, preserva patrimônio.</div>
+    </div>
+  </div>
+
+  <div class="scenario" style="margin-top:1rem;border-left:3px solid var(--green)">
+    <h3 style="color:var(--green)">Cenário C — Modo Sobrevivência</h3>
+    <p style="font-size:.78rem;color:var(--text3);margin-bottom:.8rem">Só despesas recorrentes + MAG. Adia cursos e óvulos para 2º semestre.</p>
+    <div class="grid-2" style="gap:2rem">
+      <div>
+        <div class="scenario-row"><span>Despesas recorrentes (6m)</span><span>R$ 142.000</span></div>
+        <div class="scenario-row"><span style="text-decoration:line-through;opacity:.4">Cursos + viagens</span><span style="text-decoration:line-through;opacity:.4">R$ 30.000</span></div>
+        <div class="scenario-row"><span style="text-decoration:line-through;opacity:.4">Congelamento óvulos</span><span style="text-decoration:line-through;opacity:.4">R$ 25.000</span></div>
+        <div class="scenario-row"><span>Seguro MAG</span><span>R$ 6.978</span></div>
+        <div class="scenario-row"><span style="font-weight:600">Total necessário</span><span style="color:var(--green)">R$ 149.000</span></div>
+        <div class="scenario-row"><span>Receita (R$ 20k × 6)</span><span style="color:var(--green)">R$ 120.000</span></div>
+        <div class="scenario-row" style="font-size:1rem"><span style="color:var(--green)">Resgate da Warren</span><span style="color:var(--green);font-family:var(--font-display)">R$ 41.000</span></div>
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:center">
+        <div style="padding:1rem;background:var(--green-dim);border-radius:10px;font-size:.82rem;color:var(--green)">
+          <strong>Warren: R$ 346k → R$ 305k</strong><br>
+          Perda menor. Ganha tempo para aumentar receita do consultório.<br><br>
+          <strong>Se aumentar receita para R$ 23k/mês:</strong><br>
+          Resgate cai para R$ 11k em 6 meses — quase equilíbrio!
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- META DE RECEITA -->
+<section>
+  <div class="section-label">06 — Quanto Precisa Faturar</div>
+  <h2 class="section-title">A receita necessária para parar de queimar reserva</h2>
+
+  <div class="chart-card">
+    <h3>Receita Necessária vs Cenário Atual</h3>
+    <div class="chart-container" style="height:250px"><canvas id="chartMeta"></canvas></div>
+  </div>
+
+  <div class="grid-4" style="margin-top:1rem">
+    <div class="card" style="border-top:3px solid var(--red)"><div class="card-label">Para zerar (cenário A)</div><div class="card-value" style="font-size:1.3rem;color:var(--red)">R$ 34k/mês</div></div>
+    <div class="card" style="border-top:3px solid var(--orange)"><div class="card-label">Para zerar (cenário B)</div><div class="card-value" style="font-size:1.3rem;color:var(--orange)">R$ 29k/mês</div></div>
+    <div class="card" style="border-top:3px solid var(--green)"><div class="card-label">Para zerar (cenário C)</div><div class="card-value" style="font-size:1.3rem;color:var(--green)">R$ 25k/mês</div></div>
+    <div class="card" style="border-top:3px solid var(--text3)"><div class="card-label">Receita atual</div><div class="card-value" style="font-size:1.3rem">R$ 20k/mês</div></div>
+  </div>
+
+  <div class="alert alert-blue"><div class="alert-icon">🎯</div><div class="alert-text"><strong>O caminho:</strong> No cenário C, basta aumentar a receita em R$ 5k/mês (de R$ 20k para R$ 25k) para zerar o déficit. Na sessão ficou claro: +1 paciente a mais por semana pode resolver. Com a precificação certa (mínimo R$ 500), são 3-4 procedimentos a mais por semana.</div></div>
+</section>
+
+<div class="footer">
+  <div class="brand">GW9 Capital</div>
+  <p>Projeção preparada por Laysa Corrêa — CFP® — Planejadora Financeira</p>
+  <p style="margin-top:.3rem">Fontes: Faturas Itaú (Dez/25–Fev/26) · Extrato CC (15/11/25–13/02/26) · Reunião diagnóstica 12/02/2026</p>
+</div>
+
+<script>
+Chart.defaults.color='#9b978f';Chart.defaults.borderColor='rgba(201,165,92,.08)';Chart.defaults.font.family="'DM Sans',sans-serif";Chart.defaults.font.size=11;
+const gold='#c9a55c',red='#e85d5d',green='#5dbe8a',blue='#5d8ee8',purple='#a07de8',orange='#e8a85d';
+
+// Fatura mês a mês
+new Chart(document.getElementById('chartFatura'),{type:'bar',
+  data:{labels:['Fev/26\n(real)','Mar/26','Abr/26','Mai/26','Jun/26','Jul/26','Ago/26'],datasets:[
+    {label:'Parcelas existentes',data:[10844,6843,6261,3950,3950,3681,3518],backgroundColor:red+'cc',borderRadius:4},
+    {label:'Compras novas (est.)',data:[3336,4000,4000,4000,4000,4000,4000],backgroundColor:gold+'88',borderRadius:4}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:12,font:{size:10}}},tooltip:{callbacks:{label:c=>`${c.dataset.label}: R$ ${c.raw.toLocaleString('pt-BR')}`}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:'rgba(255,255,255,.03)'},ticks:{callback:v=>`R$ ${(v/1000).toFixed(0)}k`}}}}
+});
+
+// Despesas fixas CC
+new Chart(document.getElementById('chartFixas'),{type:'bar',
+  data:{labels:['Aluguel+\nCondo','Amil','Simples\nNacional','Psicóloga','Personal','VIVO','Gravação','Luciana\n(?)','Dra IS\n(?)','Parcela-\nmos','Nutricionista (Bruno F)\n(?)','Seg\nCarro','DARF','Mercado','Luz','Outros'],
+  datasets:[{data:[2900,2100,1500,1280,1080,899,798,747,733,577,533,490,450,300,281,303],
+    backgroundColor:[gold,blue,purple,orange,green,blue+'88',gold+'88',orange+'88',orange+'88',red+'88',orange+'88',green+'88',red,gold+'55',blue+'55','#5e5b55'],borderRadius:4,barThickness:20}]},
+  options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`R$ ${c.raw.toLocaleString('pt-BR')}/mês`}}},scales:{x:{grid:{display:false},ticks:{callback:v=>`R$ ${v}`}},y:{grid:{display:false}}}}
+});
+
+// Compromissos timeline
+new Chart(document.getElementById('chartCompromissos'),{type:'bar',
+  data:{labels:['Mar/26','Abr/26','Mai/26','Jun/26'],datasets:[
+    {label:'Seguro MAG',data:[6978,0,0,0],backgroundColor:red},
+    {label:'Curso + viagem',data:[0,13000,0,17000],backgroundColor:purple},
+    {label:'Óvulos (dividido)',data:[0,12500,0,12500],backgroundColor:gold}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,font:{size:10}}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:'rgba(255,255,255,.03)'},ticks:{callback:v=>`R$ ${(v/1000).toFixed(0)}k`}}}}
+});
+
+// Meta de receita
+new Chart(document.getElementById('chartMeta'),{type:'bar',
+  data:{labels:['Receita\nAtual','Cenário C\n(equilíbrio)','Cenário B','Cenário A'],datasets:[
+    {label:'Receita mensal necessária',data:[18000,25000,29000,34000],backgroundColor:[green,green,orange,red],borderRadius:6,barThickness:40}
+  ]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`R$ ${c.raw.toLocaleString('pt-BR')}/mês`}},annotation:{}},scales:{x:{grid:{display:false},ticks:{callback:v=>`R$ ${(v/1000)}k`}},y:{grid:{display:false}}}}
+});
+</script>
+</body>
+</html>
