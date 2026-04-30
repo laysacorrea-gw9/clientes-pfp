@@ -81,8 +81,20 @@ section { padding:5rem 1.5rem; max-width:1300px; margin:auto; }
 .plan-name { font-family:var(--font-display); font-size:1.7rem; font-weight:600; margin-bottom:0.4rem; line-height:1.2; }
 .plan-tagline { font-size:0.95rem; color:var(--text2); margin-bottom:1.75rem; line-height:1.5; }
 
-.plan-duration { display:flex; align-items:center; gap:0.6rem; font-size:0.88rem; color:var(--text); margin-bottom:1.75rem; padding:0.85rem 1rem; background:var(--surface2); border-radius:10px; border-left:3px solid var(--accent); }
+.plan-duration { display:flex; align-items:center; gap:0.6rem; font-size:0.88rem; color:var(--text); margin-bottom:1.5rem; padding:0.85rem 1rem; background:var(--surface2); border-radius:10px; border-left:3px solid var(--accent); }
 .plan-duration strong { color:var(--accent); font-weight:600; }
+
+/* Plan price block */
+.plan-price { padding:1.25rem 0 1.5rem; border-bottom:1px solid var(--border); margin-bottom:1.5rem; }
+.plan-price-amount { display:flex; align-items:baseline; gap:0.4rem; }
+.plan-price-amount .currency { font-family:var(--font-display); font-size:1.2rem; color:var(--text2); }
+.plan-price-amount .number { font-family:var(--font-display); font-size:2.8rem; font-weight:700; line-height:1; }
+.bronze .plan-price-amount .number { color:var(--bronze); }
+.prata .plan-price-amount .number { color:var(--prata); }
+.gold .plan-price-amount .number { color:var(--gold); }
+.plan-price-vista { font-size:0.78rem; color:var(--text3); letter-spacing:1.2px; text-transform:uppercase; margin-top:0.3rem; margin-bottom:0.6rem; }
+.plan-price-installment { font-size:0.92rem; color:var(--text); }
+.plan-price-installment strong { color:var(--accent); font-weight:600; }
 
 .plan-features-label { font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color:var(--text3); margin-bottom:1rem; font-weight:500; }
 .plan-features { list-style:none; padding:0; margin-bottom:1.75rem; }
@@ -216,6 +228,15 @@ section { padding:5rem 1.5rem; max-width:1300px; margin:auto; }
         ⏱️ <span><strong>3 meses</strong> · 3 consultas médicas</span>
       </div>
 
+      <div class="plan-price">
+        <div class="plan-price-amount">
+          <span class="currency">R$</span>
+          <span class="number">2.190</span>
+        </div>
+        <div class="plan-price-vista">À vista (PIX/dinheiro)</div>
+        <div class="plan-price-installment">ou <strong>3× de R$ 770</strong> no cartão sem juros</div>
+      </div>
+
       <div class="plan-features-label">O que está incluso</div>
       <ul class="plan-features">
         <li>3 consultas médicas com a Dra. Marcella (D0, 30 e 60 dias)</li>
@@ -242,6 +263,15 @@ section { padding:5rem 1.5rem; max-width:1300px; margin:auto; }
         ⏱️ <span><strong>4 meses</strong> · 4 consultas médicas</span>
       </div>
 
+      <div class="plan-price">
+        <div class="plan-price-amount">
+          <span class="currency">R$</span>
+          <span class="number">2.790</span>
+        </div>
+        <div class="plan-price-vista">À vista (PIX/dinheiro)</div>
+        <div class="plan-price-installment">ou <strong>4× de R$ 730</strong> no cartão sem juros</div>
+      </div>
+
       <div class="plan-features-label">Tudo do Bronze, mais</div>
       <ul class="plan-features">
         <li>4 consultas médicas (D0, 30, 60 e 90 dias)</li>
@@ -265,6 +295,15 @@ section { padding:5rem 1.5rem; max-width:1300px; margin:auto; }
 
       <div class="plan-duration">
         ⏱️ <span><strong>6 meses</strong> · 6 consultas médicas</span>
+      </div>
+
+      <div class="plan-price">
+        <div class="plan-price-amount">
+          <span class="currency">R$</span>
+          <span class="number">4.490</span>
+        </div>
+        <div class="plan-price-vista">À vista (PIX/dinheiro)</div>
+        <div class="plan-price-installment">ou <strong>6× de R$ 790</strong> no cartão sem juros</div>
       </div>
 
       <div class="plan-features-label">Tudo do Prata, mais</div>
@@ -298,9 +337,9 @@ section { padding:5rem 1.5rem; max-width:1300px; margin:auto; }
       <thead>
         <tr>
           <th style="width:34%;">Item</th>
-          <th class="col-bronze">Bronze<br><span style="font-size:0.78rem;font-weight:400;color:var(--text3);">3 meses</span></th>
-          <th class="col-prata">Prata<br><span style="font-size:0.78rem;font-weight:400;color:var(--text3);">4 meses</span></th>
-          <th class="col-gold">Gold<br><span style="font-size:0.78rem;font-weight:400;color:var(--text3);">6 meses</span></th>
+          <th class="col-bronze">Bronze<br><span style="font-size:0.78rem;font-weight:400;color:var(--text3);">3 meses</span><br><span style="font-size:0.95rem;color:var(--bronze);font-weight:700;">R$ 2.190</span></th>
+          <th class="col-prata">Prata<br><span style="font-size:0.78rem;font-weight:400;color:var(--text3);">4 meses</span><br><span style="font-size:0.95rem;color:var(--prata);font-weight:700;">R$ 2.790</span></th>
+          <th class="col-gold">Gold<br><span style="font-size:0.78rem;font-weight:400;color:var(--text3);">6 meses</span><br><span style="font-size:0.95rem;color:var(--gold);font-weight:700;">R$ 4.490</span></th>
         </tr>
       </thead>
       <tbody>
