@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta Comercial — Dra. Marcella Cabral</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0f14;
+  --surface: #141820;
+  --surface2: #1a2030;
+  --accent: #c9a55c;
+  --accent2: #e8c97a;
+  --accent-dim: rgba(201,165,92,0.15);
+  --red: #e85d5d;
+  --red-dim: rgba(232,93,93,0.12);
+  --green: #5dbe8a;
+  --green-dim: rgba(93,190,138,0.12);
+  --blue: #5d8ee8;
+  --blue-dim: rgba(93,142,232,0.12);
+  --purple: #a07de8;
+  --purple-dim: rgba(160,125,232,0.12);
+  --text: #e8e4dd;
+  --text2: #9b978f;
+  --text3: #5e5b55;
+  --border: rgba(201,165,92,0.1);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { background:var(--bg); color:var(--text); font-family:var(--font-body); font-weight:400; line-height:1.6; overflow-x:hidden; }
+::selection { background:var(--accent); color:var(--bg); }
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--accent-dim); border-radius:3px; }
+
+/* Hero */
+.hero { min-height:90vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:2rem; position:relative; overflow:hidden; }
+.hero::before { content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%; background:radial-gradient(ellipse at 30% 50%, rgba(201,165,92,0.06) 0%, transparent 50%), radial-gradient(ellipse at 70% 30%, rgba(93,142,232,0.04) 0%, transparent 50%); animation: heroGlow 15s ease infinite; }
+@keyframes heroGlow { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-3%,2%)} }
+.hero-label { font-family:var(--font-body); font-weight:500; letter-spacing:4px; text-transform:uppercase; font-size:0.75rem; color:var(--accent); margin-bottom:2rem; opacity:0; animation: fadeUp 0.8s 0.3s forwards; }
+.hero h1 { font-family:var(--font-display); font-size:clamp(2.2rem,5.5vw,4rem); font-weight:700; color:var(--text); line-height:1.15; max-width:850px; opacity:0; animation: fadeUp 0.8s 0.5s forwards; }
+.hero h1 span { color:var(--accent); font-style:italic; }
+.hero-sub { font-size:1.05rem; color:var(--text2); margin-top:1.5rem; max-width:600px; opacity:0; animation: fadeUp 0.8s 0.7s forwards; }
+.hero-date { margin-top:3rem; font-size:0.8rem; color:var(--text3); letter-spacing:2px; text-transform:uppercase; opacity:0; animation: fadeUp 0.8s 0.9s forwards; }
+@keyframes fadeUp { to{opacity:1;transform:translateY(0)} from{opacity:0;transform:translateY(20px)} }
+
+/* Sections */
+section { padding:5rem 2rem; max-width:1300px; margin:auto; }
+.section-label { font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:0.75rem; font-weight:500; }
+.section-title { font-family:var(--font-display); font-size:clamp(1.8rem,4vw,2.8rem); font-weight:600; margin-bottom:0.5rem; }
+.section-desc { color:var(--text2); font-size:0.95rem; max-width:700px; margin-bottom:3rem; }
+
+/* Cards */
+.grid-2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1.5rem; }
+.grid-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.75rem; transition:all 0.4s ease; }
+.card:hover { border-color:rgba(201,165,92,0.25); transform:translateY(-2px); }
+.card-label { font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color:var(--text3); margin-bottom:0.75rem; font-weight:500; }
+.card-value { font-family:var(--font-display); font-size:2rem; font-weight:700; line-height:1.2; }
+.card-sub { font-size:0.85rem; color:var(--text2); margin-top:0.5rem; }
+.card-accent { border-left:3px solid var(--accent); }
+.card-red { border-left:3px solid var(--red); }
+.card-green { border-left:3px solid var(--green); }
+.card-blue { border-left:3px solid var(--blue); }
+
+/* KPI row */
+.kpi-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem; margin-bottom:3rem; }
+.kpi { text-align:center; padding:1.5rem 1rem; background:var(--surface); border:1px solid var(--border); border-radius:12px; }
+.kpi-number { font-family:var(--font-display); font-size:1.8rem; font-weight:700; }
+.kpi-label { font-size:0.72rem; color:var(--text2); margin-top:0.35rem; letter-spacing:1px; text-transform:uppercase; }
+
+/* Tags */
+.tag { display:inline-block; padding:0.3rem 0.85rem; border-radius:20px; font-size:0.72rem; font-weight:500; letter-spacing:0.5px; }
+.tag-red { background:var(--red-dim); color:var(--red); }
+.tag-green { background:var(--green-dim); color:var(--green); }
+.tag-blue { background:var(--blue-dim); color:var(--blue); }
+.tag-accent { background:var(--accent-dim); color:var(--accent); }
+
+/* Pricing cards */
+.pricing-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(380px,1fr)); gap:2rem; margin-top:2rem; }
+.pricing-card { background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:2.5rem 2rem; position:relative; transition:all 0.4s; display:flex; flex-direction:column; }
+.pricing-card:hover { border-color:rgba(201,165,92,0.3); transform:translateY(-3px); }
+.pricing-card.featured { border:1px solid rgba(201,165,92,0.4); background:linear-gradient(135deg, var(--surface) 0%, rgba(201,165,92,0.04) 100%); }
+.pricing-badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--accent); color:var(--bg); padding:0.35rem 1.2rem; border-radius:20px; font-size:0.7rem; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; }
+.pricing-tier { font-size:0.75rem; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:0.75rem; font-weight:500; }
+.pricing-name { font-family:var(--font-display); font-size:1.6rem; font-weight:600; margin-bottom:0.5rem; line-height:1.2; }
+.pricing-tagline { font-size:0.92rem; color:var(--text2); margin-bottom:1.75rem; min-height:2.8rem; }
+.pricing-amount { display:flex; align-items:baseline; gap:0.4rem; margin-bottom:0.5rem; }
+.pricing-amount .currency { font-family:var(--font-display); font-size:1.2rem; color:var(--text2); }
+.pricing-amount .number { font-family:var(--font-display); font-size:3rem; font-weight:700; color:var(--accent); line-height:1; }
+.pricing-amount .period { font-size:0.85rem; color:var(--text2); }
+.pricing-note { font-size:0.78rem; color:var(--text3); margin-bottom:1.75rem; }
+.pricing-feature-label { font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color:var(--text3); margin-bottom:1rem; padding-top:1.5rem; border-top:1px solid var(--border); }
+.pricing-features { list-style:none; padding:0; margin-bottom:1.5rem; }
+.pricing-features li { padding:0.55rem 0; padding-left:1.75rem; font-size:0.9rem; color:var(--text); position:relative; }
+.pricing-features li::before { content:'✓'; position:absolute; left:0; top:0.55rem; color:var(--green); font-weight:700; }
+.pricing-features li.excluded { color:var(--text3); text-decoration:line-through; }
+.pricing-features li.excluded::before { content:'✗'; color:var(--red); }
+.pricing-card .ideal { background:var(--accent-dim); border-radius:8px; padding:0.85rem 1rem; margin-top:auto; font-size:0.85rem; color:var(--text); }
+.pricing-card .ideal strong { color:var(--accent); display:block; font-size:0.7rem; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:0.25rem; }
+
+/* Timeline */
+.timeline { position:relative; padding-left:2rem; }
+.timeline::before { content:''; position:absolute; left:0; top:0; bottom:0; width:1px; background:linear-gradient(to bottom, var(--accent), var(--accent-dim), transparent); }
+.timeline-item { position:relative; margin-bottom:2.5rem; padding-left:0.5rem; }
+.timeline-item::before { content:''; position:absolute; left:-2rem; top:0.5rem; width:9px; height:9px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px rgba(201,165,92,0.4); transform:translateX(-4px); }
+.timeline-item h4 { font-family:var(--font-display); font-size:1.2rem; margin-bottom:0.5rem; }
+.timeline-item .time { font-size:0.72rem; color:var(--accent); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:0.75rem; }
+.timeline-item p { font-size:0.92rem; color:var(--text2); }
+
+/* Alert */
+.alert { padding:1.5rem; border-radius:12px; margin-bottom:1.5rem; display:flex; gap:1rem; align-items:flex-start; }
+.alert-red { background:var(--red-dim); border:1px solid rgba(232,93,93,0.2); }
+.alert-green { background:var(--green-dim); border:1px solid rgba(93,190,138,0.2); }
+.alert-accent { background:var(--accent-dim); border:1px solid rgba(201,165,92,0.2); }
+.alert-icon { font-size:1.3rem; flex-shrink:0; }
+.alert-text { font-size:0.92rem; color:var(--text2); }
+.alert-text strong { color:var(--text); }
+
+/* Comparison table */
+.compare-wrap { overflow-x:auto; border-radius:16px; border:1px solid var(--border); }
+.compare { width:100%; border-collapse:collapse; min-width:600px; }
+.compare th { padding:1.25rem 1.5rem; text-align:left; font-size:0.75rem; letter-spacing:1.5px; text-transform:uppercase; background:var(--surface); border-bottom:1px solid var(--border); }
+.compare th.col-track1 { color:var(--blue); border-left:3px solid var(--blue); }
+.compare th.col-track2 { color:var(--accent); border-left:3px solid var(--accent); background:rgba(201,165,92,0.04); }
+.compare td { padding:1rem 1.5rem; border-bottom:1px solid rgba(255,255,255,0.03); font-size:0.9rem; vertical-align:top; }
+.compare td:first-child { color:var(--text2); font-size:0.85rem; }
+.compare td.featured { background:rgba(201,165,92,0.04); }
+.compare .check { color:var(--green); font-weight:700; }
+.compare .cross { color:var(--red); font-weight:700; }
+
+/* Hours table */
+.hours-wrap { overflow-x:auto; border-radius:12px; border:1px solid var(--border); margin-top:1.5rem; }
+.hours { width:100%; border-collapse:collapse; }
+.hours th { padding:0.85rem 1.2rem; text-align:left; font-size:0.7rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text3); background:var(--surface); border-bottom:1px solid var(--border); font-weight:500; }
+.hours td { padding:0.85rem 1.2rem; border-bottom:1px solid rgba(255,255,255,0.03); font-size:0.88rem; vertical-align:top; }
+.hours td:last-child { text-align:right; color:var(--accent); font-weight:600; }
+.hours tr.total { background:var(--accent-dim); }
+.hours tr.total td { color:var(--text); font-weight:600; }
+
+/* Divider */
+.divider { height:1px; background:linear-gradient(to right, transparent, var(--border), transparent); margin:3rem 0; }
+
+/* Footer */
+.footer { text-align:center; padding:4rem 2rem; color:var(--text3); font-size:0.8rem; border-top:1px solid var(--border); }
+.footer .brand { font-family:var(--font-display); font-size:1.1rem; color:var(--accent); margin-bottom:0.5rem; }
+
+/* Quote */
+.quote { background:var(--surface); border-left:3px solid var(--accent); padding:1.4rem 1.75rem; margin:1rem 0; font-style:italic; color:var(--text2); border-radius:0 8px 8px 0; font-size:0.95rem; }
+
+/* CTA */
+.cta { background:linear-gradient(135deg, var(--surface) 0%, rgba(201,165,92,0.08) 100%); border:1px solid rgba(201,165,92,0.25); border-radius:20px; padding:3rem; text-align:center; margin-top:3rem; }
+.cta h3 { font-family:var(--font-display); font-size:1.8rem; margin-bottom:0.75rem; }
+.cta p { color:var(--text2); margin-bottom:1.5rem; max-width:600px; margin-left:auto; margin-right:auto; }
+.cta-buttons { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+.cta-btn { display:inline-block; padding:0.85rem 1.75rem; border-radius:12px; font-size:0.85rem; font-weight:600; letter-spacing:1px; text-transform:uppercase; text-decoration:none; transition:all 0.3s; }
+.cta-btn-primary { background:var(--accent); color:var(--bg); }
+.cta-btn-primary:hover { background:var(--accent2); transform:translateY(-2px); }
+.cta-btn-outline { border:1px solid var(--accent); color:var(--accent); }
+.cta-btn-outline:hover { background:var(--accent-dim); }
+
+/* Responsive */
+@media(max-width:768px) {
+  section { padding:3rem 1.25rem; }
+  .grid-2,.grid-3,.pricing-row { grid-template-columns:1fr; }
+  .kpi-row { grid-template-columns:repeat(2,1fr); }
+}
+
+/* Animate */
+.reveal { opacity:0; transform:translateY(30px); transition:all 0.8s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Proposta Comercial GW9 Capital</div>
+  <h1>Como vamos seguir <span>juntas</span></h1>
+  <p class="hero-sub">Diagnóstico entregue. Agora é hora de escolher como vamos transformar tudo isso em consultório que cresce sem virar caos. Duas trilhas para você decidir.</p>
+  <div class="hero-date">Para Dra. Marcella Cabral &nbsp;|&nbsp; 28 de Abril de 2026</div>
+</div>
+
+<!-- ONDE ESTAMOS -->
+<section>
+  <div class="section-label reveal">01 — Onde estamos</div>
+  <h2 class="section-title reveal">O que já foi feito</h2>
+  <p class="section-desc reveal">Desde fevereiro de 2026 caminhamos juntas. Aqui está a entrega já realizada e o que precisa ser fechado.</p>
+
+  <div class="grid-3 reveal">
+    <div class="card card-green">
+      <div class="card-label">Diagnóstico Financeiro Pessoal</div>
+      <div style="font-family:var(--font-display); font-size:1.2rem; font-weight:600; margin-top:0.5rem;">Entregue em 26/02/2026</div>
+      <div class="card-sub" style="margin-top:0.75rem;">Mapeamento completo: receita, despesa, patrimônio, seguros, dívidas, objetivos e projeção de 6 meses. Apresentação 1:1 + dashboards interativos.</div>
+    </div>
+    <div class="card card-green">
+      <div class="card-label">Diagnóstico Operacional do Consultório</div>
+      <div style="font-family:var(--font-display); font-size:1.2rem; font-weight:600; margin-top:0.5rem;">Entregue em 28/04/2026</div>
+      <div class="card-sub" style="margin-top:0.75rem;">18 problemas mapeados em 7 frentes. Reunião com a Amanda em 22/04, análise das 3 planilhas atuais, revisão de termos clínicos. <a href="diagnostico-operacional-consultorio.html" style="color:var(--accent); text-decoration:underline;">Ver diagnóstico →</a></div>
+    </div>
+    <div class="card card-accent">
+      <div class="card-label">Pendência financeira</div>
+      <div style="font-family:var(--font-display); font-size:1.6rem; font-weight:700; color:var(--accent); margin-top:0.5rem;">R$ 1.000</div>
+      <div class="card-sub" style="margin-top:0.75rem;"><strong style="color:var(--text);">Diagnóstico financeiro pessoal</strong> — investimento acordado em março/2026, ainda não cobrado. Pamela enviará boleto/Pix em 2x.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- AS DUAS TRILHAS -->
+<section id="trilhas">
+  <div class="section-label reveal">02 — As 2 Trilhas</div>
+  <h2 class="section-title reveal">Como você quer seguir</h2>
+  <p class="section-desc reveal">Duas opções claras para você escolher. Ambas começam após o pagamento do diagnóstico (R$ 1.000) e da 1ª mensalidade da trilha escolhida.</p>
+
+  <div class="pricing-row reveal">
+    <!-- TRACK 1 -->
+    <div class="pricing-card">
+      <div class="pricing-tier">Trilha 1 — Direcionamento</div>
+      <div class="pricing-name">Consultoria Empresarial sem execução</div>
+      <p class="pricing-tagline">Eu te entrego o "o quê" e o "como". Você (e a Amanda) executam.</p>
+
+      <div class="pricing-amount">
+        <span class="currency">R$</span>
+        <span class="number">2.500</span>
+        <span class="period">/mês</span>
+      </div>
+      <div class="pricing-note">Mínimo de 4 meses · sem fidelidade após esse período</div>
+
+      <div class="pricing-feature-label">O que está incluso</div>
+      <ul class="pricing-features">
+        <li>Apresentação formal do Diagnóstico Operacional</li>
+        <li>Plano de ação detalhado para os 18 problemas</li>
+        <li>Reuniões <strong>semanais</strong> no 1º mês</li>
+        <li>Reuniões <strong>quinzenais</strong> no 2º e 3º mês</li>
+        <li>Checklist semanal de tarefas para você + Amanda</li>
+        <li>Revisão dos próximos passos e ajuste de rota</li>
+        <li>Inclui a separação PF/PJ e organização financeira do consultório</li>
+        <li>Suporte por WhatsApp (até 2h/mês)</li>
+      </ul>
+
+      <div class="pricing-feature-label">O que NÃO está incluso</div>
+      <ul class="pricing-features">
+        <li class="excluded">Implementação prática (você + Amanda fazem)</li>
+        <li class="excluded">Treinamento direto da Amanda</li>
+        <li class="excluded">Auditoria de execução</li>
+        <li class="excluded">Configuração do sistema de gestão</li>
+      </ul>
+
+      <div class="ideal">
+        <strong>Ideal se</strong>
+        Você tem confiança na sua capacidade de executar com a Amanda, só precisa de direcionamento técnico e disciplina semanal para não se perder.
+      </div>
+    </div>
+
+    <!-- TRACK 2 -->
+    <div class="pricing-card featured">
+      <div class="pricing-badge">Recomendada</div>
+      <div class="pricing-tier">Trilha 2 — Mão na massa</div>
+      <div class="pricing-name">Consultoria Empresarial com execução</div>
+      <p class="pricing-tagline">A gente executa junto. Camila tira o operacional do seu colo.</p>
+
+      <div class="pricing-amount">
+        <span class="currency">R$</span>
+        <span class="number">5.000</span>
+        <span class="period">/mês</span>
+      </div>
+      <div class="pricing-note">Mínimo de 3 meses · sem fidelidade após esse período</div>
+
+      <div class="pricing-feature-label">Tudo da Trilha 1, mais</div>
+      <ul class="pricing-features">
+        <li><strong>Camila como ponta operacional</strong> com a Amanda</li>
+        <li>2 reuniões/semana no 1º mês (intensivo) — Camila + Amanda</li>
+        <li>Reunião mensal de fechamento — Marcella + Amanda + Laysa + Camila</li>
+        <li>Implementação dos POPs no consultório</li>
+        <li>Configuração do sistema de gestão médica (Iclinic / Feegow)</li>
+        <li>Migração dos pacientes das planilhas para o sistema</li>
+        <li>Treinamento da Amanda nas tarefas administrativas</li>
+        <li>Padronização dos Termos de Injetáveis</li>
+        <li>Estruturação da tabela de preços e política de descontos</li>
+        <li>Auditoria leve do que a Amanda executa (revisão por amostra)</li>
+        <li>Reportes mensais de progresso</li>
+      </ul>
+
+      <div class="ideal">
+        <strong>Ideal se</strong>
+        Você quer destravar o consultório RÁPIDO, tirar peso operacional do seu colo e focar na clínica. Você ganha tempo. A Amanda ganha repertório. O consultório ganha estrutura.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPARATIVO RÁPIDO -->
+<section>
+  <div class="section-label reveal">03 — Comparativo rápido</div>
+  <h2 class="section-title reveal">Diferença entre as trilhas</h2>
+  <p class="section-desc reveal">Resumo lado a lado para você decidir com clareza.</p>
+
+  <div class="compare-wrap reveal">
+    <table class="compare">
+      <thead>
+        <tr>
+          <th style="width:35%;">Item</th>
+          <th class="col-track1" style="width:32.5%;">Trilha 1 · R$ 2.500/mês</th>
+          <th class="col-track2" style="width:32.5%;">Trilha 2 · R$ 5.000/mês</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Diagnóstico já entregue</td>
+          <td><span class="check">✓</span> Apresentado formalmente</td>
+          <td class="featured"><span class="check">✓</span> Apresentado formalmente</td>
+        </tr>
+        <tr>
+          <td>Frequência das reuniões — mês 1</td>
+          <td>1×/semana</td>
+          <td class="featured">2×/semana (Amanda + Marcella)</td>
+        </tr>
+        <tr>
+          <td>Frequência das reuniões — mês 2+</td>
+          <td>Quinzenal</td>
+          <td class="featured">1× quinzenal Amanda + 1× mensal Marcella</td>
+        </tr>
+        <tr>
+          <td>Quem executa</td>
+          <td>Você + Amanda</td>
+          <td class="featured">Camila + Amanda (Laysa supervisiona)</td>
+        </tr>
+        <tr>
+          <td>Treinamento da Amanda</td>
+          <td><span class="cross">✗</span> Você treina</td>
+          <td class="featured"><span class="check">✓</span> Camila treina</td>
+        </tr>
+        <tr>
+          <td>Adoção do sistema de gestão</td>
+          <td><span class="cross">✗</span> Você configura</td>
+          <td class="featured"><span class="check">✓</span> Camila configura</td>
+        </tr>
+        <tr>
+          <td>Auditoria de execução</td>
+          <td><span class="cross">✗</span></td>
+          <td class="featured"><span class="check">✓</span> Por amostra semanal</td>
+        </tr>
+        <tr>
+          <td>Separação PF/PJ + organização financeira</td>
+          <td><span class="check">✓</span></td>
+          <td class="featured"><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td>Tempo médio mensal investido pela GW9</td>
+          <td>~12 horas</td>
+          <td class="featured">~24 horas (mês 1) → 14h (mês 2+)</td>
+        </tr>
+        <tr>
+          <td>Compromisso mínimo</td>
+          <td>4 meses</td>
+          <td class="featured">3 meses</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DETALHAMENTO HORAS -->
+<section>
+  <div class="section-label reveal">04 — Por dentro do cálculo</div>
+  <h2 class="section-title reveal">De onde vem o valor</h2>
+  <p class="section-desc reveal">Transparência total. Aqui está o detalhamento da carga horária e do valor-hora de cada trilha.</p>
+
+  <div class="grid-2 reveal">
+    <div class="card card-blue">
+      <div class="card-label" style="color:var(--blue);">Trilha 1 — Direcionamento</div>
+      <div style="font-family:var(--font-display); font-size:1.4rem; font-weight:600; margin-top:0.5rem; margin-bottom:1rem;">~12h/mês</div>
+      <div class="hours-wrap">
+        <table class="hours">
+          <thead>
+            <tr><th>Atividade</th><th>Horas</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Reunião semanal (mês 1) / quinzenal (mês 2+)</td><td>4h</td></tr>
+            <tr><td>Análise PF/PJ + checklist semanal</td><td>3h</td></tr>
+            <tr><td>Preparação de orientações e materiais</td><td>3h</td></tr>
+            <tr><td>WhatsApp / suporte (limite 2h/mês)</td><td>2h</td></tr>
+            <tr class="total"><td>Total mensal</td><td>~12h</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-sub" style="margin-top:1rem;"><strong style="color:var(--text);">Valor-hora: R$ 208/h</strong> — dentro do mercado de consultoria estratégica (R$ 180-300/h).</div>
+    </div>
+
+    <div class="card card-accent">
+      <div class="card-label" style="color:var(--accent);">Trilha 2 — Mão na massa</div>
+      <div style="font-family:var(--font-display); font-size:1.4rem; font-weight:600; margin-top:0.5rem; margin-bottom:1rem;">~24h/mês (mês 1) → 14h (mês 2-3)</div>
+      <div class="hours-wrap">
+        <table class="hours">
+          <thead>
+            <tr><th>Atividade</th><th>Horas (mês 1)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Reuniões com Amanda (Camila — 1x/semana)</td><td>4h</td></tr>
+            <tr><td>Reunião mensal Marcella + equipe</td><td>2h</td></tr>
+            <tr><td>Implementação POPs + sistema</td><td>10h</td></tr>
+            <tr><td>Auditoria leve por amostra</td><td>3h</td></tr>
+            <tr><td>Coordenação Camila ↔ Laysa</td><td>3h</td></tr>
+            <tr><td>WhatsApp / suporte</td><td>2h</td></tr>
+            <tr class="total"><td>Total mensal (mês 1)</td><td>~24h</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-sub" style="margin-top:1rem;"><strong style="color:var(--text);">Valor-hora médio: R$ 263/h</strong> — adequado ao mercado de consultoria com execução. Mês 1 mais intensivo, mês 2-3 mais leve. Camila como ponta operacional, Laysa como sponsor/revisora.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LINHA DO TEMPO -->
+<section>
+  <div class="section-label reveal">05 — Linha do tempo</div>
+  <h2 class="section-title reveal">Como vai acontecer</h2>
+  <p class="section-desc reveal">Os primeiros 90 dias após o aceite, em ambas as trilhas.</p>
+
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <div class="time">Semana 0 — Confirmação</div>
+      <h4>Aceite + pagamentos iniciais</h4>
+      <p>Você confirma a trilha escolhida. Pamela envia: (1) boleto/Pix de R$ 1.000 do diagnóstico em 2x; (2) boleto/Pix da 1ª mensalidade da trilha. Após pagamento da 1ª mensalidade, começamos imediatamente.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time">Semanas 1-4 — Implementação intensiva</div>
+      <h4>Travar o essencial</h4>
+      <p>Política de sinal, tabela de preços oficial, planilha unificada (transição), Doctoralia ativado. Trilha 2: Camila começa reuniões com Amanda, avalia sistema de gestão (Iclinic / Feegow / Amplimed).</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time">Semanas 5-12 — Adoção do sistema</div>
+      <h4>Consultório em sistema profissional</h4>
+      <p>Migração das planilhas para o sistema. Configuração de geração automática de termos. Treinamento Amanda. Tabela de preços + regulamento de indicação ativos. Reuniões quinzenais (Trilha 1) ou intensivas (Trilha 2).</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time">Mês 4+ — Otimização</div>
+      <h4>Consultório operando com método</h4>
+      <p>Fechamento financeiro mensal funcional. Indicações registradas. Estoque controlado. Métricas mensais para decisão. Reavaliação do escopo: continuar, ajustar ou encerrar.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- POR FORA DO ESCOPO -->
+<section>
+  <div class="section-label reveal">06 — Fora do escopo (em ambas trilhas)</div>
+  <h2 class="section-title reveal">Para deixar claro</h2>
+  <p class="section-desc reveal">Itens que não fazem parte da assessoria — para alinhar expectativas.</p>
+
+  <div class="grid-2 reveal">
+    <div class="card card-red">
+      <div class="card-label">NÃO está incluso</div>
+      <ul style="margin-top:1rem; padding-left:1.2rem; color:var(--text2); font-size:0.92rem;">
+        <li style="margin-bottom:0.5rem;">Construção de sistema customizado para o consultório (recomendamos adotar Iclinic / Feegow / Amplimed — R$ 200-500/mês)</li>
+        <li style="margin-bottom:0.5rem;">Custo do sistema de gestão escolhido (pago diretamente pelo consultório)</li>
+        <li style="margin-bottom:0.5rem;">Planejamento financeiro pessoal completo (a Marcella já demonstrou autonomia financeira pessoal)</li>
+        <li style="margin-bottom:0.5rem;">Gestão da carteira de investimentos (permanece com assessor atual)</li>
+        <li style="margin-bottom:0.5rem;">Planejamento tributário e contabilidade (responsabilidade do contador)</li>
+        <li style="margin-bottom:0.5rem;">Trabalho jurídico (contratos, termos com aval jurídico — recomendamos advogado especialista)</li>
+      </ul>
+    </div>
+    <div class="card card-blue">
+      <div class="card-label">Investimentos paralelos da Marcella</div>
+      <ul style="margin-top:1rem; padding-left:1.2rem; color:var(--text2); font-size:0.92rem;">
+        <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Sistema de gestão médica:</strong> ~R$ 200-500/mês (Iclinic, Feegow, Amplimed)</li>
+        <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">WhatsApp Business:</strong> Gratuito</li>
+        <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Doctoralia:</strong> Já contratado — apenas ajustar configurações</li>
+        <li style="margin-bottom:0.5rem;"><strong style="color:var(--text);">Eventuais melhorias do consultório</strong> (impressora, máquina Stone, papelaria) — sob critério da Dra.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA -->
+<section>
+  <div class="cta reveal">
+    <h3>Próximo passo</h3>
+    <p>Você tem <strong style="color:var(--accent);">1 semana</strong> para decidir entre as trilhas. Após esse prazo, entendemos como pausa do projeto. O diagnóstico já entregue (R$ 1.000) é cobrado independentemente da decisão sobre a trilha.</p>
+    <div class="cta-buttons">
+      <a href="https://wa.me/5521994797468?text=Laysa%2C%20escolhi%20a%20Trilha%201%20%E2%9D%A4%EF%B8%8F" class="cta-btn cta-btn-outline">Escolho a Trilha 1</a>
+      <a href="https://wa.me/5521994797468?text=Laysa%2C%20escolhi%20a%20Trilha%202%20%F0%9F%92%9B" class="cta-btn cta-btn-primary">Escolho a Trilha 2</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="brand">GW9 Capital</div>
+  <div>Proposta Comercial · Dra. Marcella Cabral · 28 de Abril de 2026</div>
+  <div style="margin-top:0.5rem;">Laysa Corrêa, CFP® · Camila Soares, Compliance &amp; Processos</div>
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold:0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

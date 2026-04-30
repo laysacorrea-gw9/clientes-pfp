@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico Operacional do Consultório — Dra. Marcella Cabral</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0f14;
+  --surface: #141820;
+  --surface2: #1a2030;
+  --accent: #c9a55c;
+  --accent2: #e8c97a;
+  --accent-dim: rgba(201,165,92,0.15);
+  --red: #e85d5d;
+  --red-dim: rgba(232,93,93,0.12);
+  --green: #5dbe8a;
+  --green-dim: rgba(93,190,138,0.12);
+  --blue: #5d8ee8;
+  --blue-dim: rgba(93,142,232,0.12);
+  --purple: #a07de8;
+  --purple-dim: rgba(160,125,232,0.12);
+  --text: #e8e4dd;
+  --text2: #9b978f;
+  --text3: #5e5b55;
+  --border: rgba(201,165,92,0.1);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { background:var(--bg); color:var(--text); font-family:var(--font-body); font-weight:400; line-height:1.6; overflow-x:hidden; }
+::selection { background:var(--accent); color:var(--bg); }
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--accent-dim); border-radius:3px; }
+
+/* Hero */
+.hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:2rem; position:relative; overflow:hidden; }
+.hero::before { content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%; background:radial-gradient(ellipse at 30% 50%, rgba(201,165,92,0.06) 0%, transparent 50%), radial-gradient(ellipse at 70% 30%, rgba(93,142,232,0.04) 0%, transparent 50%); animation: heroGlow 15s ease infinite; }
+@keyframes heroGlow { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-3%,2%)} }
+.hero-label { font-family:var(--font-body); font-weight:500; letter-spacing:4px; text-transform:uppercase; font-size:0.75rem; color:var(--accent); margin-bottom:2rem; opacity:0; animation: fadeUp 0.8s 0.3s forwards; }
+.hero h1 { font-family:var(--font-display); font-size:clamp(2.2rem,5.5vw,4rem); font-weight:700; color:var(--text); line-height:1.15; max-width:850px; opacity:0; animation: fadeUp 0.8s 0.5s forwards; }
+.hero h1 span { color:var(--accent); font-style:italic; }
+.hero-sub { font-size:1.05rem; color:var(--text2); margin-top:1.5rem; max-width:600px; opacity:0; animation: fadeUp 0.8s 0.7s forwards; }
+.hero-date { margin-top:3rem; font-size:0.8rem; color:var(--text3); letter-spacing:2px; text-transform:uppercase; opacity:0; animation: fadeUp 0.8s 0.9s forwards; }
+.hero-scroll { position:absolute; bottom:3rem; display:flex; flex-direction:column; align-items:center; gap:0.5rem; opacity:0; animation: fadeUp 0.8s 1.2s forwards; cursor:pointer; }
+.hero-scroll span { font-size:0.7rem; color:var(--text3); letter-spacing:2px; text-transform:uppercase; }
+.hero-scroll .arrow { width:1px; height:40px; background:linear-gradient(to bottom, var(--accent), transparent); animation: scrollPulse 2s infinite; }
+@keyframes scrollPulse { 0%,100%{opacity:0.3;transform:scaleY(0.7)} 50%{opacity:1;transform:scaleY(1)} }
+@keyframes fadeUp { to{opacity:1;transform:translateY(0)} from{opacity:0;transform:translateY(20px)} }
+
+/* Nav */
+.nav { position:sticky; top:0; z-index:100; background:rgba(12,15,20,0.85); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); padding:0 2rem; }
+.nav-inner { max-width:1200px; margin:auto; display:flex; gap:0.25rem; overflow-x:auto; scrollbar-width:none; }
+.nav-inner::-webkit-scrollbar{display:none;}
+.nav a { padding:1rem 1.2rem; font-size:0.75rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text3); text-decoration:none; white-space:nowrap; border-bottom:2px solid transparent; transition:all 0.3s; }
+.nav a:hover, .nav a.active { color:var(--accent); border-bottom-color:var(--accent); }
+
+/* Sections */
+section { padding:5rem 2rem; max-width:1200px; margin:auto; }
+.section-label { font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:0.75rem; font-weight:500; }
+.section-title { font-family:var(--font-display); font-size:clamp(1.8rem,4vw,2.8rem); font-weight:600; margin-bottom:0.5rem; }
+.section-desc { color:var(--text2); font-size:0.95rem; max-width:700px; margin-bottom:3rem; }
+
+/* Cards */
+.grid-2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1.5rem; }
+.grid-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; }
+.grid-4 { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1.25rem; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.75rem; transition:all 0.4s ease; position:relative; overflow:hidden; }
+.card:hover { border-color:rgba(201,165,92,0.25); transform:translateY(-2px); }
+.card-label { font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color:var(--text3); margin-bottom:0.75rem; font-weight:500; }
+.card-value { font-family:var(--font-display); font-size:2rem; font-weight:700; line-height:1.2; }
+.card-sub { font-size:0.85rem; color:var(--text2); margin-top:0.5rem; }
+.card-accent { border-left:3px solid var(--accent); }
+.card-red { border-left:3px solid var(--red); }
+.card-green { border-left:3px solid var(--green); }
+.card-blue { border-left:3px solid var(--blue); }
+.card-purple { border-left:3px solid var(--purple); }
+
+/* KPI row */
+.kpi-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem; margin-bottom:3rem; }
+.kpi { text-align:center; padding:1.5rem 1rem; background:var(--surface); border:1px solid var(--border); border-radius:12px; }
+.kpi-number { font-family:var(--font-display); font-size:1.8rem; font-weight:700; }
+.kpi-label { font-size:0.72rem; color:var(--text2); margin-top:0.35rem; letter-spacing:1px; text-transform:uppercase; }
+
+/* Tags */
+.tag { display:inline-block; padding:0.25rem 0.75rem; border-radius:20px; font-size:0.72rem; font-weight:500; letter-spacing:0.5px; }
+.tag-red { background:var(--red-dim); color:var(--red); }
+.tag-green { background:var(--green-dim); color:var(--green); }
+.tag-blue { background:var(--blue-dim); color:var(--blue); }
+.tag-accent { background:var(--accent-dim); color:var(--accent); }
+.tag-purple { background:var(--purple-dim); color:var(--purple); }
+
+/* Tables */
+.table-wrap { overflow-x:auto; border-radius:12px; border:1px solid var(--border); }
+table { width:100%; border-collapse:collapse; font-size:0.88rem; }
+th { padding:0.85rem 1.2rem; text-align:left; font-size:0.7rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text3); background:var(--surface); border-bottom:1px solid var(--border); font-weight:500; }
+td { padding:0.85rem 1.2rem; border-bottom:1px solid rgba(255,255,255,0.03); vertical-align:top; }
+tr:hover td { background:rgba(201,165,92,0.03); }
+
+/* Problems list */
+.problem { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:1.5rem; margin-bottom:1rem; transition:all 0.3s; }
+.problem:hover { border-color:rgba(201,165,92,0.25); }
+.problem-header { display:flex; align-items:center; gap:0.75rem; margin-bottom:0.75rem; flex-wrap:wrap; }
+.problem-num { font-family:var(--font-display); font-size:1.2rem; font-weight:700; color:var(--accent); min-width:2.5rem; }
+.problem-title { font-family:var(--font-display); font-size:1.1rem; font-weight:600; flex:1; min-width:200px; }
+.problem-block { margin-top:0.6rem; }
+.problem-block-label { font-size:0.7rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text3); margin-bottom:0.25rem; }
+.problem-block-text { font-size:0.9rem; color:var(--text2); }
+.problem-block-text strong { color:var(--text); }
+
+/* Frente group */
+.frente { margin-bottom:3rem; }
+.frente-header { display:flex; align-items:center; gap:1rem; margin-bottom:1.25rem; padding-bottom:0.75rem; border-bottom:1px solid var(--border); }
+.frente-icon { font-size:1.5rem; }
+.frente-title { font-family:var(--font-display); font-size:1.4rem; font-weight:600; flex:1; }
+
+/* Timeline */
+.timeline { position:relative; padding-left:2rem; }
+.timeline::before { content:''; position:absolute; left:0; top:0; bottom:0; width:1px; background:linear-gradient(to bottom, var(--accent), var(--accent-dim), transparent); }
+.timeline-item { position:relative; margin-bottom:2.5rem; padding-left:0.5rem; }
+.timeline-item::before { content:''; position:absolute; left:-2rem; top:0.5rem; width:9px; height:9px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px rgba(201,165,92,0.4); transform:translateX(-4px); }
+.timeline-item h4 { font-family:var(--font-display); font-size:1.2rem; margin-bottom:0.5rem; }
+.timeline-item .time { font-size:0.72rem; color:var(--accent); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:0.75rem; }
+.timeline-list { list-style:none; padding:0; margin-top:0.5rem; }
+.timeline-list li { padding:0.4rem 0; padding-left:1.5rem; position:relative; font-size:0.9rem; color:var(--text2); }
+.timeline-list li::before { content:'→'; position:absolute; left:0; color:var(--accent); }
+
+/* Alert box */
+.alert { padding:1.5rem; border-radius:12px; margin-bottom:1.5rem; display:flex; gap:1rem; align-items:flex-start; }
+.alert-red { background:var(--red-dim); border:1px solid rgba(232,93,93,0.2); }
+.alert-green { background:var(--green-dim); border:1px solid rgba(93,190,138,0.2); }
+.alert-accent { background:var(--accent-dim); border:1px solid rgba(201,165,92,0.2); }
+.alert-icon { font-size:1.3rem; flex-shrink:0; }
+.alert-text { font-size:0.92rem; color:var(--text2); }
+.alert-text strong { color:var(--text); }
+
+/* Quote (citações) */
+.quote { background:var(--surface); border-left:3px solid var(--accent); padding:1.2rem 1.5rem; margin:1rem 0; font-style:italic; color:var(--text2); border-radius:0 8px 8px 0; font-size:0.92rem; }
+.quote-author { display:block; margin-top:0.6rem; font-style:normal; font-size:0.78rem; color:var(--text3); letter-spacing:1px; text-transform:uppercase; }
+
+/* Divider */
+.divider { height:1px; background:linear-gradient(to right, transparent, var(--border), transparent); margin:3rem 0; }
+
+/* Footer */
+.footer { text-align:center; padding:4rem 2rem; color:var(--text3); font-size:0.8rem; border-top:1px solid var(--border); }
+.footer .brand { font-family:var(--font-display); font-size:1.1rem; color:var(--accent); margin-bottom:0.5rem; }
+
+/* Responsive */
+@media(max-width:768px) {
+  section { padding:3rem 1.25rem; }
+  .grid-2,.grid-3,.grid-4 { grid-template-columns:1fr; }
+  .kpi-row { grid-template-columns:repeat(2,1fr); }
+  .nav a { padding:0.85rem 0.8rem; font-size:0.65rem; }
+}
+
+/* Animate on scroll */
+.reveal { opacity:0; transform:translateY(30px); transition:all 0.8s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="hero-label">Diagnóstico Operacional do Consultório</div>
+  <h1>Dra. Marcella <span>Cabral</span></h1>
+  <p class="hero-sub">Mapeamento completo dos processos do consultório — agenda, prontuário, financeiro, estoque e comunicação. 18 oportunidades de melhoria identificadas, organizadas em um plano de ação executável.</p>
+  <div class="hero-date">Preparado por Laysa Corrêa — CFP® com Camila Soares — Compliance &nbsp;|&nbsp; 28 de Abril de 2026</div>
+  <div class="hero-scroll" onclick="document.getElementById('sumario').scrollIntoView()">
+    <span>Explorar</span>
+    <div class="arrow"></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#sumario" class="active">Sumário</a>
+    <a href="#contexto">Contexto</a>
+    <a href="#problemas">Problemas</a>
+    <a href="#agenda">Agenda</a>
+    <a href="#contato">Primeiro Contato</a>
+    <a href="#prontuario">Prontuário</a>
+    <a href="#financeiro">Financeiro</a>
+    <a href="#estoque">Estoque</a>
+    <a href="#comunicacao">Comunicação</a>
+    <a href="#roadmap">Plano de Ação</a>
+    <a href="#conclusao">Conclusão</a>
+  </div>
+</nav>
+
+<!-- SUMÁRIO -->
+<section id="sumario">
+  <div class="section-label reveal">01 — Sumário Executivo</div>
+  <h2 class="section-title reveal">A janela ideal para estruturar</h2>
+  <p class="section-desc reveal">O consultório está em fase de estruturação. A Dra. Marcella operou sozinha por um período significativo e a Amanda foi contratada há cerca de um mês. O volume atual é manejável (~40-50 pacientes ativos), o que cria uma janela perfeita para organizar processos antes do crescimento.</p>
+
+  <div class="kpi-row reveal">
+    <div class="kpi">
+      <div class="kpi-number" style="color:var(--accent)">18</div>
+      <div class="kpi-label">Problemas mapeados</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-number" style="color:var(--blue)">7</div>
+      <div class="kpi-label">Frentes operacionais</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-number" style="color:var(--green)">~50</div>
+      <div class="kpi-label">Pacientes ativos</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-number" style="color:var(--red)">3</div>
+      <div class="kpi-label">Planilhas duplicadas</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-number" style="color:var(--purple)">2</div>
+      <div class="kpi-label">Pessoas operando</div>
+    </div>
+  </div>
+
+  <div class="grid-2 reveal">
+    <div class="card card-accent">
+      <div class="card-label">Diagnóstico em uma frase</div>
+      <div style="font-family:var(--font-display); font-size:1.4rem; font-weight:600; line-height:1.3; margin-top:0.5rem;">Excelência clínica, organização operacional em construção.</div>
+      <div class="card-sub" style="margin-top:1rem;">A Dra. tem domínio técnico comprovado por indicações constantes, mas o consultório vive de processos informais que não escalam. A boa notícia: tudo é corrigível com ferramentas simples — sem investimento alto.</div>
+    </div>
+    <div class="card card-blue">
+      <div class="card-label">3 Fontes Cruzadas</div>
+      <div style="font-family:var(--font-display); font-size:1.1rem; font-weight:600; margin-top:0.5rem;">Como esse diagnóstico foi feito</div>
+      <div class="card-sub" style="margin-top:1rem;">
+        <strong style="color:var(--text);">a)</strong> Reunião com a Amanda em 22/04/2026 — mapeamento de processos<br>
+        <strong style="color:var(--text);">b)</strong> Análise das 3 planilhas em uso (Injetáveis, Tirze Marcella, Tirzepatida Indicados)<br>
+        <strong style="color:var(--text);">c)</strong> Revisão do lote de termos clínicos e propostas comerciais existentes
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-accent reveal" style="margin-top:2rem;">
+    <div class="alert-icon">★</div>
+    <div class="alert-text">
+      <strong>Insight central:</strong> A própria Amanda observou em reunião — <em>"a gente já está se perdendo com poucos pacientes"</em>. Isso significa que estruturar AGORA é decisão estratégica: 50 pacientes desorganizados é trabalhoso, 200 pacientes desorganizados é impossível.
+    </div>
+  </div>
+</section>
+
+<!-- CONTEXTO -->
+<section id="contexto">
+  <div class="section-label reveal">02 — Contexto</div>
+  <h2 class="section-title reveal">O ponto de partida</h2>
+  <p class="section-desc reveal">O cenário atual do consultório, do ponto de vista de processos, ferramentas e equipe.</p>
+
+  <div class="grid-3 reveal">
+    <div class="card">
+      <div class="card-label">EQUIPE</div>
+      <div style="font-family:var(--font-display); font-size:1.3rem; font-weight:600; margin-top:0.5rem;">Dra. Marcella + Amanda</div>
+      <div class="card-sub" style="margin-top:1rem;">Amanda contratada em <strong style="color:var(--text);">17/03/2026</strong>. Histórico em Rede D'Or como recepcionista. Primeira função em gestão de consultório.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">FERRAMENTAS EM USO</div>
+      <div style="font-family:var(--font-display); font-size:1.3rem; font-weight:600; margin-top:0.5rem;">Doctoralia + Google + WhatsApp</div>
+      <div class="card-sub" style="margin-top:1rem;">Doctoralia (assinado, mas subutilizado). Google Drive (arquivos), Google Planilhas (controle), WhatsApp (comunicação central).</div>
+    </div>
+    <div class="card">
+      <div class="card-label">FREQUÊNCIA DE ATENDIMENTO</div>
+      <div style="font-family:var(--font-display); font-size:1.3rem; font-weight:600; margin-top:0.5rem;">Terça e Quinta</div>
+      <div class="card-sub" style="margin-top:1rem;">2 dias presenciais por semana. Demais dias: telemedicina (Sírio-Libanês) e plantões.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">PORTFÓLIO DE SERVIÇOS</div>
+      <div style="font-family:var(--font-display); font-size:1.3rem; font-weight:600; margin-top:0.5rem;">Multidisciplinar</div>
+      <div class="card-sub" style="margin-top:1rem;">Consulta nutrológica + Tirzepatida (perda de peso) + Injetáveis (vitaminas) + Pré-consulta + Bioimpedância.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">PLANILHAS ATUAIS</div>
+      <div style="font-family:var(--font-display); font-size:1.3rem; font-weight:600; margin-top:0.5rem;">3 arquivos sobrepostos</div>
+      <div class="card-sub" style="margin-top:1rem;">"TIRZE Marcella", "TIRZEPATIDA INDICADOS" e "_INJETÁVEIS" — com pacientes duplicados e estruturas similares mas inconsistentes.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">DOCUMENTAÇÃO</div>
+      <div style="font-family:var(--font-display); font-size:1.3rem; font-weight:600; margin-top:0.5rem;">Termos Word, ad-hoc</div>
+      <div class="card-sub" style="margin-top:1rem;">Cada Termo de Injetáveis é cópia manual, com prefixos "1°, 2°, 3°" e duplicações ("Cópia de…"). Sem template padronizado.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROBLEMAS -->
+<section id="problemas">
+  <div class="section-label reveal">03 — 18 Problemas Mapeados</div>
+  <h2 class="section-title reveal">O que está travando o consultório</h2>
+  <p class="section-desc reveal">Cada problema apresenta o impacto observado, a causa-raiz e a recomendação. Agrupados em 7 frentes operacionais.</p>
+
+  <!-- AGENDA -->
+  <div class="frente reveal" id="agenda">
+    <div class="frente-header">
+      <span class="frente-icon">📅</span>
+      <div class="frente-title">Agenda &amp; Marcação</div>
+      <span class="tag tag-red">Prioridade ALTA</span>
+    </div>
+
+    <div class="problem">
+      <div class="problem-header">
+        <span class="problem-num">01</span>
+        <div class="problem-title">Horário da consulta informado apenas 2 dias antes</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Impacto</div>
+        <div class="problem-block-text">A Amanda confirma a DATA, mas o horário só é informado 2 dias antes. Obriga o paciente a deixar o dia "em aberto", gera retrabalho e projeta imagem de desorganização.</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Causa-raiz</div>
+        <div class="problem-block-text">Estratégia defensiva da Dra. para conseguir remanejar caso necessário — transfere o custo da incerteza para o processo inteiro.</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Recomendação</div>
+        <div class="problem-block-text"><strong>Travar data + horário no primeiro contato.</strong> Remanejamento, quando necessário, é negociado 1 paciente por vez.</div>
+      </div>
+    </div>
+
+    <div class="problem">
+      <div class="problem-header">
+        <span class="problem-num">02</span>
+        <div class="problem-title">Ausência de política de sinal e de bloqueio de agenda</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Impacto</div>
+        <div class="problem-block-text">Pacientes confirmam a semana inteira e desmarcam 2h antes da consulta. Horário não é recuperado. Prejuízo direto de R$ 200-450 por desmarcação + horário ocioso.</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Recomendação</div>
+        <div class="problem-block-text"><strong>Sinal de 30-40% do valor da consulta</strong> para bloqueio do horário. Cancelamento &gt;48h: reembolso. 24-48h: pode remarcar em 30 dias. &lt;24h ou no-show: sinal não devolvido.</div>
+      </div>
+    </div>
+
+    <div class="problem">
+      <div class="problem-header">
+        <span class="problem-num">03</span>
+        <div class="problem-title">Doctoralia subutilizado — agenda online fechada</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Impacto</div>
+        <div class="problem-block-text">A Dra. paga pela assinatura mas mantém a agenda fechada para evitar overbooking. Resultado: paga sem capturar pacientes do Google/Doctoralia.</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Recomendação</div>
+        <div class="problem-block-text">Abrir 40-60% da agenda no Doctoralia (apenas terças e quintas, em janelas pré-definidas). Amanda confere 2x/dia.</div>
+      </div>
+    </div>
+
+    <div class="problem">
+      <div class="problem-header">
+        <span class="problem-num">04</span>
+        <div class="problem-title">Pré-consulta (pedido de exames) entregue sem cobrança</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Impacto</div>
+        <div class="problem-block-text">A Dra. monta pedido de exames individualizado ANTES da consulta. Se o paciente desiste, todo o trabalho é perdido. Prejuízo silencioso recorrente.</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Recomendação</div>
+        <div class="problem-block-text">Criar 2 modelos: <strong>(a)</strong> Consulta tradicional — valor cheio. <strong>(b)</strong> Consulta com pré-diagnóstico — valor + 30 a 40%, cobrado no ato do pedido. Não comparecimento: valor já está pago.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRIMEIRO CONTATO -->
+  <div class="frente reveal" id="contato">
+    <div class="frente-header">
+      <span class="frente-icon">📞</span>
+      <div class="frente-title">Primeiro Contato &amp; Triagem</div>
+      <span class="tag tag-blue">Prioridade Média</span>
+    </div>
+
+    <div class="problem">
+      <div class="problem-header">
+        <span class="problem-num">05</span>
+        <div class="problem-title">Roteiro de primeiro atendimento inconsistente</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Impacto</div>
+        <div class="problem-block-text">A Amanda descreveu o roteiro de memória, com passos soltos: pergunta se é do Rio, se é indicação, se tem exames recentes. Não existe script documentado.</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Recomendação</div>
+        <div class="problem-block-text">Documentar script de triagem. Usar respostas prontas no WhatsApp Business para garantir consistência.</div>
+      </div>
+    </div>
+
+    <div class="problem">
+      <div class="problem-header">
+        <span class="problem-num">06</span>
+        <div class="problem-title">Programa de indicação sem regras claras documentadas</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Impacto</div>
+        <div class="problem-block-text">A Amanda pergunta "é indicação?" mas não há regulamento. Na planilha TIRZEPATIDA INDICADOS há abas "Indicação" e "Agregados" sem critério óbvio.</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Recomendação</div>
+        <div class="problem-block-text">Regulamento escrito: quem indica ganha o quê (ex.: R$ 50 de crédito), quem é indicado recebe o quê (ex.: 10% off na 1ª consulta), validade da indicação, registro padrão.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRONTUÁRIO -->
+  <div class="frente reveal" id="prontuario">
+    <div class="frente-header">
+      <span class="frente-icon">📋</span>
+      <div class="frente-title">Prontuário &amp; Registro Clínico</div>
+      <span class="tag tag-red">Prioridade ALTA</span>
+    </div>
+
+    <div class="problem">
+      <div class="problem-header">
+        <span class="problem-num">07</span>
+        <div class="problem-title">Prontuário fragmentado em 5 lugares</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Impacto</div>
+        <div class="problem-block-text">Informações de UM paciente estão em: pasta no Drive, 3 planilhas, grupo do WhatsApp, possivelmente Doctoralia, e documentos Word. A Amanda confirma que não sabe se exames são arquivados.</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Recomendação</div>
+        <div class="problem-block-text">Consolidar em <strong>2 lugares apenas</strong>: <strong>(1)</strong> Sistema de gestão médica (Iclinic / Feegow / Amplimed) — para dados estruturados. <strong>(2)</strong> Drive — apenas para PDFs/imagens (termos, exames). WhatsApp deixa de ser repositório.</div>
+      </div>
+    </div>
+
+    <div class="problem">
+      <div class="problem-header">
+        <span class="problem-num">08</span>
+        <div class="problem-title">Duplicidade entre planilhas Tirze Marcella e Tirzepatida Indicados</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Impacto</div>
+        <div class="problem-block-text">Mesmas colunas, com pacientes parcialmente sobrepostos (Wellington Mata, Beatriz Fricks, Elizangela aparecem nas duas). Risco altíssimo de atualizar uma e esquecer a outra.</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Recomendação</div>
+        <div class="problem-block-text">Unificar em UMA planilha (transição de 30-60 dias) com coluna "Categoria" (Indicação / Agregado / Padrão). Em paralelo, migrar para sistema médico.</div>
+      </div>
+    </div>
+
+    <div class="problem">
+      <div class="problem-header">
+        <span class="problem-num">09</span>
+        <div class="problem-title">Termos de injetáveis criados como cópias manuais</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Impacto</div>
+        <div class="problem-block-text">Múltiplas versões do mesmo termo para o mesmo paciente ("Marcelle da Silva TERMO INJETÁVEIS", "(1)", "(2)"; "Cópia de 16.11.26 Claudio Povoa"). Datas erradas. Numeração manual ("1°, 2°, 3°").</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Recomendação</div>
+        <div class="problem-block-text">Template único em Google Docs com placeholders. Amanda preenche 4 campos (nome, CPF, data, número da aplicação), salva como PDF, arquiva em <code style="background:var(--surface2);padding:0.1rem 0.4rem;border-radius:4px;">Pacientes/[Nome]/Termos/AAAA-MM-DD_NN.pdf</code>. Ao adotar sistema de gestão, o termo é gerado automaticamente.</div>
+      </div>
+    </div>
+
+    <div class="problem">
+      <div class="problem-header">
+        <span class="problem-num">10</span>
+        <div class="problem-title">Resultados de exames não arquivados no prontuário</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Impacto</div>
+        <div class="problem-block-text">A Amanda relatou: "eu acho que o resultado dos exames ela não coloca na pasta do paciente". Resultado é visto apenas no momento da consulta, muitas vezes em papel.</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Recomendação</div>
+        <div class="problem-block-text">Ao final de cada atendimento, exames recebidos são fotografados/escaneados e arquivados em <code style="background:var(--surface2);padding:0.1rem 0.4rem;border-radius:4px;">Pacientes/[Nome]/Exames/AAAA-MM-DD.pdf</code>. Retenção mínima 20 anos (CFM).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINANCEIRO -->
+  <div class="frente reveal" id="financeiro">
+    <div class="frente-header">
+      <span class="frente-icon">💰</span>
+      <div class="frente-title">Controle Financeiro</div>
+      <span class="tag tag-red">Prioridade ALTA</span>
+    </div>
+
+    <div class="problem">
+      <div class="problem-header">
+        <span class="problem-num">11</span>
+        <div class="problem-title">Cobrança registrada informalmente no grupo do WhatsApp</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Impacto</div>
+        <div class="problem-block-text">A Amanda registra cada pagamento no grupo da Dra. ("paciente X pagou Y em PIX"). Se perde na cronologia, não gera relatórios, não fecha mês, não registra parcelamento.</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Recomendação</div>
+        <div class="problem-block-text">Aba Financeiro estruturada (transição) → módulo financeiro do sistema de gestão (destino). Cada pagamento registrado em 1 linha: data, paciente, serviço, valor, taxa, líquido, forma, parcelas, status. Fechamento diário e mensal.</div>
+      </div>
+    </div>
+
+    <div class="problem">
+      <div class="problem-header">
+        <span class="problem-num">12</span>
+        <div class="problem-title">Pagamento em dinheiro entregue direto à médica, sem recibo interno</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Impacto</div>
+        <div class="problem-block-text">A Amanda relatou: "quando paga em dinheiro, eu literalmente pego o dinheiro e entrego pra doutora". Sem protocolo. Vulnerabilidade para ambas.</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Recomendação</div>
+        <div class="problem-block-text">Caixa interno: dinheiro em envelope identificado com data, valor e paciente. Entrega à Dra. com recibo assinado em planilha simples. Protege ambas — secretária e médica.</div>
+      </div>
+    </div>
+
+    <div class="problem">
+      <div class="problem-header">
+        <span class="problem-num">13</span>
+        <div class="problem-title">Parcelamento em cartão não registrado</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Impacto</div>
+        <div class="problem-block-text">A planilha registra "cartão" mas não a estrutura do parcelamento. Se um paciente parcela em 4x na Stone e depois pede NF por competência, a informação está perdida.</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Recomendação</div>
+        <div class="problem-block-text">Coluna "Parcelas" + "Competência" no controle. Reconciliação mensal com extrato Stone.</div>
+      </div>
+    </div>
+
+    <div class="problem">
+      <div class="problem-header">
+        <span class="problem-num">14</span>
+        <div class="problem-title">Tabela de preços inconsistente</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Impacto</div>
+        <div class="problem-block-text">Para a mesma dose de 2,5mg de Tirzepatida, valores variam entre R$ 60, R$ 87,70, R$ 97,70, R$ 107,70, R$ 117,70, R$ 137,70, R$ 140, R$ 175,40, R$ 187,70 e R$ 197,85. Sem critério documentado para o desconto. Consulta varia entre R$ 200, R$ 300, R$ 390 e R$ 450.</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Recomendação</div>
+        <div class="problem-block-text"><strong>Criar tabela oficial</strong>: definir valor cheio + critério documentado de desconto (indicação? renda? fidelidade?). Exceções passam por aprovação da Dra. registrada na planilha.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESTOQUE -->
+  <div class="frente reveal" id="estoque">
+    <div class="frente-header">
+      <span class="frente-icon">📦</span>
+      <div class="frente-title">Controle de Estoque</div>
+      <span class="tag tag-red">Prioridade ALTA</span>
+    </div>
+
+    <div class="problem">
+      <div class="problem-header">
+        <span class="problem-num">15</span>
+        <div class="problem-title">Não há controle de estoque</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Impacto</div>
+        <div class="problem-block-text">Estoque gerido por memória. Insumos (luva, agulha 0,7×25, agulha 1,20×40, álcool 70%, algodão, seringas) e medicações são comprados quando "acabam". Insustentável com 20+ pacientes em tratamento. Já houve perdas relatadas por validade vencida.</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Recomendação</div>
+        <div class="problem-block-text">Planilha de Estoque (transição) com 2 abas: Medicações (com lote e validade) e Insumos. Ponto de reposição para cada item. Revisão semanal toda segunda. Migração para módulo de estoque do sistema.</div>
+      </div>
+    </div>
+
+    <div class="problem">
+      <div class="problem-header">
+        <span class="problem-num">16</span>
+        <div class="problem-title">Lote e validade de medicações sem registro centralizado</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Impacto</div>
+        <div class="problem-block-text">Lote/validade preenchidos manualmente nos termos, no ato da aplicação. Em caso de recall ANVISA, não há rastreabilidade.</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Recomendação</div>
+        <div class="problem-block-text">Obrigatório registrar Lote + Validade no recebimento da medicação. Aplicação puxa automaticamente da planilha de estoque (transição) ou do sistema (destino).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMUNICAÇÃO -->
+  <div class="frente reveal" id="comunicacao">
+    <div class="frente-header">
+      <span class="frente-icon">💬</span>
+      <div class="frente-title">Comunicação Interna</div>
+      <span class="tag tag-blue">Prioridade Média</span>
+    </div>
+
+    <div class="problem">
+      <div class="problem-header">
+        <span class="problem-num">17</span>
+        <div class="problem-title">Grupo único de WhatsApp concentra TUDO</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Impacto</div>
+        <div class="problem-block-text">"Planejamento do Consultório" mistura pendências, cobranças, dúvidas clínicas e comprovantes. A cronologia se perde rapidamente. Mensagens importantes ficam soterradas.</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Recomendação</div>
+        <div class="problem-block-text">Manter <strong>1 grupo apenas</strong> para coisas operacionais do dia. Decisões clínicas e financeiras passam a viver dentro do sistema de gestão (anotações no prontuário, registros financeiros). WhatsApp volta a ser canal de comunicação temporária.</div>
+      </div>
+    </div>
+
+    <div class="problem">
+      <div class="problem-header">
+        <span class="problem-num">18</span>
+        <div class="problem-title">Lembretes de retorno dependem da memória humana</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Impacto</div>
+        <div class="problem-block-text">A Amanda criou "gambiarra" no Google Agenda + mensagem fixada no grupo com retornos de todos os pacientes. Não escala.</div>
+      </div>
+      <div class="problem-block">
+        <div class="problem-block-label">Recomendação</div>
+        <div class="problem-block-text">Campo "Data de retorno" na planilha + Google Agenda compartilhado entre Dra. e Amanda com lembretes 7, 3 e 1 dia antes. No sistema, lembretes automáticos via WhatsApp.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="section-label reveal">04 — Plano de Ação</div>
+  <h2 class="section-title reveal">Roadmap em 3 horizontes</h2>
+  <p class="section-desc reveal">A implementação foi estruturada em 3 horizontes para evitar sobrecarga. Cada item tem responsável e prazo claros.</p>
+
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <div class="time">Semana 1 e 2 — Estabilização</div>
+      <h4>Travar o essencial</h4>
+      <ul class="timeline-list">
+        <li>Adotar planilha unificada (transição) e migrar dados das 3 planilhas atuais</li>
+        <li>Implementar política de sinal (30-40% do valor) para bloqueio de agenda</li>
+        <li>Travar data + horário no primeiro contato (eliminar a confirmação 2 dias antes)</li>
+        <li>Ativar WhatsApp Business com etiquetas e respostas prontas</li>
+        <li>Configurar idioma do Doctoralia para Português-BR</li>
+        <li>Documentar tabela oficial de preços (consulta, pré-consulta, doses por mg)</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="time">Mês 1 a 3 — Adoção do Sistema de Gestão</div>
+      <h4>Migrar para sistema profissional</h4>
+      <ul class="timeline-list">
+        <li><strong style="color:var(--text);">Avaliar e contratar sistema de gestão médica</strong> — Iclinic, Feegow, Amplimed (custo ~R$ 200-500/mês, já inclui agenda + prontuário + financeiro + estoque + termos)</li>
+        <li>Migrar pacientes da planilha unificada para o sistema</li>
+        <li>Configurar geração automática de Termo de Injetáveis no sistema</li>
+        <li>Treinar Amanda no novo sistema</li>
+        <li>Abrir 40-60% da agenda no Doctoralia ao público</li>
+        <li>Criar regulamento oficial do Programa de Indicação</li>
+        <li>Avaliar emissão direta de NFS-e via portal da prefeitura ou software (eliminar dependência do contador para emissão)</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="time">Mês 4 a 6 — Otimização &amp; Escala</div>
+      <h4>Automatizar para crescer</h4>
+      <ul class="timeline-list">
+        <li>Implementar integração Stone → relatório financeiro</li>
+        <li>Automatizar lembretes de retorno via WhatsApp Business API</li>
+        <li>Rever política de preços com base no histórico real do trimestre</li>
+        <li>Avaliar contratação adicional ou expansão de horários conforme volume</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONCLUSÃO -->
+<section id="conclusao">
+  <div class="section-label reveal">05 — Conclusão</div>
+  <h2 class="section-title reveal">O momento é agora</h2>
+  <p class="section-desc reveal">Por que estruturar agora e não em 6 meses.</p>
+
+  <div class="grid-2 reveal">
+    <div class="card card-green">
+      <div class="card-label">Pontos Fortes</div>
+      <div style="font-family:var(--font-display); font-size:1.3rem; font-weight:600; margin-top:0.5rem;">O que já funciona bem</div>
+      <ul style="margin-top:1rem; padding-left:1.2rem; color:var(--text2); font-size:0.92rem;">
+        <li style="margin-bottom:0.5rem;">Excelência clínica comprovada por indicações constantes</li>
+        <li style="margin-bottom:0.5rem;">Doctoralia já contratado (basta usar)</li>
+        <li style="margin-bottom:0.5rem;">Amanda com perfil de relacionamento forte (Rede D'Or)</li>
+        <li style="margin-bottom:0.5rem;">Volume manejável de pacientes (~50 ativos)</li>
+        <li style="margin-bottom:0.5rem;">Drive já organizado em pastas por paciente</li>
+      </ul>
+    </div>
+    <div class="card card-red">
+      <div class="card-label">Riscos do "não fazer nada"</div>
+      <div style="font-family:var(--font-display); font-size:1.3rem; font-weight:600; margin-top:0.5rem;">Se nada mudar</div>
+      <ul style="margin-top:1rem; padding-left:1.2rem; color:var(--text2); font-size:0.92rem;">
+        <li style="margin-bottom:0.5rem;">Erros clínicos por perda de informação (lote, dose, retorno)</li>
+        <li style="margin-bottom:0.5rem;">Perda financeira contínua (no-shows sem sinal, descontos sem critério, estoque vencido)</li>
+        <li style="margin-bottom:0.5rem;">Burnout da Dra. e da Amanda — "a gente já está se perdendo com poucos pacientes"</li>
+        <li style="margin-bottom:0.5rem;">Inviabilidade de crescer (escala impossível com processos atuais)</li>
+        <li style="margin-bottom:0.5rem;">Vulnerabilidade jurídica (termos sem padronização, prontuário fragmentado)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert alert-accent reveal" style="margin-top:2rem;">
+    <div class="alert-icon">★</div>
+    <div class="alert-text">
+      <strong>Mensagem final:</strong> Os 18 problemas mapeados são todos corrigíveis com ferramentas simples e mensalidades baixas. A transição não exige investimento alto — basta disciplina de processo. O <strong>retorno</strong> aparece em poucas semanas: menos no-shows, menos perdas com estoque, equipe menos sobrecarregada e um consultório que cresce sem virar caos.
+    </div>
+  </div>
+
+  <div class="alert alert-green reveal">
+    <div class="alert-icon">→</div>
+    <div class="alert-text">
+      <strong>Próximo passo:</strong> Apresentação da proposta comercial GW9 — 2 trilhas para conduzir essa transformação juntas. <a href="proposta-marcella.html" style="color:var(--accent); text-decoration:underline;">Ver proposta →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="brand">GW9 Capital</div>
+  <div>Diagnóstico Operacional do Consultório · Dra. Marcella Cabral · 28 de Abril de 2026</div>
+  <div style="margin-top:0.5rem;">Preparado por Laysa Corrêa, CFP® com Camila Soares</div>
+</div>
+
+<script>
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold:0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Active nav link
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id');
+  });
+  navLinks.forEach(l => {
+    l.classList.remove('active');
+    if (l.getAttribute('href').slice(1) === current) l.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
