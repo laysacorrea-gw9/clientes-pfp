@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tabela de Preços — Tirzepatida — Dra. Marcella Cabral</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0f14;
+  --surface: #141820;
+  --surface2: #1a2030;
+  --accent: #c9a55c;
+  --accent2: #e8c97a;
+  --accent-dim: rgba(201,165,92,0.15);
+  --red: #e85d5d;
+  --red-dim: rgba(232,93,93,0.12);
+  --green: #5dbe8a;
+  --green-dim: rgba(93,190,138,0.12);
+  --blue: #5d8ee8;
+  --blue-dim: rgba(93,142,232,0.12);
+  --purple: #a07de8;
+  --purple-dim: rgba(160,125,232,0.12);
+  --text: #e8e4dd;
+  --text2: #9b978f;
+  --text3: #5e5b55;
+  --border: rgba(201,165,92,0.1);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { background:var(--bg); color:var(--text); font-family:var(--font-body); line-height:1.6; }
+::selection { background:var(--accent); color:var(--bg); }
+
+.hero { min-height:60vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:3rem 2rem; position:relative; }
+.hero::before { content:''; position:absolute; inset:-50%; background:radial-gradient(ellipse at 30% 50%, rgba(201,165,92,0.06) 0%, transparent 50%); animation: glow 15s ease infinite; }
+@keyframes glow { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-3%,2%)} }
+.hero-label { font-size:0.75rem; letter-spacing:4px; text-transform:uppercase; color:var(--accent); margin-bottom:1.5rem; opacity:0; animation: fadeUp 0.8s 0.3s forwards; }
+.hero h1 { font-family:var(--font-display); font-size:clamp(2rem,5vw,3.5rem); font-weight:700; max-width:850px; opacity:0; animation: fadeUp 0.8s 0.5s forwards; line-height:1.15; }
+.hero h1 span { color:var(--accent); font-style:italic; }
+.hero-sub { font-size:1rem; color:var(--text2); margin-top:1.5rem; max-width:600px; opacity:0; animation: fadeUp 0.8s 0.7s forwards; }
+.hero-date { margin-top:2rem; font-size:0.78rem; color:var(--text3); letter-spacing:2px; text-transform:uppercase; opacity:0; animation: fadeUp 0.8s 0.9s forwards; }
+@keyframes fadeUp { to{opacity:1;transform:translateY(0)} from{opacity:0;transform:translateY(20px)} }
+
+section { padding:3rem 2rem; max-width:1200px; margin:auto; }
+.section-label { font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:0.5rem; font-weight:500; }
+.section-title { font-family:var(--font-display); font-size:clamp(1.6rem,3.5vw,2.4rem); font-weight:600; margin-bottom:0.5rem; }
+.section-desc { color:var(--text2); font-size:0.95rem; max-width:700px; margin-bottom:2rem; }
+
+.card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.75rem; margin-bottom:1.5rem; }
+
+.tabela-wrap { overflow-x:auto; border:1px solid var(--border); border-radius:12px; }
+table { width:100%; border-collapse:collapse; font-size:0.9rem; min-width:600px; }
+th { padding:1rem 1.25rem; text-align:left; font-size:0.7rem; letter-spacing:1.5px; text-transform:uppercase; background:var(--surface); color:var(--text3); border-bottom:1px solid var(--border); font-weight:500; }
+td { padding:0.85rem 1.25rem; border-bottom:1px solid rgba(255,255,255,0.04); }
+tr:hover td { background:rgba(201,165,92,0.03); }
+.text-right { text-align:right; }
+.text-center { text-align:center; }
+.text-red { color:var(--red); }
+.text-green { color:var(--green); }
+.text-accent { color:var(--accent); }
+.text-blue { color:var(--blue); }
+.text-purple { color:var(--purple); }
+.bold { font-weight:600; }
+
+.kpi-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem; margin-bottom:2rem; }
+.kpi { padding:1.5rem 1rem; background:var(--surface); border:1px solid var(--border); border-radius:12px; text-align:center; }
+.kpi-num { font-family:var(--font-display); font-size:1.8rem; font-weight:700; }
+.kpi-label { font-size:0.7rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text2); margin-top:0.4rem; }
+
+.alert { padding:1.5rem; border-radius:12px; margin:1.5rem 0; display:flex; gap:1rem; align-items:flex-start; }
+.alert-red { background:var(--red-dim); border:1px solid rgba(232,93,93,0.3); }
+.alert-green { background:var(--green-dim); border:1px solid rgba(93,190,138,0.3); }
+.alert-accent { background:var(--accent-dim); border:1px solid rgba(201,165,92,0.3); }
+.alert-icon { font-size:1.5rem; flex-shrink:0; }
+.alert strong { color:var(--text); }
+
+.divider { height:1px; background:linear-gradient(to right, transparent, var(--border), transparent); margin:3rem auto; max-width:1100px; }
+
+.callout { background:linear-gradient(135deg, var(--surface) 0%, rgba(201,165,92,0.05) 100%); border-left:4px solid var(--accent); padding:1.5rem 1.75rem; border-radius:0 12px 12px 0; margin:1.5rem 0; }
+.callout h3 { font-family:var(--font-display); font-size:1.2rem; margin-bottom:0.5rem; color:var(--accent); }
+
+.footer { text-align:center; padding:4rem 2rem; color:var(--text3); font-size:0.8rem; border-top:1px solid var(--border); margin-top:3rem; }
+.footer .brand { font-family:var(--font-display); font-style:italic; font-size:1.3rem; color:var(--accent); margin-bottom:0.5rem; }
+
+@media(max-width:768px) {
+  section { padding:2rem 1.25rem; }
+  .kpi-row { grid-template-columns:repeat(2,1fr); }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">Tabela de Preços · Tirzepatida</div>
+  <h1>Como precificar com <span>margem real</span></h1>
+  <p class="hero-sub">Análise dos custos da farmácia × o que vc cobra hoje + sugestão de tabela oficial baseada em markup justo de mercado.</p>
+  <div class="hero-date">Para Dra. Marcella Cabral · Maio/2026</div>
+</div>
+
+<!-- 01. Resumo crítico -->
+<section>
+  <div class="section-label">01 — Diagnóstico</div>
+  <h2 class="section-title">Onde estamos hoje</h2>
+  <p class="section-desc">Análise das vendas de Tirzepatida nas suas planilhas + cruzamento com o orçamento da farmácia Formédica de 04/05/2026.</p>
+
+  <div class="kpi-row">
+    <div class="kpi" style="border-left:3px solid var(--red);">
+      <div class="kpi-num text-red">R$ 39-127</div>
+      <div class="kpi-label">Custo real / dose</div>
+    </div>
+    <div class="kpi" style="border-left:3px solid var(--accent);">
+      <div class="kpi-num text-accent">R$ 87-197</div>
+      <div class="kpi-label">O que vc cobra hoje</div>
+    </div>
+    <div class="kpi" style="border-left:3px solid var(--blue);">
+      <div class="kpi-num text-blue">240%</div>
+      <div class="kpi-label">Markup dose 2,5mg ✓</div>
+    </div>
+    <div class="kpi" style="border-left:3px solid var(--red);">
+      <div class="kpi-num text-red">8%</div>
+      <div class="kpi-label">Markup dose 7,5mg ❌</div>
+    </div>
+  </div>
+
+  <div class="alert alert-red">
+    <div class="alert-icon">🚨</div>
+    <div>
+      <strong>Doses 5mg+ estão subprecificadas.</strong> Você cobra praticamente no custo. Cada dose 7,5mg vendida a R$ 130 te dá menos de R$ 10 de lucro bruto — sem contar tempo, sala, insumos, Amanda. Isso provavelmente é um dos motivos do déficit do consultório.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 02. Custos reais -->
+<section>
+  <div class="section-label">02 — Custos confirmados</div>
+  <h2 class="section-title">O que a farmácia te cobra</h2>
+  <p class="section-desc">Baseado no orçamento Formédica nº 1891485 de 04/05/2026 (50.235 reais). Pode variar de 5-10% conforme volume e fornecedor.</p>
+
+  <div class="card">
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Apresentação (compra)</th>
+            <th class="text-right">Preço/ampola</th>
+            <th class="text-right">Doses 2,5mg</th>
+            <th class="text-right">Doses 5mg</th>
+            <th class="text-right">Doses 7,5mg</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tirzepatida 5 mg/ml × 4ml<br><span style="font-size:0.8rem; color:var(--text3);">20mg total</span></td>
+            <td class="text-right text-red bold">R$ 340</td>
+            <td class="text-right">8</td>
+            <td class="text-right">4</td>
+            <td class="text-right">~3</td>
+          </tr>
+          <tr>
+            <td>Tirzepatida 10 mg/ml × 4ml<br><span style="font-size:0.8rem; color:var(--text3);">40mg total</span></td>
+            <td class="text-right text-red bold">R$ 670</td>
+            <td class="text-right">16</td>
+            <td class="text-right">8</td>
+            <td class="text-right">~5</td>
+          </tr>
+          <tr>
+            <td>Tirzepatida 15 mg/ml × 4ml<br><span style="font-size:0.8rem; color:var(--text3);">60mg total · melhor custo/dose</span></td>
+            <td class="text-right text-red bold">R$ 950</td>
+            <td class="text-right">24</td>
+            <td class="text-right">12</td>
+            <td class="text-right">8</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout">
+    <h3>💡 Dica de compra</h3>
+    <p style="font-size:0.92rem;">A apresentação <strong>15mg/ml × 4ml por R$ 950</strong> é a mais econômica em custo/dose. Compre essa quando o volume permitir. Custo dose 2,5mg cai pra <strong>R$ 39,58</strong> (vs R$ 42,50 na apresentação menor).</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 03. Cobrança hoje vs sugerida -->
+<section>
+  <div class="section-label">03 — Comparativo</div>
+  <h2 class="section-title">O que você cobra hoje × o justo</h2>
+  <p class="section-desc">Análise das ~30 vendas de Tirzepatida no período fev-mai/2026.</p>
+
+  <div class="card">
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Dose</th>
+            <th class="text-right">Custo real</th>
+            <th class="text-right">Cobra hoje (média)</th>
+            <th class="text-right">Markup atual</th>
+            <th class="text-right text-accent">Sugerido (markup 200%)</th>
+            <th class="text-right text-purple">Sugerido (markup 300%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="bold">1,25 mg</td>
+            <td class="text-right text-red">R$ 20</td>
+            <td class="text-right">R$ 107-177</td>
+            <td class="text-right text-green">~750%</td>
+            <td class="text-right text-accent bold">R$ 60</td>
+            <td class="text-right text-purple bold">R$ 80</td>
+          </tr>
+          <tr>
+            <td class="bold">2,5 mg</td>
+            <td class="text-right text-red">R$ 40</td>
+            <td class="text-right">R$ 87-197 (méd. 137)</td>
+            <td class="text-right text-green">240%</td>
+            <td class="text-right text-accent bold">R$ 120</td>
+            <td class="text-right text-purple bold">R$ 160</td>
+          </tr>
+          <tr>
+            <td class="bold">3,75 mg</td>
+            <td class="text-right text-red">R$ 60</td>
+            <td class="text-right">R$ 137-175</td>
+            <td class="text-right text-blue">160%</td>
+            <td class="text-right text-accent bold">R$ 180</td>
+            <td class="text-right text-purple bold">R$ 240</td>
+          </tr>
+          <tr style="background:rgba(232,93,93,0.05);">
+            <td class="bold">5 mg</td>
+            <td class="text-right text-red">R$ 80</td>
+            <td class="text-right">R$ 107-178 (méd. 130)</td>
+            <td class="text-right text-red bold">62% ❌</td>
+            <td class="text-right text-accent bold">R$ 240</td>
+            <td class="text-right text-purple bold">R$ 320</td>
+          </tr>
+          <tr style="background:rgba(232,93,93,0.08);">
+            <td class="bold">7,5 mg</td>
+            <td class="text-right text-red">R$ 120</td>
+            <td class="text-right">R$ 60-187 (méd. 130)</td>
+            <td class="text-right text-red bold">8% 🚨</td>
+            <td class="text-right text-accent bold">R$ 360</td>
+            <td class="text-right text-purple bold">R$ 480</td>
+          </tr>
+          <tr>
+            <td class="bold">10 mg</td>
+            <td class="text-right text-red">R$ 168</td>
+            <td class="text-right text-text3">não cobrado</td>
+            <td class="text-right">—</td>
+            <td class="text-right text-accent bold">R$ 500</td>
+            <td class="text-right text-purple bold">R$ 670</td>
+          </tr>
+          <tr>
+            <td class="bold">15 mg</td>
+            <td class="text-right text-red">R$ 250</td>
+            <td class="text-right text-text3">não cobrado</td>
+            <td class="text-right">—</td>
+            <td class="text-right text-accent bold">R$ 750</td>
+            <td class="text-right text-purple bold">R$ 1.000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 04. Frasco completo -->
+<section>
+  <div class="section-label">04 — Frasco completo</div>
+  <h2 class="section-title">Quando o paciente leva pra casa</h2>
+  <p class="section-desc">Algumas pacientes preferem comprar o frasco fechado e aplicar em casa. É mais cômodo pra elas, melhor margem pra você.</p>
+
+  <div class="card">
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Apresentação</th>
+            <th class="text-right">Custo</th>
+            <th class="text-right text-blue">Markup 100%</th>
+            <th class="text-right text-accent">Markup 200%</th>
+            <th class="text-right text-purple">Markup 400%</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>5 mg/ml × 4ml (20mg)</td>
+            <td class="text-right text-red bold">R$ 340</td>
+            <td class="text-right text-blue">R$ 680</td>
+            <td class="text-right text-accent bold">R$ 1.020</td>
+            <td class="text-right text-purple">R$ 1.700</td>
+          </tr>
+          <tr>
+            <td>10 mg/ml × 4ml (40mg)</td>
+            <td class="text-right text-red bold">R$ 670</td>
+            <td class="text-right text-blue">R$ 1.340</td>
+            <td class="text-right text-accent bold">R$ 2.010</td>
+            <td class="text-right text-purple">R$ 3.350</td>
+          </tr>
+          <tr>
+            <td>15 mg/ml × 4ml (60mg)</td>
+            <td class="text-right text-red bold">R$ 950</td>
+            <td class="text-right text-blue">R$ 1.900</td>
+            <td class="text-right text-accent bold">R$ 2.850</td>
+            <td class="text-right text-purple">R$ 4.750</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 05. Política de descontos -->
+<section>
+  <div class="section-label">05 — Política de descontos</div>
+  <h2 class="section-title">Como aplicar descontos com critério</h2>
+  <p class="section-desc">Hoje você dá descontos sem critério (R$ 60 a R$ 197 pra mesma dose). Sugestão: tabela oficial fixa com 4 níveis claros.</p>
+
+  <div class="card">
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Categoria do paciente</th>
+            <th class="text-right">Desconto</th>
+            <th class="text-right">Dose 2,5mg</th>
+            <th class="text-right">Dose 5mg</th>
+            <th class="text-right">Dose 7,5mg</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Tabela oficial</strong> (Instagram / particular / sem origem)</td>
+            <td class="text-right text-text3">0%</td>
+            <td class="text-right text-accent bold">R$ 120</td>
+            <td class="text-right text-accent bold">R$ 240</td>
+            <td class="text-right text-accent bold">R$ 360</td>
+          </tr>
+          <tr>
+            <td><strong>Indicação</strong> (programa formal, pacientes ativos)</td>
+            <td class="text-right text-text3">10% off</td>
+            <td class="text-right">R$ 108</td>
+            <td class="text-right">R$ 216</td>
+            <td class="text-right">R$ 324</td>
+          </tr>
+          <tr>
+            <td><strong>Pacientes Dr. Thiago</strong> (parceria existente)</td>
+            <td class="text-right text-text3">20% off</td>
+            <td class="text-right">R$ 96</td>
+            <td class="text-right">R$ 192</td>
+            <td class="text-right">R$ 288</td>
+          </tr>
+          <tr>
+            <td><strong>Família / cortesia</strong> (registro explícito)</td>
+            <td class="text-right text-text3">a definir</td>
+            <td class="text-right text-text3" colspan="3">Caso a caso, registrar como "Cortesia"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="alert alert-accent">
+    <div class="alert-icon">⚠️</div>
+    <div>
+      <strong>Importante:</strong> "Tabela oficial" é o que vai pro Instagram, formulário de primeira consulta, e o que a Amanda fala quando alguém perguntar valor. Os descontos só são aplicados <strong>após você confirmar a categoria do paciente</strong>. Sem critério: sem desconto.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 06. Próximos passos -->
+<section>
+  <div class="section-label">06 — Implementação</div>
+  <h2 class="section-title">Como sair desse ponto sem afastar paciente</h2>
+
+  <div class="card">
+    <ol style="padding-left:1.5rem; line-height:2;">
+      <li><strong>Pacientes existentes:</strong> mantém preço atual até o fim do tratamento. Não troca regra no meio.</li>
+      <li><strong>Pacientes novos (a partir de hoje):</strong> tabela oficial nova já entra. A Amanda recebe a tabela impressa e usa ela na hora da cobrança.</li>
+      <li><strong>Renovação de Tirzepatida:</strong> quando o paciente atual voltar pra dose seguinte, comunica gentil: <em>"Daiana, atualizamos a tabela em maio. Sua próxima dose passa a ser R$ X. Quer manter o protocolo?"</em></li>
+      <li><strong>Pacientes Dr. Thiago:</strong> renegocia com o Thiago a partilha 50/50 com base nos preços novos.</li>
+      <li><strong>Família/cortesia:</strong> separe em planilha à parte. Não confunde com paciente comum.</li>
+    </ol>
+  </div>
+
+  <div class="alert alert-green">
+    <div class="alert-icon">✓</div>
+    <div>
+      <strong>Resultado esperado:</strong> em 60 dias, sua margem em Tirzepatida sobe de ~25% para ~250% sem perder pacientes. As doses 5mg+ que hoje quase não dão margem passam a contribuir pra fechar o consultório no azul.
+    </div>
+  </div>
+</section>
+
+<div class="footer">
+  <div class="brand">GW9 Capital</div>
+  <div>Tabela de Preços Tirzepatida · Dra. Marcella Cabral · Maio/2026</div>
+  <div style="margin-top:0.5rem;">Estruturado por Laysa Corrêa, CFP® com Kamylla — Compliance &amp; Processos</div>
+</div>
+
+</body>
+</html>

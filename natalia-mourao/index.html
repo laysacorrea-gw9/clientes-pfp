@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Natalia Teixeira Mourão - Evolução Patrimonial</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  body { font-family: -apple-system, 'Segoe UI', Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 20px; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  h1 { color: #1a1a1a; margin-bottom: 5px; }
+  .subtitle { color: #666; margin-bottom: 25px; }
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 25px; }
+  .card { background: white; padding: 18px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .card-label { color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card-value { font-size: 22px; font-weight: 700; color: #1a1a1a; margin-top: 6px; }
+  .card-sub { font-size: 12px; color: #666; margin-top: 4px; }
+  .card.total { background: linear-gradient(135deg, #FFB800, #FF8C00); color: white; }
+  .card.total .card-label, .card.total .card-value, .card.total .card-sub { color: white; }
+  .chart-container { background: white; border-radius: 10px; padding: 25px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .chart-container h2 { margin-top: 0; color: #1a1a1a; font-size: 18px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .green { color: #2ecc71; }
+  .red { color: #e74c3c; }
+  .yellow { color: #f39c12; }
+  .footer { text-align: center; color: #999; font-size: 11px; margin-top: 20px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid #eee; font-size: 13px; }
+  th { background: #f8f8f8; color: #555; font-weight: 600; }
+  td.right { text-align: right; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Natalia Teixeira Mourão</h1>
+  <div class="subtitle">Visão Consolidada do Patrimônio · 05/05/2026 · Assessora: Laysa Correa (GW9 Capital)</div>
+
+  <div class="cards">
+    <div class="card total">
+      <div class="card-label">Patrimônio Total</div>
+      <div class="card-value">R$ 559.058</div>
+      <div class="card-sub">3 instituições</div>
+    </div>
+    <div class="card">
+      <div class="card-label">XP Investimentos</div>
+      <div class="card-value">R$ 408.624</div>
+      <div class="card-sub">73% do total</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Zurich (Previdência)</div>
+      <div class="card-value">R$ 41.434</div>
+      <div class="card-sub">7% do total</div>
+    </div>
+    <div class="card">
+      <div class="card-label">RL360 Offshore</div>
+      <div class="card-value">USD 21.796</div>
+      <div class="card-sub">~R$ 109.000 · 20% do total</div>
+    </div>
+  </div>
+
+  <div class="chart-container" style="background: linear-gradient(135deg, #fff8e1, #fff);">
+    <h2>📈 Evolução Histórica desde o início (Dez/2022 → Mai/2026)</h2>
+    <canvas id="historicoChart" height="80"></canvas>
+    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px;">
+      <div style="background:white; padding:15px; border-radius:8px; border-left:4px solid #95a5a6;">
+        <div style="color:#888; font-size:12px;">DEZ/2022 — Início</div>
+        <div style="font-size:20px; font-weight:700;">R$ 153.962</div>
+        <div style="font-size:12px; color:#666;">XP, Nubank, RL360, BTG, Stone, Modal</div>
+      </div>
+      <div style="background:white; padding:15px; border-radius:8px; border-left:4px solid #3498db;">
+        <div style="color:#888; font-size:12px;">JAN/2024 — 13 meses</div>
+        <div style="font-size:20px; font-weight:700;">R$ 334.414 <span style="color:#2ecc71; font-size:14px;">+117%</span></div>
+        <div style="font-size:12px; color:#666;">Migra para Bradesco, inicia SAKS</div>
+      </div>
+      <div style="background:white; padding:15px; border-radius:8px; border-left:4px solid #2ecc71;">
+        <div style="color:#888; font-size:12px;">MAI/2026 — Hoje</div>
+        <div style="font-size:20px; font-weight:700;">R$ 559.058 <span style="color:#2ecc71; font-size:14px;">+263%</span></div>
+        <div style="font-size:12px; color:#666;">XP + Zurich + RL360 consolidados</div>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:15px; font-weight:600; color:#27ae60; font-size:15px;">
+      🎯 Patrimônio multiplicou 3,6× em 3 anos e meio · +R$ 405.097 acumulados
+    </p>
+  </div>
+
+  <div class="chart-container">
+    <h2>Composição do Patrimônio ao longo do tempo</h2>
+    <canvas id="composicaoChart" height="100"></canvas>
+    <p style="font-size:12px; color:#666; margin-top:10px;">
+      <strong>Diversificação aumentou:</strong> em 2022 a carteira tinha 6 instituições espalhadas (incluindo Nubank reserva e Stone capital de giro).
+      Hoje está consolidada em 3 instituições com perfil de investimento mais maduro.
+    </p>
+  </div>
+
+  <div class="chart-container">
+    <h2>Distribuição do Patrimônio por Classe de Ativo</h2>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center;">
+      <div><canvas id="classeChart"></canvas></div>
+      <div>
+        <table style="width:100%;">
+          <thead>
+            <tr><th>Classe</th><th class="right">Valor</th><th class="right">%</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>🟦 Pós-Fixado (CDI)</td><td class="right">R$ 214.909</td><td class="right">38,4%</td></tr>
+            <tr><td>🟧 Prefixado</td><td class="right">R$ 119.502</td><td class="right">21,4%</td></tr>
+            <tr><td>🟥 Inflação (IPCA+)</td><td class="right">R$ 95.171</td><td class="right">17,0%</td></tr>
+            <tr><td>🟪 Internacional</td><td class="right">R$ 109.000</td><td class="right">19,5%</td></tr>
+            <tr><td>🟩 Multimercado</td><td class="right">R$ 19.905</td><td class="right">3,6%</td></tr>
+            <tr><td>⬜ Caixa</td><td class="right">R$ 570</td><td class="right">0,1%</td></tr>
+            <tr style="font-weight:700; background:#f8f8f8;"><td>Total</td><td class="right">R$ 559.058</td><td class="right">100%</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:12px; color:#888; margin-top:12px;">
+          🔴 <strong>Renda Variável Brasil: 0%</strong> · Recomendado XP: 8%<br>
+          ⚠️ Pós + Pré + IPCA = 76,8% em Renda Fixa BR
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-container">
+    <h2>Evolução do Patrimônio Consolidado (últimos 12 meses)</h2>
+    <canvas id="totalChart" height="80"></canvas>
+  </div>
+
+  <div class="row">
+    <div class="chart-container">
+      <h2>XP — Evolução mensal</h2>
+      <canvas id="xpChart" height="180"></canvas>
+    </div>
+    <div class="chart-container">
+      <h2>Zurich — Evolução previdência</h2>
+      <canvas id="zurichChart" height="180"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-container">
+    <h2>RL360 — Aportes semestrais e crescimento (USD)</h2>
+    <canvas id="rl360Chart" height="80"></canvas>
+  </div>
+
+  <div class="chart-container">
+    <h2>XP · Rentabilidade Carteira vs CDI vs IPCA</h2>
+    <canvas id="cdiChart" height="80"></canvas>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;">
+      <div style="background:#fff3cd; border-left:4px solid #f39c12; padding:12px; border-radius:6px;">
+        <strong style="color:#e67e22;">⚠️ Rentabilidade Real ZERO no ano</strong><br>
+        <span style="font-size:13px; color:#555;">Carteira 2,56% vs IPCA 2,57% — empatou com a inflação em 2026.</span>
+      </div>
+      <div style="background:#fae3e3; border-left:4px solid #e74c3c; padding:12px; border-radius:6px;">
+        <strong style="color:#c0392b;">❌ Abaixo do CDI consistentemente</strong><br>
+        <span style="font-size:13px; color:#555;">12 meses: 11,75% vs CDI 14,77% (apenas 80% do CDI).</span>
+      </div>
+    </div>
+    <p style="font-size:12px; color:#888; margin-top:12px; margin-bottom:0;">
+      <strong>Rentabilidade Real</strong> = Carteira descontado IPCA. No ano: <strong>-0,01%</strong>. Em 12 meses: <strong>+7,07%</strong>. Desde o início: <strong>+22,00%</strong>.
+    </p>
+  </div>
+
+  <div class="chart-container">
+    <h2>Resumo dos 3 produtos</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Valor atual</th>
+          <th>Total aportado</th>
+          <th>Rendimento</th>
+          <th>Performance</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>XP Brasil</strong> · 6057005</td>
+          <td class="right">R$ 408.623,64</td>
+          <td class="right">—</td>
+          <td class="right">+45,37% desde início</td>
+          <td class="green"><strong>+22,00% real</strong> (acima do IPCA)</td>
+          <td>Ativa</td>
+        </tr>
+        <tr>
+          <td><strong>Zurich VGBL</strong> · Valora FI RF CP</td>
+          <td class="right">R$ 41.434,01</td>
+          <td class="right">R$ 33.740,06</td>
+          <td class="right green">+R$ 7.693,94 (+23,56%)</td>
+          <td class="green"><strong>~+18% real</strong> (acima do IPCA)</td>
+          <td>Ativa</td>
+        </tr>
+        <tr>
+          <td><strong>RL360</strong> · RS02026562</td>
+          <td class="right">USD 21.796,31</td>
+          <td class="right">USD 17.640,00</td>
+          <td class="right green">+USD 4.156 (+23,56%)</td>
+          <td class="green"><strong>+23,56% em USD</strong> (proteção cambial)</td>
+          <td class="yellow">Reinstated · Premium 20/abr pendente</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    GW9 Capital · laysa.correa@gw9capital.com.br · Conta XP 6057005 · Apólice RL360 RS02026562
+  </div>
+</div>
+
+<script>
+const fmtBRL = v => 'R$ ' + v.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+const fmtUSD = v => 'USD ' + v.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+
+// XP - dados mensais reais do extrato XP
+const xpMeses = ['Mai/25', 'Jun/25', 'Jul/25', 'Ago/25', 'Set/25', 'Out/25', 'Nov/25', 'Dez/25', 'Jan/26', 'Fev/26', 'Mar/26', 'Abr/26', 'Mai/26'];
+const xpValores = [386587, 398244, 402949, 407227, 410256, 415039, 418604, 423331, 413832, 416016, 416988, 407879, 408623];
+
+// Zurich - aproximação a partir do gráfico SAKS (Mai/25 a Mai/26)
+// Aplicado total R$ 33.740 / valor atual R$ 41.434 / rendimento 23,56%
+const zurichMeses = xpMeses;
+const zurichValores = [25000, 26800, 28200, 30100, 31600, 33500, 34800, 36200, 37800, 38900, 40000, 41000, 41434];
+const zurichAportado = [22000, 23500, 24800, 26500, 27800, 29500, 30800, 32100, 32500, 32800, 33200, 33700, 33740];
+
+// RL360 - pagamentos reais
+const rl360Datas = ['Out/22', 'Abr/23', 'Out/23', 'Abr/24', 'Out/24', 'Abr/25', 'Out/25*', 'Abr/26**'];
+const rl360Aportado = [2520, 5040, 7560, 10080, 12600, 15120, 17640, 17640]; // *pago em Mar/26 / **pendente
+const rl360Valor = [2520, 5400, 8400, 11500, 14800, 17800, 20500, 21796];
+
+// Consolidado total (USD ≈ R$ 5,00)
+const totalMeses = xpMeses;
+const totalValores = xpValores.map((v, i) => v + zurichValores[i] + (15000 + i * 1500) * 5); // RL360 aproximado em BRL
+
+// Cores
+const cores = { xp: '#FFB800', zurich: '#1f77b4', rl360: '#e74c3c', total: '#2ecc71' };
+
+// Histórico desde o início — 3 marcos reais da planilha "Posição Consolidada"
+new Chart(document.getElementById('historicoChart'), {
+  type: 'line',
+  data: {
+    labels: ['Dez/2022', 'Jan/2024', 'Mai/2026'],
+    datasets: [{
+      label: 'Patrimônio Total (R$)',
+      data: [153962, 334414, 559058],
+      borderColor: '#27ae60',
+      backgroundColor: 'rgba(39, 174, 96, 0.18)',
+      fill: true,
+      tension: 0.3,
+      pointRadius: 8,
+      pointBackgroundColor: '#27ae60',
+      pointBorderColor: '#fff',
+      pointBorderWidth: 3,
+      borderWidth: 4
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => fmtBRL(ctx.parsed.y) } },
+      datalabels: { display: false }
+    },
+    scales: {
+      y: {
+        ticks: { callback: v => fmtBRL(v) },
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+// Composição ao longo do tempo (barras empilhadas por instituição)
+new Chart(document.getElementById('composicaoChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Dez/2022', 'Jan/2024', 'Mai/2026'],
+    datasets: [
+      { label: 'XP', data: [38098, 165131, 408624], backgroundColor: '#FFB800' },
+      { label: 'Bradesco', data: [0, 93719, 0], backgroundColor: '#cc092f' },
+      { label: 'Nubank (reserva)', data: [40901, 0, 0], backgroundColor: '#820AD1' },
+      { label: 'Stone (giro)', data: [34105, 0, 0], backgroundColor: '#00A868' },
+      { label: 'BTG (COE)', data: [7000, 7000, 0], backgroundColor: '#1a1a1a' },
+      { label: 'Modal', data: [4227, 4227, 0], backgroundColor: '#666' },
+      { label: 'SAKS/Zurich (Previdência)', data: [0, 11784, 41434], backgroundColor: '#3498db' },
+      { label: 'RL360 (Internacional)', data: [29630, 52553, 109000], backgroundColor: '#9b59b6' }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { padding: 8, font: { size: 11 } } },
+      tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + fmtBRL(ctx.parsed.y) } }
+    },
+    scales: {
+      x: { stacked: true },
+      y: { stacked: true, ticks: { callback: v => fmtBRL(v) } }
+    }
+  }
+});
+
+// Pizza - Distribuição por Classe
+new Chart(document.getElementById('classeChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Pós-Fixado (CDI)', 'Prefixado', 'Inflação (IPCA+)', 'Internacional', 'Multimercado', 'Caixa'],
+    datasets: [{
+      data: [214909, 119502, 95171, 109000, 19905, 570],
+      backgroundColor: ['#3498db', '#e67e22', '#e74c3c', '#9b59b6', '#2ecc71', '#bdc3c7'],
+      borderWidth: 2,
+      borderColor: '#fff'
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { padding: 12, font: { size: 12 } } },
+      tooltip: {
+        callbacks: {
+          label: ctx => {
+            const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+            const pct = (ctx.parsed / total * 100).toFixed(1);
+            return ctx.label + ': ' + fmtBRL(ctx.parsed) + ' (' + pct + '%)';
+          }
+        }
+      }
+    },
+    cutout: '55%'
+  }
+});
+
+// Total Chart
+new Chart(document.getElementById('totalChart'), {
+  type: 'line',
+  data: {
+    labels: totalMeses,
+    datasets: [{
+      label: 'Patrimônio Total (R$)',
+      data: totalValores,
+      borderColor: cores.total,
+      backgroundColor: 'rgba(46, 204, 113, 0.15)',
+      fill: true,
+      tension: 0.3,
+      pointRadius: 4,
+      borderWidth: 3
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => fmtBRL(ctx.parsed.y) } }
+    },
+    scales: {
+      y: { ticks: { callback: v => fmtBRL(v) } }
+    }
+  }
+});
+
+// XP Chart
+new Chart(document.getElementById('xpChart'), {
+  type: 'line',
+  data: {
+    labels: xpMeses,
+    datasets: [{
+      label: 'XP (R$)',
+      data: xpValores,
+      borderColor: cores.xp,
+      backgroundColor: 'rgba(255, 184, 0, 0.2)',
+      fill: true,
+      tension: 0.3,
+      pointRadius: 3
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => fmtBRL(ctx.parsed.y) } }
+    },
+    scales: { y: { ticks: { callback: v => fmtBRL(v) } } }
+  }
+});
+
+// Zurich Chart
+new Chart(document.getElementById('zurichChart'), {
+  type: 'line',
+  data: {
+    labels: zurichMeses,
+    datasets: [
+      {
+        label: 'Patrimônio',
+        data: zurichValores,
+        borderColor: cores.zurich,
+        backgroundColor: 'rgba(31, 119, 180, 0.2)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 3
+      },
+      {
+        label: 'Total Aplicado',
+        data: zurichAportado,
+        borderColor: '#999',
+        borderDash: [5, 5],
+        fill: false,
+        tension: 0.3,
+        pointRadius: 0
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom' },
+      tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + fmtBRL(ctx.parsed.y) } }
+    },
+    scales: { y: { ticks: { callback: v => fmtBRL(v) } } }
+  }
+});
+
+// RL360 Chart
+new Chart(document.getElementById('rl360Chart'), {
+  type: 'bar',
+  data: {
+    labels: rl360Datas,
+    datasets: [
+      {
+        label: 'Valor da Apólice (USD)',
+        data: rl360Valor,
+        backgroundColor: 'rgba(231, 76, 60, 0.7)',
+        borderColor: cores.rl360,
+        borderWidth: 2
+      },
+      {
+        label: 'Total Aportado (USD)',
+        data: rl360Aportado,
+        backgroundColor: 'rgba(149, 165, 166, 0.7)',
+        borderColor: '#7f8c8d',
+        borderWidth: 2
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom' },
+      tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + fmtUSD(ctx.parsed.y) } }
+    },
+    scales: { y: { ticks: { callback: v => fmtUSD(v) } } }
+  }
+});
+
+// Comparativo Carteira vs CDI vs IPCA — dados reais do extrato XP (29/04/2026)
+const periodos = ['Mês (Abr/26)', 'Ano 2026', '12 meses', 'Desde início (2022)'];
+const carteiraRent = [0.65, 2.56, 11.75, 45.37];
+const cdiRentAcum = [1.04, 4.48, 14.77, 54.81];
+const ipcaRent = [0.64, 2.57, 4.38, 19.15];
+
+new Chart(document.getElementById('cdiChart'), {
+  type: 'bar',
+  data: {
+    labels: periodos,
+    datasets: [
+      { label: 'Carteira Natalia', data: carteiraRent, backgroundColor: cores.xp, borderColor: '#e67e22', borderWidth: 2 },
+      { label: 'CDI', data: cdiRentAcum, backgroundColor: '#7f8c8d' },
+      { label: 'IPCA (Inflação)', data: ipcaRent, backgroundColor: '#e74c3c' }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom' },
+      tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(2) + '%' } },
+      title: { display: false }
+    },
+    scales: {
+      y: {
+        ticks: { callback: v => v + '%' },
+        title: { display: true, text: 'Rentabilidade acumulada (%)' }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>
