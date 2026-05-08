@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sua Jornada — Dra. Marcella Cabral</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0f14;
+  --surface: #141820;
+  --surface2: #1a2030;
+  --accent: #c9a55c;
+  --accent2: #e8c97a;
+  --accent-dim: rgba(201,165,92,0.15);
+  --red: #e85d5d;
+  --red-dim: rgba(232,93,93,0.12);
+  --green: #5dbe8a;
+  --green-dim: rgba(93,190,138,0.12);
+  --blue: #5d8ee8;
+  --blue-dim: rgba(93,142,232,0.12);
+  --text: #e8e4dd;
+  --text2: #9b978f;
+  --text3: #5e5b55;
+  --border: rgba(201,165,92,0.1);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { background:var(--bg); color:var(--text); font-family:var(--font-body); font-weight:400; line-height:1.6; overflow-x:hidden; }
+::selection { background:var(--accent); color:var(--bg); }
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--accent-dim); border-radius:3px; }
+
+/* Hero */
+.hero { min-height:55vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:3rem 2rem 2rem; position:relative; overflow:hidden; }
+.hero::before { content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%; background:radial-gradient(ellipse at 30% 50%, rgba(201,165,92,0.06) 0%, transparent 50%), radial-gradient(ellipse at 70% 30%, rgba(93,142,232,0.04) 0%, transparent 50%); animation: heroGlow 15s ease infinite; }
+@keyframes heroGlow { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-3%,2%)} }
+.hero-label { font-family:var(--font-body); font-weight:500; letter-spacing:4px; text-transform:uppercase; font-size:0.75rem; color:var(--accent); margin-bottom:1.5rem; opacity:0; animation: fadeUp 0.8s 0.3s forwards; }
+.hero h1 { font-family:var(--font-display); font-size:clamp(2rem,5vw,3.4rem); font-weight:700; color:var(--text); line-height:1.15; max-width:850px; opacity:0; animation: fadeUp 0.8s 0.5s forwards; }
+.hero h1 span { color:var(--accent); font-style:italic; }
+.hero-sub { font-size:1rem; color:var(--text2); margin-top:1.25rem; max-width:640px; opacity:0; animation: fadeUp 0.8s 0.7s forwards; }
+.hero-date { margin-top:2rem; font-size:0.75rem; color:var(--text3); letter-spacing:2px; text-transform:uppercase; opacity:0; animation: fadeUp 0.8s 0.9s forwards; }
+@keyframes fadeUp { to{opacity:1;transform:translateY(0)} from{opacity:0;transform:translateY(20px)} }
+
+/* Sections */
+section { padding:3rem 2rem; max-width:1300px; margin:auto; }
+
+/* Cards */
+.grid-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.75rem; transition:all 0.4s ease; display:flex; flex-direction:column; }
+.card:hover { border-color:rgba(201,165,92,0.25); transform:translateY(-2px); }
+.card-sub { font-size:0.85rem; color:var(--text2); margin-top:0.4rem; }
+.card-accent { border-left:3px solid var(--accent); }
+.card-red { border-left:3px solid var(--red); }
+.card-green { border-left:3px solid var(--green); }
+
+.card h3 { font-family:var(--font-display); font-size:1.4rem; font-weight:600; margin-top:0.6rem; margin-bottom:0.4rem; color:var(--text); }
+.card ul { list-style:none; padding:0; margin-top:1rem; }
+.card ul li { padding:0.55rem 0; padding-left:1.4rem; font-size:0.9rem; color:var(--text2); position:relative; line-height:1.55; }
+.card ul li::before { content:'•'; position:absolute; left:0.3rem; top:0.55rem; color:var(--text3); font-weight:700; }
+.card ul li strong { color:var(--text); font-weight:600; }
+.card.card-accent ul li strong { color:var(--accent); }
+.card.card-green ul li::before { color:var(--green); }
+.card.card-accent ul li::before { color:var(--accent); }
+.card.card-red ul li::before { color:var(--red); }
+
+/* Tags */
+.tag { display:inline-block; padding:0.3rem 0.85rem; border-radius:20px; font-size:0.7rem; font-weight:500; letter-spacing:0.5px; text-transform:uppercase; align-self:flex-start; }
+.tag-red { background:var(--red-dim); color:var(--red); }
+.tag-green { background:var(--green-dim); color:var(--green); }
+.tag-accent { background:var(--accent-dim); color:var(--accent); }
+
+/* Quote */
+.quote { background:var(--surface); border-left:3px solid var(--accent); padding:1.4rem 1.75rem; margin:0; font-style:italic; color:var(--text2); border-radius:0 8px 8px 0; font-size:0.92rem; }
+.quote-block { background:linear-gradient(135deg, var(--surface) 0%, rgba(201,165,92,0.05) 100%); border:1px solid rgba(201,165,92,0.2); border-radius:16px; padding:2rem 2.5rem; margin-top:3rem; text-align:center; font-size:1.05rem; color:var(--text); line-height:1.7; }
+.quote-block strong { color:var(--accent); font-style:normal; font-weight:600; }
+
+/* Highlight tag dentro do card 2 */
+.tag-pronto { display:inline-block; background:var(--accent-dim); color:var(--accent); font-size:0.7rem; padding:0.15rem 0.5rem; border-radius:6px; margin-left:0.4rem; font-weight:500; letter-spacing:0.3px; }
+
+/* Footer */
+.footer { text-align:center; padding:3rem 2rem 2rem; color:var(--text3); font-size:0.78rem; border-top:1px solid var(--border); margin-top:3rem; }
+.footer .brand { font-family:var(--font-display); font-size:1.05rem; color:var(--accent); margin-bottom:0.5rem; }
+
+/* Back link */
+.back-link { display:inline-flex; align-items:center; gap:0.5rem; color:var(--text2); text-decoration:none; font-size:0.85rem; margin-top:2rem; padding:0.5rem 1rem; border:1px solid var(--border); border-radius:8px; transition:all 0.3s; }
+.back-link:hover { color:var(--accent); border-color:var(--accent); }
+
+/* Responsive */
+@media(max-width:768px) {
+  section { padding:2rem 1.25rem; }
+  .grid-3 { grid-template-columns:1fr; }
+  .quote-block { padding:1.5rem 1.25rem; font-size:0.95rem; }
+}
+
+/* Reveal */
+.reveal { opacity:0; transform:translateY(30px); transition:all 0.8s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Sua Jornada</div>
+  <h1>De onde você veio · onde está · <span>onde vai chegar</span></h1>
+  <p class="hero-sub">Recapitulação rápida do caminho até aqui — pra você não perder de vista o quanto avançamos.</p>
+  <div class="hero-date">Atualizado em 08 de Maio de 2026</div>
+</div>
+
+<!-- 3 CARDS -->
+<section>
+  <div class="grid-3">
+    <!-- CARD 1 — DE ONDE VEIO -->
+    <div class="card card-red reveal">
+      <span class="tag tag-red">Fev → Abr 2026</span>
+      <h3>De onde você veio</h3>
+      <div class="card-sub">Período de diagnóstico — pré-consultoria empresarial</div>
+      <ul>
+        <li>Déficit mensal de <strong>R$ 12k</strong> coberto com resgates de patrimônio (4 meses no vermelho)</li>
+        <li><strong>3 planilhas duplicadas</strong> (Tirze, Indicados, Injetáveis) com pacientes embolados</li>
+        <li>Amanda recém-contratada, sem rotina nem treinamento estruturado</li>
+        <li><strong>Tirzepatida com markup 8%</strong> na dose 7,5mg — vendida quase no custo</li>
+        <li><strong>Pré-consulta de graça</strong> — pacientes pegavam exame e sumiam</li>
+        <li>Descontos sem critério (R$ 60 a R$ 197 pra mesma dose 2,5mg)</li>
+        <li><strong>PF e PJ misturadas</strong> — cartão pessoal pagando despesa do consultório</li>
+      </ul>
+      <div class="quote" style="margin-top:1.5rem; font-size:0.85rem;">"A empresa já faliu mas continua funcionando" — suas palavras em 30/04</div>
+    </div>
+
+    <!-- CARD 2 — ONDE ESTÁ -->
+    <div class="card card-accent reveal">
+      <span class="tag tag-accent">Últimas 2 semanas</span>
+      <h3>Onde você está</h3>
+      <div class="card-sub">Após decidirmos juntas pela Trilha 1 em 30/04</div>
+      <ul>
+        <li><strong>Trilha 1 contratada</strong> (R$ 2.500/mês × 4 meses) + R$ 1.000 retro pago</li>
+        <li><strong>Papéis definidos</strong> — Kamylla ensina · Amanda executa · Laysa supervisiona</li>
+        <li><strong>Dashboard financeiro privado</strong> — 343 transações classificadas, PF/PJ separadas, déficit real de R$ 46k mapeado</li>
+        <li><strong>18 problemas operacionais mapeados</strong> em 7 frentes <span class="tag-pronto">Apresentando hoje</span></li>
+        <li><strong>Tabela Tirzepatida + Injetáveis</strong> com custos reais (Formédica + Stin Pharma) e markup justo <span class="tag-pronto">Apresentando hoje</span></li>
+        <li><strong>Planos Bronze/Prata/Gold precificados</strong> com custos confirmados (R$ 2.320 / R$ 2.880 / R$ 4.880)</li>
+        <li><strong>Acordo 50/50 com Tiago documentado</strong> (com alerta jurídico do frasco)</li>
+      </ul>
+    </div>
+
+    <!-- CARD 3 — ONDE VAI CHEGAR -->
+    <div class="card card-green reveal">
+      <span class="tag tag-green">Próximos 4 meses · até Ago 2026</span>
+      <h3>Onde você vai chegar</h3>
+      <div class="card-sub">Estado-alvo no fim da Trilha 1</div>
+      <ul>
+        <li><strong>Sistema de gestão SmartClinic implementado</strong> — substitui Doctoralia + estoque manual + termos em Word</li>
+        <li><strong>Tabela oficial de Tirzepatida e injetáveis aplicada</strong> — markup mínimo, política de descontos por categoria de paciente</li>
+        <li><strong>Política de sinal e cancelamento ativa</strong> — sem desmarcação na hora</li>
+        <li><strong>Amanda autônoma operacionalmente</strong> — cadastra, cobra, controla estoque sem depender de você</li>
+        <li><strong>Termos clínicos eletrônicos</strong> com assinatura digital (sem Word manual)</li>
+        <li><strong>PF e PJ rigorosamente separadas</strong> + categorização do dashboard 100% automática</li>
+        <li><strong>Margem positiva mensal sustentável</strong> + retomada do aporte da previdência</li>
+        <li><strong>Seguro DIT regularizado</strong> + Amanda formalizada (CLT/MEI)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quote-block reveal">
+    Os 3 meses anteriores foram diagnóstico — descobrir o problema. As 2 últimas semanas foram decisão. <strong>Os próximos 4 meses são execução.</strong> É aqui que o consultório sai do vermelho.
+  </div>
+
+  <div style="text-align:center;">
+    <a href="index.html" class="back-link">← Voltar aos materiais</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="brand">GW9 Capital</div>
+  <div>Sua Jornada · Dra. Marcella Cabral · Atualizado 08/05/2026</div>
+  <div style="margin-top:0.5rem;">Laysa Corrêa, CFP®</div>
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold:0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
