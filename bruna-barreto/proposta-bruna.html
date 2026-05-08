@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta — Plano Financeiro Bruna & Tadeu</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0f14;
+  --surface: #141820;
+  --surface2: #1a2030;
+  --accent: #c9a55c;
+  --accent2: #e8c97a;
+  --accent-dim: rgba(201,165,92,0.15);
+  --red: #e85d5d;
+  --red-dim: rgba(232,93,93,0.12);
+  --green: #5dbe8a;
+  --green-dim: rgba(93,190,138,0.12);
+  --blue: #5d8ee8;
+  --blue-dim: rgba(93,142,232,0.12);
+  --text: #e8e4dd;
+  --text2: #9b978f;
+  --text3: #5e5b55;
+  --border: rgba(201,165,92,0.1);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { background:var(--bg); color:var(--text); font-family:var(--font-body); font-weight:400; line-height:1.6; overflow-x:hidden; }
+::selection { background:var(--accent); color:var(--bg); }
+
+.hero { min-height:80vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:2rem; position:relative; overflow:hidden; }
+.hero::before { content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%; background:radial-gradient(ellipse at 30% 50%, rgba(201,165,92,0.08) 0%, transparent 50%), radial-gradient(ellipse at 70% 30%, rgba(93,142,232,0.04) 0%, transparent 50%); }
+.hero-label { font-weight:500; letter-spacing:4px; text-transform:uppercase; font-size:0.75rem; color:var(--accent); margin-bottom:2rem; position:relative; }
+.hero h1 { font-family:var(--font-display); font-size:clamp(2.2rem,5.5vw,4rem); font-weight:700; line-height:1.15; max-width:850px; position:relative; }
+.hero h1 span { color:var(--accent); font-style:italic; }
+.hero-sub { font-size:1.05rem; color:var(--text2); margin-top:1.5rem; max-width:640px; position:relative; }
+.hero-date { margin-top:3rem; font-size:0.8rem; color:var(--text3); letter-spacing:2px; text-transform:uppercase; position:relative; }
+
+section { padding:5rem 2rem; max-width:1300px; margin:auto; }
+.section-label { font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:0.75rem; font-weight:500; }
+.section-title { font-family:var(--font-display); font-size:clamp(1.8rem,4vw,2.8rem); font-weight:600; margin-bottom:0.5rem; line-height:1.2; }
+.section-title span { color:var(--accent); font-style:italic; }
+.section-desc { color:var(--text2); font-size:0.95rem; max-width:720px; margin-bottom:3rem; }
+
+.grid-2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1.5rem; }
+.grid-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.75rem; transition:all 0.4s ease; }
+.card:hover { border-color:rgba(201,165,92,0.25); transform:translateY(-2px); }
+.card-icon { font-size:1.6rem; margin-bottom:0.75rem; }
+.card-title { font-family:var(--font-display); font-size:1.1rem; font-weight:600; margin-bottom:0.5rem; }
+.card-desc { font-size:0.9rem; color:var(--text2); line-height:1.6; }
+
+.deliverables { display:flex; flex-direction:column; gap:0.75rem; }
+.deliverable { display:flex; gap:1.25rem; padding:1.25rem 1.5rem; background:var(--surface); border:1px solid var(--border); border-radius:12px; align-items:flex-start; transition:all 0.3s; }
+.deliverable:hover { border-color:rgba(201,165,92,0.3); transform:translateX(4px); }
+.deliverable-num { font-family:var(--font-display); font-size:1.3rem; font-weight:700; color:var(--accent); flex-shrink:0; min-width:2.2rem; line-height:1.4; }
+.deliverable-content h4 { font-family:var(--font-display); font-size:1.05rem; font-weight:600; margin-bottom:0.25rem; }
+.deliverable-content p { font-size:0.88rem; color:var(--text2); }
+.deliverable-tag { display:inline-block; margin-left:0.5rem; padding:0.15rem 0.6rem; background:var(--accent-dim); color:var(--accent); border-radius:8px; font-size:0.65rem; letter-spacing:1px; text-transform:uppercase; vertical-align:middle; }
+
+.timeline { position:relative; padding-left:2.5rem; }
+.timeline::before { content:''; position:absolute; left:0.6rem; top:0.5rem; bottom:0.5rem; width:1px; background:linear-gradient(to bottom, var(--accent), var(--accent-dim), transparent); }
+.timeline-item { position:relative; margin-bottom:2rem; }
+.timeline-item::before { content:''; position:absolute; left:-2.1rem; top:0.5rem; width:11px; height:11px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px rgba(201,165,92,0.5); }
+.timeline-item h4 { font-family:var(--font-display); font-size:1.1rem; margin-bottom:0.35rem; }
+.timeline-item .week { font-size:0.7rem; color:var(--accent); letter-spacing:2px; text-transform:uppercase; margin-bottom:0.5rem; font-weight:500; }
+.timeline-item p { font-size:0.9rem; color:var(--text2); }
+
+.pricing-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(360px,1fr)); gap:2rem; margin-top:2rem; }
+.pricing-card { background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:2.5rem 2rem; position:relative; display:flex; flex-direction:column; transition:all 0.4s; }
+.pricing-card:hover { transform:translateY(-3px); }
+.pricing-card.featured { border:1px solid rgba(201,165,92,0.5); background:linear-gradient(135deg, var(--surface) 0%, rgba(201,165,92,0.06) 100%); }
+.pricing-badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--accent); color:var(--bg); padding:0.35rem 1.2rem; border-radius:20px; font-size:0.7rem; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; }
+.pricing-tier { font-size:0.75rem; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:0.75rem; font-weight:500; }
+.pricing-name { font-family:var(--font-display); font-size:1.5rem; font-weight:600; margin-bottom:0.5rem; }
+.pricing-tagline { font-size:0.92rem; color:var(--text2); margin-bottom:1.5rem; }
+.pricing-row-amount { background:rgba(201,165,92,0.06); border-radius:12px; padding:1.25rem; margin-bottom:1.25rem; }
+.pricing-row-amount .label { font-size:0.7rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text3); margin-bottom:0.4rem; }
+.pricing-row-amount .value { display:flex; align-items:baseline; gap:0.4rem; }
+.pricing-row-amount .currency { font-family:var(--font-display); font-size:1.1rem; color:var(--text2); }
+.pricing-row-amount .number { font-family:var(--font-display); font-size:2.4rem; font-weight:700; color:var(--accent); line-height:1; }
+.pricing-row-amount .period { font-size:0.85rem; color:var(--text2); }
+.pricing-features { list-style:none; padding:1.5rem 0 0; border-top:1px solid var(--border); margin-top:auto; }
+.pricing-features li { padding:0.5rem 0; padding-left:1.75rem; font-size:0.9rem; color:var(--text); position:relative; }
+.pricing-features li::before { content:'✓'; position:absolute; left:0; top:0.5rem; color:var(--green); font-weight:700; }
+
+.compare-wrap { overflow-x:auto; border-radius:16px; border:1px solid var(--border); margin-top:2rem; }
+.compare { width:100%; border-collapse:collapse; min-width:600px; }
+.compare th { padding:1.25rem 1.5rem; text-align:left; font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase; background:var(--surface); border-bottom:1px solid var(--border); font-weight:500; }
+.compare th.bad { color:var(--red); border-left:3px solid var(--red); }
+.compare th.good { color:var(--green); border-left:3px solid var(--green); background:rgba(93,190,138,0.04); }
+.compare td { padding:1.1rem 1.5rem; border-bottom:1px solid rgba(255,255,255,0.03); font-size:0.92rem; vertical-align:top; }
+.compare td:first-child { color:var(--text3); font-size:0.78rem; letter-spacing:1px; text-transform:uppercase; }
+.compare td.featured { background:rgba(93,190,138,0.04); color:var(--text); }
+
+.alert { background:var(--accent-dim); border:1px solid rgba(201,165,92,0.2); border-radius:12px; padding:1.5rem; margin:2.5rem 0; }
+.alert-title { color:var(--accent); font-weight:600; font-size:0.95rem; margin-bottom:0.5rem; font-family:var(--font-display); }
+.alert-body { font-size:0.95rem; color:var(--text); line-height:1.7; }
+.alert-body strong { color:var(--accent); }
+
+.quote { background:var(--surface); border-left:3px solid var(--accent); padding:1.5rem 1.75rem; margin:2rem 0; font-style:italic; color:var(--text); border-radius:0 12px 12px 0; font-size:1.05rem; line-height:1.7; }
+
+.cta-section { background:linear-gradient(135deg, var(--surface) 0%, rgba(201,165,92,0.1) 100%); border:1px solid rgba(201,165,92,0.3); border-radius:24px; padding:3.5rem 2rem; text-align:center; margin-top:3rem; }
+.cta-title { font-family:var(--font-display); font-size:2.2rem; font-weight:600; margin-bottom:1rem; line-height:1.2; }
+.cta-title span { color:var(--accent); font-style:italic; }
+.cta-sub { color:var(--text2); max-width:640px; margin:0 auto 2rem; font-size:1rem; line-height:1.7; }
+
+footer { padding:3rem 2rem; border-top:1px solid var(--border); margin-top:5rem; text-align:center; color:var(--text3); font-size:0.8rem; letter-spacing:2px; text-transform:uppercase; }
+footer .accent { color:var(--accent); }
+
+@media(max-width:720px) {
+  section { padding:3rem 1.25rem; }
+  .pricing-row { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">Proposta de Planejamento Financeiro</div>
+  <h1>Sua nova relação <span>com o dinheiro</span> começa aqui.</h1>
+  <p class="hero-sub">Não é mais uma planilha. Não é mais um app esquecido. É um acompanhamento mensal real, com método e responsabilidade compartilhada — para você sair do ciclo de "ganhar 80, gastar 80" e começar a construir patrimônio.</p>
+  <div class="hero-date">Para Bruna &amp; Tadeu &nbsp;|&nbsp; Maio 2026</div>
+</div>
+
+<!-- O QUE VOCÊ RECEBE -->
+<section>
+  <div class="section-label">O que está incluso</div>
+  <h2 class="section-title">10 entregáveis. <span>Um plano que respira com você.</span></h2>
+  <p class="section-desc">Não cobro por hora. Cobro por transformação. Aqui está exatamente o que vai acontecer no seu mês com a Laysa Corrêa, CFP®.</p>
+
+  <div class="deliverables">
+    <div class="deliverable">
+      <div class="deliverable-num">01</div>
+      <div class="deliverable-content">
+        <h4>Diagnóstico Financeiro 360°<span class="deliverable-tag">Mês 1</span></h4>
+        <p>Análise completa de receitas, despesas (12 faturas analisadas), patrimônio, seguros e objetivos. Você já viu uma amostra hoje.</p>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="deliverable-num">02</div>
+      <div class="deliverable-content">
+        <h4>Dashboard Pessoal Online<span class="deliverable-tag">Mês 1</span></h4>
+        <p>Acesso a um painel exclusivo com entradas, saídas, projeções e alertas em tempo real. Pelo celular, atualizado todo mês.</p>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="deliverable-num">03</div>
+      <div class="deliverable-content">
+        <h4>Plano de Objetivos Quantificado<span class="deliverable-tag">Mês 1</span></h4>
+        <p>Cada sonho com valor, prazo e aporte mensal: viagem Espanha, aniversário Tadeu, apartamento Itaipu, independência financeira aos 60.</p>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="deliverable-num">04</div>
+      <div class="deliverable-content">
+        <h4>Estratégia de Aportes Disciplinada<span class="deliverable-tag">Mensal</span></h4>
+        <p>Consórcio + VGBL + investimentos diretos, distribuídos para que cada mês você invista os R$ 10 mil prometidos — automaticamente.</p>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="deliverable-num">05</div>
+      <div class="deliverable-content">
+        <h4>Duas Reuniões Mensais<span class="deliverable-tag">Mensal</span></h4>
+        <p><strong>Reunião 1 — Categorização (com Kamylla):</strong> revisão dos lançamentos do mês, classificação de cada gasto, alimentação do dashboard.<br><strong>Reunião 2 — Estratégica (comigo):</strong> análise dos resultados, decisões de aporte, ajustes de plano e próximos passos.</p>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="deliverable-num">06</div>
+      <div class="deliverable-content">
+        <h4>Revisão da Carteira de Investimentos<span class="deliverable-tag">Mês 1 + trimestral</span></h4>
+        <p>Hoje seus R$ 190 mil estão em 4 instituições sem estratégia. Vamos consolidar tudo na XP, com tese clara para reserva, médio e longo prazo.</p>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="deliverable-num">07</div>
+      <div class="deliverable-content">
+        <h4>Auditoria dos Seguros<span class="deliverable-tag">Mês 1</span></h4>
+        <p>Suas 5 apólices Prudential somam R$ 2.357/mês. Vou revisar cobertura por cobertura para garantir que não está pagando por proteção redundante.</p>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="deliverable-num">08</div>
+      <div class="deliverable-content">
+        <h4>Portabilidade Previdência<span class="deliverable-tag">Mês 1-2</span></h4>
+        <p>Migração dos R$ 60 mil do Santander para VGBL XP com tabela regressiva. Sem fato gerador, sem custo extra. Economia projetada: 5% de IR.</p>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="deliverable-num">09</div>
+      <div class="deliverable-content">
+        <h4>Grupo de WhatsApp com a Equipe<span class="deliverable-tag">Sempre</span></h4>
+        <p>Grupo exclusivo com você + minha equipe (eu + Kamylla). Direcionamento rápido e pronto: "posso fazer essa compra?", "vale a pena parcelar?", "recebi um bônus, o que faço?". Resposta no mesmo dia útil, sem depender de uma pessoa só.</p>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="deliverable-num">10</div>
+      <div class="deliverable-content">
+        <h4>Relatório Anual de Patrimônio<span class="deliverable-tag">Anual</span></h4>
+        <p>Quanto cresceu, quanto rendeu, quanto faltou. Relatório executivo entregue em dezembro, pronto para mostrar para o Tadeu, para o contador e para você mesma.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE VOCÊ CONQUISTA -->
+<section>
+  <div class="section-label">O resultado que você leva</div>
+  <h2 class="section-title">O que isso muda <span>na sua vida.</span></h2>
+  <p class="section-desc">Não é sobre planilhas. É sobre dormir tranquila, sobre ver a poupança crescer, sobre comprar o apartamento de Itaipu e, principalmente, sobre parar de se sentir culpada cada vez que abre a fatura do cartão.</p>
+
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-icon">🛡️</div>
+      <div class="card-title">Reserva de Emergência Real</div>
+      <p class="card-desc">Hoje você tem R$ 130k. Em 6 meses, R$ 240k (3 meses de despesas). Tranquilidade para qualquer imprevisto.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏠</div>
+      <div class="card-title">Apartamento Itaipu em 10 anos</div>
+      <p class="card-desc">R$ 1,5 milhão à vista, sem ter que financiar. Via consórcio + VGBL, com aporte de R$ 10k/mês.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💎</div>
+      <div class="card-title">Independência aos 60</div>
+      <p class="card-desc">Renda passiva de R$ 30k/mês para você e o Tadeu, sem depender de clínica nem hospital.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📱</div>
+      <div class="card-title">Controle Total no Celular</div>
+      <p class="card-desc">Pra onde foi cada real do mês, em tempo real. Sem precisar abrir 5 aplicativos.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">😌</div>
+      <div class="card-title">Fim da Ansiedade da Fatura</div>
+      <p class="card-desc">Saber, todo dia 1, que a fatura cabe no orçamento. Sem surpresas. Sem aperto.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">👨‍👩‍👧‍👦</div>
+      <div class="card-title">Família Protegida</div>
+      <p class="card-desc">Seguros revisados na medida certa, previdência adequada, sucessão pensada. Os meninos seguros, mesmo no pior cenário.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CRONOGRAMA -->
+<section>
+  <div class="section-label">Os primeiros 30 dias</div>
+  <h2 class="section-title">Como começa <span>a transformação.</span></h2>
+  <p class="section-desc">Implantação intensiva no primeiro mês. Depois, ritmo mensal estável.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="week">Semana 1</div>
+      <h4>Coleta &amp; Diagnóstico Profundo</h4>
+      <p>Entrega de tudo que falta: contracheque, plano de saúde Porto, financiamentos, dados Previdência Santander. Validação completa do diagnóstico já apresentado hoje.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="week">Semana 2</div>
+      <h4>Dashboard no ar + Plano dos Sonhos</h4>
+      <p>Seu dashboard pessoal vai ao ar. Você acessa pelo celular. Apresento o plano detalhado: quanto investir por mês para cada objetivo (apartamento, viagem, aniversário Tadeu, independência).</p>
+    </div>
+    <div class="timeline-item">
+      <div class="week">Semana 3</div>
+      <h4>Migração XP + Consórcio</h4>
+      <p>Abertura da conta XP. Início da portabilidade dos R$ 60k Santander. Apresentação das duas cartas de consórcio R$ 500k. Revisão das apólices Prudential.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="week">Semana 4</div>
+      <h4>Primeiras Reuniões de Acompanhamento</h4>
+      <p>Tudo no ar e funcionando. Primeira reunião de categorização com a Kamylla + primeira reunião estratégica comigo. A partir daqui, esse ritmo se mantém todos os meses, com o grupo de WhatsApp sempre aberto entre uma reunião e outra.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTIMENTO -->
+<section>
+  <div class="section-label">Investimento</div>
+  <h2 class="section-title">O que custa <span>ter um plano.</span></h2>
+  <p class="section-desc">Cobro implantação no primeiro mês (que tem o triplo de trabalho) e mensalidade nos seguintes. Sem fidelidade, sem multa, sem letra miúda.</p>
+
+  <div class="pricing-row">
+    <div class="pricing-card featured">
+      <div class="pricing-badge">Recomendado</div>
+      <div class="pricing-tier">Plano Financeiro</div>
+      <h3 class="pricing-name">Acompanhamento<br>Mensal Completo</h3>
+      <p class="pricing-tagline">Implantação intensiva + revisão mensal contínua. Tudo o que você precisa em um único pacote.</p>
+
+      <div class="pricing-row-amount">
+        <div class="label">Implantação (mês 1, único)</div>
+        <div class="value">
+          <span class="currency">R$</span>
+          <span class="number">2.000</span>
+          <span class="period">único</span>
+        </div>
+      </div>
+
+      <div class="pricing-row-amount">
+        <div class="label">Mensalidade (mês 2 em diante)</div>
+        <div class="value">
+          <span class="currency">R$</span>
+          <span class="number">1.000</span>
+          <span class="period">/mês</span>
+        </div>
+      </div>
+
+      <ul class="pricing-features">
+        <li>10 entregáveis listados acima</li>
+        <li>Duas reuniões mensais (Kamylla + Laysa)</li>
+        <li>Dashboard online sempre atualizado</li>
+        <li>Grupo de WhatsApp com a equipe</li>
+        <li>Auditoria de seguros</li>
+        <li>Migração de carteira para XP sem custo extra</li>
+        <li>Relatório anual de patrimônio</li>
+        <li><strong>Sem fidelidade</strong> — pode cancelar a qualquer momento</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ROI -->
+<section>
+  <div class="section-label">O que custa NÃO ter plano</div>
+  <h2 class="section-title">Você está pagando R$ 12 mil/ano <span>de qualquer jeito.</span></h2>
+  <p class="section-desc">A diferença é que com plano, esse dinheiro vira investimento. Sem plano, vira fatura.</p>
+
+  <div class="compare-wrap">
+    <table class="compare">
+      <thead>
+        <tr>
+          <th>Cenário</th>
+          <th class="bad">Sem plano financeiro</th>
+          <th class="good">Com plano financeiro</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cartão de crédito mensal</td>
+          <td>R$ 33.000</td>
+          <td class="featured">R$ 22.000 (–R$ 11.000)</td>
+        </tr>
+        <tr>
+          <td>Aporte para investimentos</td>
+          <td>R$ 0</td>
+          <td class="featured">R$ 10.528/mês</td>
+        </tr>
+        <tr>
+          <td>Ansiedade no dia 25</td>
+          <td>"Será que cabe?"</td>
+          <td class="featured">"Está tudo no plano"</td>
+        </tr>
+        <tr>
+          <td>Apartamento de Itaipu em 10 anos</td>
+          <td>Adiado para nunca</td>
+          <td class="featured">Pago à vista</td>
+        </tr>
+        <tr>
+          <td>Patrimônio em 5 anos</td>
+          <td>R$ 250.000</td>
+          <td class="featured">R$ 920.000</td>
+        </tr>
+        <tr>
+          <td>Patrimônio em 10 anos</td>
+          <td>R$ 350.000</td>
+          <td class="featured">R$ 2.300.000</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert">
+    <div class="alert-title">⚖️ A matemática que importa</div>
+    <div class="alert-body">
+      <strong>Investimento no plano em 10 anos:</strong> R$ 122.000 (R$ 2.000 implantação + R$ 1.000/mês × 120 meses).<br>
+      <strong>Patrimônio adicional gerado em 10 anos:</strong> R$ 1.950.000.<br>
+      <strong>Retorno sobre o investimento:</strong> 16× o valor pago. <em>E isso é um cálculo conservador.</em>
+    </div>
+  </div>
+</section>
+
+<!-- ANALOGIA + GARANTIA -->
+<section>
+  <div class="section-label">A garantia</div>
+  <h2 class="section-title">Você sabe ir à academia. <span>Mas só vai com personal.</span></h2>
+
+  <div class="quote">
+    "O personal não te ensina nada que você já não saiba. Ele garante que você aparece, faz o exercício certo e não desiste no terceiro mês. R$ 1.000/mês de plano financeiro é exatamente isso. Você sabe controlar dinheiro. Eu garanto que você faz."
+  </div>
+
+  <div class="alert" style="background:var(--green-dim); border-color:rgba(93,190,138,0.3); margin-top:2rem">
+    <div class="alert-title" style="color:var(--green); font-family:var(--font-display)">✓ Garantia 12 meses</div>
+    <div class="alert-body">
+      Se ao final de 12 meses você não tiver economizado ao menos <strong style="color:var(--green)">R$ 12 mil</strong> em custos desnecessários (quase exatamente o valor do plano), <strong>devolvo o ano inteiro pago</strong>. Sem perguntas, sem letra miúda. É o tipo de garantia que só faço porque sei que vai acontecer.
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <div class="cta-section">
+    <div style="font-family:var(--font-display); font-size:1.1rem; color:var(--accent); margin-bottom:0.75rem; letter-spacing:1px">Hoje, ao final desta reunião</div>
+    <h2 class="cta-title">Você ganha 80 mil por mês.<br><span>Quer parar de perder 80 mil?</span></h2>
+    <p class="cta-sub">Começamos amanhã. Você me autoriza no WhatsApp, eu mando o contrato simplificado por e-mail, e na segunda-feira já estou montando seu dashboard com os dados que recebi por WhatsApp em abril.</p>
+
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:2rem">
+      <div style="background:var(--accent); color:var(--bg); padding:1rem 2rem; border-radius:12px; font-weight:600; letter-spacing:1px">VAMOS COMEÇAR</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div><span class="accent">Laysa Corrêa</span> · CFP® · Planejadora Financeira CFP</div>
+  <div style="margin-top:0.5rem; color:var(--text3)">GW9 Capital · Maio 2026</div>
+</footer>
+
+</body>
+</html>
