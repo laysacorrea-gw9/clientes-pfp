@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tabela de Preços — Tirzepatida — Dra. Marcella Cabral</title>
+<title>Tabela de Preços — Tirzepatida + Injetáveis — Dra. Marcella Cabral</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -93,10 +93,19 @@ tr:hover td { background:rgba(201,165,92,0.03); }
 <body>
 
 <div class="hero">
-  <div class="hero-label">Tabela de Preços · Tirzepatida</div>
+  <div class="hero-label">Tabela de Preços · Tirzepatida + Injetáveis</div>
   <h1>Como precificar com <span>margem real</span></h1>
-  <p class="hero-sub">Análise dos custos da farmácia × o que vc cobra hoje + sugestão de tabela oficial baseada em markup justo de mercado.</p>
-  <div class="hero-date">Para Dra. Marcella Cabral · Maio/2026</div>
+  <p class="hero-sub">Análise dos custos das farmácias parceiras × o que vc cobra hoje + sugestão de tabela oficial baseada em markup justo de mercado, contemplando Tirzepatida e injetáveis vitamínicos.</p>
+  <div class="hero-date">Para Dra. Marcella Cabral · Atualizado 08 Maio 2026</div>
+</div>
+
+<div style="max-width:1200px; margin:0 auto; padding:0 2rem;">
+  <div class="alert alert-accent" style="margin-top:0;">
+    <div class="alert-icon">🧮</div>
+    <div>
+      <strong>Calculadora ao vivo:</strong> a versão interativa dessa tabela está em <a href="https://dashboard-marcella.vercel.app/precificacao" style="color:var(--accent); text-decoration:underline;">dashboard-marcella.vercel.app/precificacao</a> — escolhe categoria, monta o pacote do paciente e vê o lucro líquido em tempo real (com repasse Tiago + imposto). Esse documento aqui é a versão estática pra leitura/impressão.
+    </div>
+  </div>
 </div>
 
 <!-- 01. Resumo crítico -->
@@ -319,69 +328,167 @@ tr:hover td { background:rgba(201,165,92,0.03); }
 
 <div class="divider"></div>
 
-<!-- 05. Política de descontos -->
+<!-- 05. Categorias de paciente -->
 <section>
-  <div class="section-label">05 — Política de descontos</div>
-  <h2 class="section-title">Como aplicar descontos com critério</h2>
-  <p class="section-desc">Hoje você dá descontos sem critério (R$ 60 a R$ 197 pra mesma dose). Sugestão: tabela oficial fixa com 4 níveis claros.</p>
+  <div class="section-label">05 — Categorias de paciente</div>
+  <h2 class="section-title">Particular × Indicação Tiago</h2>
+  <p class="section-desc">Apenas <strong>2 categorias</strong> oficiais. Sem cortesia (não dar serviço de graça). Pra desconto pontual, usar o campo "Desconto" na calculadora — ela avisa se o desconto vai gerar prejuízo.</p>
 
   <div class="card">
     <div class="tabela-wrap">
       <table>
         <thead>
           <tr>
-            <th>Categoria do paciente</th>
-            <th class="text-right">Desconto</th>
+            <th>Categoria</th>
             <th class="text-right">Dose 2,5mg</th>
             <th class="text-right">Dose 5mg</th>
             <th class="text-right">Dose 7,5mg</th>
+            <th class="text-right">Lucro pra Marcella</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>Tabela oficial</strong> (Instagram / particular / sem origem)</td>
-            <td class="text-right text-text3">0%</td>
+            <td><strong>Particular</strong><br><span style="font-size:0.8rem; color:var(--text3);">Instagram, indicação geral, paciente direto</span></td>
             <td class="text-right text-accent bold">R$ 120</td>
             <td class="text-right text-accent bold">R$ 240</td>
             <td class="text-right text-accent bold">R$ 360</td>
+            <td class="text-right text-green">100% do lucro</td>
           </tr>
           <tr>
-            <td><strong>Indicação</strong> (programa formal, pacientes ativos)</td>
-            <td class="text-right text-text3">10% off</td>
-            <td class="text-right">R$ 108</td>
-            <td class="text-right">R$ 216</td>
-            <td class="text-right">R$ 324</td>
-          </tr>
-          <tr>
-            <td><strong>Pacientes Dr. Thiago</strong> (parceria existente)</td>
-            <td class="text-right text-text3">20% off</td>
-            <td class="text-right">R$ 96</td>
-            <td class="text-right">R$ 192</td>
-            <td class="text-right">R$ 288</td>
-          </tr>
-          <tr>
-            <td><strong>Família / cortesia</strong> (registro explícito)</td>
-            <td class="text-right text-text3">a definir</td>
-            <td class="text-right text-text3" colspan="3">Caso a caso, registrar como "Cortesia"</td>
+            <td><strong>Indicação Tiago</strong><br><span style="font-size:0.8rem; color:var(--text3);">33% off no preço + split 50/50 do lucro com o Dr. Thiago</span></td>
+            <td class="text-right">R$ 80</td>
+            <td class="text-right">R$ 160</td>
+            <td class="text-right">R$ 240</td>
+            <td class="text-right text-purple">50% do lucro<br><span style="font-size:0.78rem;">(50% repassado ao Tiago)</span></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 
+  <div class="callout">
+    <h3>💡 Como o split com Tiago funciona</h3>
+    <p style="font-size:0.92rem;">Acordo da reunião 30/04: frasco vendido a <strong>R$ 1.020</strong> (3× custo) → <strong>R$ 340 custo</strong> + <strong>R$ 340 Thiago</strong> + <strong>R$ 340 Marcella</strong>. Nas doses individuais, mesma lógica: do lucro (preço − custo), 50% fica com você, 50% repassa ao Tiago. Por isso o preço pra Tiago é menor — pra paciente dele, o markup pleno seria injusto.</p>
+    <p style="font-size:0.92rem; margin-top:0.75rem;"><strong>⚠️ Risco jurídico:</strong> NUNCA entregar frasco em nome de outro paciente (= tráfico). Renegociar entrega só em seringa/pitãozinho.</p>
+  </div>
+
   <div class="alert alert-accent">
     <div class="alert-icon">⚠️</div>
     <div>
-      <strong>Importante:</strong> "Tabela oficial" é o que vai pro Instagram, formulário de primeira consulta, e o que a Amanda fala quando alguém perguntar valor. Os descontos só são aplicados <strong>após você confirmar a categoria do paciente</strong>. Sem critério: sem desconto.
+      <strong>Sem cortesia.</strong> Família, amizade ou caso especial — usa o campo "Desconto" na calculadora. Ela mostra <strong>quanto desconto você pode dar antes de virar prejuízo</strong> e alerta visualmente se você cruzar a linha.
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- 06. Próximos passos -->
+<!-- 06. Planos de acompanhamento -->
 <section>
-  <div class="section-label">06 — Implementação</div>
+  <div class="section-label">06 — Planos de acompanhamento</div>
+  <h2 class="section-title">Desconto progressivo Bronze / Prata / Gold</h2>
+  <p class="section-desc">Quem fecha plano ganha desconto em Tirzepatida e injetáveis. Progressão X / 2X / 4X com X=5%. Margem na dose 7,5mg fica saudável até no Gold (≥58%).</p>
+
+  <div class="card">
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Plano</th>
+            <th class="text-right">Duração</th>
+            <th class="text-right">Preço</th>
+            <th class="text-right">Desc. Tirze</th>
+            <th class="text-right">Desc. Injetáveis</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Bronze</strong></td>
+            <td class="text-right">3 meses</td>
+            <td class="text-right text-accent bold">R$ 2.320</td>
+            <td class="text-right">−5%</td>
+            <td class="text-right">−5%</td>
+          </tr>
+          <tr>
+            <td><strong>Prata</strong></td>
+            <td class="text-right">4 meses</td>
+            <td class="text-right text-accent bold">R$ 2.880</td>
+            <td class="text-right">−10%</td>
+            <td class="text-right">−10%</td>
+          </tr>
+          <tr>
+            <td><strong>Gold</strong></td>
+            <td class="text-right">6 meses</td>
+            <td class="text-right text-accent bold">R$ 4.880</td>
+            <td class="text-right">−20%</td>
+            <td class="text-right">−20%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 07. Injetáveis vitamínicos -->
+<section>
+  <div class="section-label">07 — Injetáveis vitamínicos</div>
+  <h2 class="section-title">Custos Stin Pharma e preço sugerido</h2>
+  <p class="section-desc">Baseado no orçamento Stin Pharma nº 026009 (25/03/2026, mentoria YM Yuri). <strong>Preço sugerido: R$ 80/ampola</strong> aplicada — cobra-se a aplicação, não o custo do componente. Margem fica saudável em todas as combinações (markup 2× a 20× dependendo do mix).</p>
+
+  <div class="card">
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Componente</th>
+            <th class="text-right">Custo / ampola</th>
+            <th class="text-right text-accent">Cobra (sugerido)</th>
+            <th class="text-right">Markup</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Sulfato Magnésio / Zinco</td><td class="text-right text-red">R$ 4,00</td><td class="text-right text-accent bold">R$ 80</td><td class="text-right text-green">19×</td></tr>
+          <tr><td>Vitamina C</td><td class="text-right text-red">R$ 4,90</td><td class="text-right text-accent bold">R$ 80</td><td class="text-right text-green">15×</td></tr>
+          <tr><td>Complexo B (B2/B3/B6/B5)</td><td class="text-right text-red">R$ 3,98</td><td class="text-right text-accent bold">R$ 80</td><td class="text-right text-green">19×</td></tr>
+          <tr><td>Curcumina</td><td class="text-right text-red">R$ 11,50</td><td class="text-right text-accent bold">R$ 80</td><td class="text-right text-green">6×</td></tr>
+          <tr><td>Ácido Alfa Lipoico</td><td class="text-right text-red">R$ 11,90</td><td class="text-right text-accent bold">R$ 80</td><td class="text-right text-green">6×</td></tr>
+          <tr><td>L-Glutathion</td><td class="text-right text-red">R$ 15,80</td><td class="text-right text-accent bold">R$ 80</td><td class="text-right text-green">4×</td></tr>
+          <tr><td>Resveratrol</td><td class="text-right text-red">R$ 15,80</td><td class="text-right text-accent bold">R$ 80</td><td class="text-right text-green">4×</td></tr>
+          <tr><td>Vitamina B12 metilcobalamina</td><td class="text-right text-red">R$ 17,10</td><td class="text-right text-accent bold">R$ 80</td><td class="text-right text-green">3,7×</td></tr>
+          <tr><td>Vitamina D3 100k UI</td><td class="text-right text-red">R$ 17,90</td><td class="text-right text-accent bold">R$ 80</td><td class="text-right text-green">3,5×</td></tr>
+          <tr><td>Recovery Neuronal</td><td class="text-right text-red">R$ 18,90</td><td class="text-right text-accent bold">R$ 80</td><td class="text-right text-green">3,2×</td></tr>
+          <tr><td>Complexo B + Lidocaína</td><td class="text-right text-red">R$ 22,80</td><td class="text-right text-accent bold">R$ 80</td><td class="text-right text-green">2,5×</td></tr>
+          <tr><td>Coenzima Q10 100mg</td><td class="text-right text-red">R$ 25,50</td><td class="text-right text-accent bold">R$ 80</td><td class="text-right text-blue">2,1×</td></tr>
+          <tr><td>Nandrolona Decanoato</td><td class="text-right text-red">R$ 36,50</td><td class="text-right text-accent bold">R$ 80</td><td class="text-right text-blue">1,2×</td></tr>
+          <tr><td>Mistura Premium 5ml</td><td class="text-right text-red">R$ 38,00</td><td class="text-right text-accent bold">R$ 80</td><td class="text-right text-blue">1,1×</td></tr>
+          <tr style="background:rgba(232,93,93,0.05);"><td>VD3+VK2+VA+VE 100k</td><td class="text-right text-red">R$ 69,90</td><td class="text-right text-accent bold">R$ 80</td><td class="text-right text-red">14% ⚠️</td></tr>
+          <tr style="background:rgba(232,93,93,0.08);"><td>KIT LIPEDEMA completo (8 ampolas)</td><td class="text-right text-red bold">R$ 500</td><td class="text-right text-text3" colspan="2"><span class="text-red">cobrar como pacote separado</span> (8 × R$ 80 = R$ 640 markup 28%)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="alert alert-green">
+    <div class="alert-icon">✓</div>
+    <div>
+      <strong>Margem saudável em ~14 dos 16 componentes.</strong> Atenção apenas pros 2 mais caros (VD3+VK2+VA+VE e KIT LIPEDEMA) — esses precisam de preço sob medida ou pacote diferenciado pra não comprimir margem.
+    </div>
+  </div>
+
+  <div class="callout">
+    <h3>💡 Aplicações típicas e markup</h3>
+    <p style="font-size:0.92rem;"><strong>Aplicação básica</strong> (3 vitaminas simples — Vit C + Mg/Zn + Complexo B): custo ~R$ 13, cobra R$ 240 (3 ampolas) → markup 18×. Saudável.</p>
+    <p style="font-size:0.92rem; margin-top:0.5rem;"><strong>Aplicação intermediária</strong> (com B12, D3 ou Q10): custo ~R$ 35-60, cobra R$ 240-320 (3-4 ampolas) → markup 5-9×. Saudável.</p>
+    <p style="font-size:0.92rem; margin-top:0.5rem;"><strong>Aplicação premium</strong> (com KIT LIPEDEMA ou Mistura Premium): custo R$ 70-200, cobrar pacote sob medida pra preservar markup.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 08. Próximos passos -->
+<section>
+  <div class="section-label">08 — Implementação</div>
   <h2 class="section-title">Como sair desse ponto sem afastar paciente</h2>
 
   <div class="card">
@@ -389,8 +496,9 @@ tr:hover td { background:rgba(201,165,92,0.03); }
       <li><strong>Pacientes existentes:</strong> mantém preço atual até o fim do tratamento. Não troca regra no meio.</li>
       <li><strong>Pacientes novos (a partir de hoje):</strong> tabela oficial nova já entra. A Amanda recebe a tabela impressa e usa ela na hora da cobrança.</li>
       <li><strong>Renovação de Tirzepatida:</strong> quando o paciente atual voltar pra dose seguinte, comunica gentil: <em>"Daiana, atualizamos a tabela em maio. Sua próxima dose passa a ser R$ X. Quer manter o protocolo?"</em></li>
-      <li><strong>Pacientes Dr. Thiago:</strong> renegocia com o Thiago a partilha 50/50 com base nos preços novos.</li>
-      <li><strong>Família/cortesia:</strong> separe em planilha à parte. Não confunde com paciente comum.</li>
+      <li><strong>Pacientes Dr. Thiago:</strong> alinhar com ele a tabela nova (Tiago R$ 240 dose 7,5mg, split 50/50 mantido). Sem alteração da regra do split — só do preço base.</li>
+      <li><strong>Injetáveis:</strong> R$ 80/ampola entra como tabela única. Pra desconto pontual, sempre via campo "Desconto" da calculadora.</li>
+      <li><strong>Planos Bronze/Prata/Gold:</strong> Marcella valida texto definitivo dos planos, equipe finaliza até sábado.</li>
     </ol>
   </div>
 
@@ -404,7 +512,7 @@ tr:hover td { background:rgba(201,165,92,0.03); }
 
 <div class="footer">
   <div class="brand">GW9 Capital</div>
-  <div>Tabela de Preços Tirzepatida · Dra. Marcella Cabral · Maio/2026</div>
+  <div>Tabela de Preços Tirzepatida + Injetáveis · Dra. Marcella Cabral · Atualizado 08/05/2026</div>
   <div style="margin-top:0.5rem;">Estruturado por Laysa Corrêa, CFP® com Kamylla — Compliance &amp; Processos</div>
 </div>
 
