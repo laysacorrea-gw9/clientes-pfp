@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tirzepatida — Diagnóstico Completo Junho 2026 — Dra. Marcella Cabral</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0f14;
+  --surface: #141820;
+  --surface2: #1a2030;
+  --accent: #c9a55c;
+  --accent2: #e8c97a;
+  --accent-dim: rgba(201,165,92,0.15);
+  --red: #e85d5d;
+  --red-dim: rgba(232,93,93,0.12);
+  --green: #5dbe8a;
+  --green-dim: rgba(93,190,138,0.12);
+  --blue: #5d8ee8;
+  --blue-dim: rgba(93,142,232,0.12);
+  --purple: #a07de8;
+  --purple-dim: rgba(160,125,232,0.12);
+  --orange: #e8a55d;
+  --orange-dim: rgba(232,165,93,0.12);
+  --text: #e8e4dd;
+  --text2: #9b978f;
+  --text3: #5e5b55;
+  --border: rgba(201,165,92,0.1);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { background:var(--bg); color:var(--text); font-family:var(--font-body); line-height:1.6; }
+::selection { background:var(--accent); color:var(--bg); }
+
+.hero { min-height:55vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:3rem 2rem; position:relative; }
+.hero::before { content:''; position:absolute; inset:-50%; background:radial-gradient(ellipse at 30% 50%, rgba(201,165,92,0.06) 0%, transparent 50%); animation: glow 15s ease infinite; }
+@keyframes glow { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-3%,2%)} }
+.hero-label { font-size:0.75rem; letter-spacing:4px; text-transform:uppercase; color:var(--accent); margin-bottom:1.5rem; opacity:0; animation: fadeUp 0.8s 0.3s forwards; }
+.hero h1 { font-family:var(--font-display); font-size:clamp(2rem,5vw,3.3rem); font-weight:700; max-width:900px; opacity:0; animation: fadeUp 0.8s 0.5s forwards; line-height:1.15; }
+.hero h1 span { color:var(--accent); font-style:italic; }
+.hero-sub { font-size:1.05rem; color:var(--text2); margin-top:1.5rem; max-width:680px; opacity:0; animation: fadeUp 0.8s 0.7s forwards; }
+.hero-date { margin-top:2rem; font-size:0.78rem; color:var(--text3); letter-spacing:2px; text-transform:uppercase; opacity:0; animation: fadeUp 0.8s 0.9s forwards; }
+@keyframes fadeUp { to{opacity:1;transform:translateY(0)} from{opacity:0;transform:translateY(20px)} }
+
+section { padding:3rem 2rem; max-width:1200px; margin:auto; }
+.section-label { font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:0.5rem; font-weight:500; }
+.section-title { font-family:var(--font-display); font-size:clamp(1.6rem,3.5vw,2.4rem); font-weight:600; margin-bottom:0.5rem; }
+.section-desc { color:var(--text2); font-size:0.98rem; max-width:720px; margin-bottom:2rem; }
+
+.card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.75rem; margin-bottom:1.5rem; }
+
+.tabela-wrap { overflow-x:auto; border:1px solid var(--border); border-radius:12px; }
+table { width:100%; border-collapse:collapse; font-size:0.9rem; min-width:560px; }
+th { padding:1rem 1.25rem; text-align:left; font-size:0.7rem; letter-spacing:1.5px; text-transform:uppercase; background:var(--surface); color:var(--text3); border-bottom:1px solid var(--border); font-weight:500; }
+td { padding:0.95rem 1.25rem; border-bottom:1px solid rgba(255,255,255,0.04); }
+tr:hover td { background:rgba(201,165,92,0.03); }
+.text-right { text-align:right; }
+.text-center { text-align:center; }
+.text-red { color:var(--red); }
+.text-green { color:var(--green); }
+.text-accent { color:var(--accent); }
+.text-blue { color:var(--blue); }
+.text-purple { color:var(--purple); }
+.text-orange { color:var(--orange); }
+.text-text2 { color:var(--text2); }
+.bold { font-weight:600; }
+.row-bad { background:rgba(232,93,93,0.05); }
+.row-good { background:rgba(93,190,138,0.05); }
+
+.kpi-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem; margin-bottom:2rem; }
+.kpi { padding:1.5rem 1rem; background:var(--surface); border:1px solid var(--border); border-radius:12px; text-align:center; }
+.kpi-num { font-family:var(--font-display); font-size:1.7rem; font-weight:700; }
+.kpi-label { font-size:0.7rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text2); margin-top:0.4rem; }
+
+.alert { padding:1.5rem; border-radius:12px; margin:1.5rem 0; display:flex; gap:1rem; align-items:flex-start; }
+.alert-red { background:var(--red-dim); border:1px solid rgba(232,93,93,0.3); }
+.alert-green { background:var(--green-dim); border:1px solid rgba(93,190,138,0.3); }
+.alert-accent { background:var(--accent-dim); border:1px solid rgba(201,165,92,0.3); }
+.alert-orange { background:var(--orange-dim); border:1px solid rgba(232,165,93,0.3); }
+.alert-icon { font-size:1.5rem; flex-shrink:0; }
+.alert strong { color:var(--text); }
+
+.divider { height:1px; background:linear-gradient(to right, transparent, var(--border), transparent); margin:3rem auto; max-width:1100px; }
+
+.callout { background:linear-gradient(135deg, var(--surface) 0%, rgba(201,165,92,0.05) 100%); border-left:4px solid var(--accent); padding:1.5rem 1.75rem; border-radius:0 12px 12px 0; margin:1.5rem 0; }
+.callout h3 { font-family:var(--font-display); font-size:1.2rem; margin-bottom:0.5rem; color:var(--accent); }
+
+.footer { text-align:center; padding:4rem 2rem; color:var(--text3); font-size:0.8rem; border-top:1px solid var(--border); margin-top:3rem; }
+.footer .brand { font-family:var(--font-display); font-style:italic; font-size:1.3rem; color:var(--accent); margin-bottom:0.5rem; }
+
+/* Card de história */
+.story { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:2rem; margin-bottom:1.5rem; position:relative; }
+.story-num { position:absolute; top:-15px; left:24px; background:var(--bg); padding:0 1rem; font-family:var(--font-display); font-size:0.85rem; letter-spacing:3px; color:var(--accent); text-transform:uppercase; }
+.story h3 { font-family:var(--font-display); font-size:1.3rem; margin-bottom:0.75rem; }
+.story p { color:var(--text2); margin-bottom:0.6rem; }
+
+/* Fluxo visual da conta */
+.fluxo { display:grid; grid-template-columns:1fr; gap:0.5rem; max-width:600px; margin:1.5rem auto; }
+.fluxo-row { display:flex; justify-content:space-between; align-items:center; padding:0.75rem 1.25rem; background:var(--surface); border:1px solid var(--border); border-radius:8px; font-size:0.95rem; }
+.fluxo-row.in { border-left:3px solid var(--green); }
+.fluxo-row.out { border-left:3px solid var(--red); }
+.fluxo-row.final { border-left:3px solid var(--accent); background:var(--accent-dim); font-weight:600; font-size:1.05rem; }
+.fluxo-row strong { font-family:var(--font-display); font-size:1.1rem; }
+
+/* Comparativo lado-a-lado */
+.compare { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1.5rem 0; }
+@media(max-width:680px) { .compare { grid-template-columns:1fr; } }
+.compare-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:1.5rem; }
+.compare-card h4 { font-family:var(--font-display); font-size:1.1rem; margin-bottom:0.75rem; }
+.compare-card.now { border-top:3px solid var(--red); }
+.compare-card.future { border-top:3px solid var(--green); }
+
+/* Linha do tempo */
+.timeline { position:relative; padding-left:2rem; margin:2rem 0; }
+.timeline::before { content:''; position:absolute; left:0.5rem; top:0; bottom:0; width:2px; background:var(--border); }
+.tl-item { position:relative; margin-bottom:2rem; padding-left:1.5rem; }
+.tl-item::before { content:''; position:absolute; left:-1.5rem; top:0.5rem; width:14px; height:14px; border-radius:50%; background:var(--accent); border:3px solid var(--bg); }
+.tl-item.past::before { background:var(--text3); }
+.tl-item.future::before { background:var(--green); }
+.tl-date { font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:0.4rem; }
+.tl-item h4 { font-family:var(--font-display); font-size:1.15rem; margin-bottom:0.5rem; }
+
+@media(max-width:768px) {
+  section { padding:2rem 1.25rem; }
+  .kpi-row { grid-template-columns:repeat(2,1fr); }
+  .fluxo-row { font-size:0.85rem; padding:0.65rem 1rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">Diagnóstico Tirzepatida · Cenário Atual e Futuro</div>
+  <h1>Marcella, o consultório precisa de <span>uma decisão agora</span></h1>
+  <p class="hero-sub">Um panorama claro de quanto o consultório está deixando pra você hoje, por que o cenário muda nos próximos meses, e qual ajuste de preço mantém a sua estrutura de pé.</p>
+  <div class="hero-date">Junho 2026 · Análise feita com seus dados reais de Abril</div>
+</div>
+
+<!-- 01. A grande descoberta -->
+<section>
+  <div class="section-label">01 — O que descobrimos</div>
+  <h2 class="section-title">Abril sobrou R$ 3.647 pra você</h2>
+  <p class="section-desc">Esse é o resultado real do seu consultório próprio em Abril (Sirio fora — ele é à parte). Foi um mês com Amanda já instalada, ou seja, é o seu mês "novo normal".</p>
+
+  <div class="kpi-row">
+    <div class="kpi" style="border-left:3px solid var(--green);">
+      <div class="kpi-num text-green">R$ 39.812</div>
+      <div class="kpi-label">Entrou no consultório</div>
+    </div>
+    <div class="kpi" style="border-left:3px solid var(--red);">
+      <div class="kpi-num text-red">R$ 36.165</div>
+      <div class="kpi-label">Saiu (custo + Tirze + imposto)</div>
+    </div>
+    <div class="kpi" style="border-left:3px solid var(--accent);">
+      <div class="kpi-num text-accent">R$ 3.647</div>
+      <div class="kpi-label">Sobrou pra você</div>
+    </div>
+    <div class="kpi" style="border-left:3px solid var(--orange);">
+      <div class="kpi-num text-orange">9%</div>
+      <div class="kpi-label">Margem líquida real</div>
+    </div>
+  </div>
+
+  <div class="alert alert-red">
+    <div class="alert-icon">🚨</div>
+    <div>
+      <strong>R$ 3.647 é menos que o salário da Amanda (R$ 2.305) somado a um aluguel.</strong> Ou seja, o seu consultório próprio hoje praticamente <strong>trabalha pra pagar a estrutura</strong>. Quem está bancando a sua vida é o Sirio, não o consultório. Isso precisa mudar — e tem uma matemática clara pra fazer isso.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 02. Para onde foi o dinheiro -->
+<section>
+  <div class="section-label">02 — Para onde foi cada real</div>
+  <h2 class="section-title">A conta de Abril, item por item</h2>
+  <p class="section-desc">Pra você ver com os próprios olhos. Esses números são da sua conta bancária — não estimativa.</p>
+
+  <div class="fluxo">
+    <div class="fluxo-row in"><span>💉 Receita Tirzepatida (33 vendas)</span><strong class="text-green">+ R$ 20.236</strong></div>
+    <div class="fluxo-row in"><span>👨‍⚕️ Receita Pacientes do Tiago (3 vendas)</span><strong class="text-green">+ R$ 3.650</strong></div>
+    <div class="fluxo-row in"><span>🩺 Receita Consultas PJ + Itaú (avulsas)</span><strong class="text-green">+ R$ 14.318</strong></div>
+    <div class="fluxo-row in"><span>👤 Receita Paciente Marcella</span><strong class="text-green">+ R$ 1.608</strong></div>
+    <div class="fluxo-row" style="background:var(--surface2); border-left:3px solid var(--blue);"><span><strong>SUBTOTAL ENTROU</strong></span><strong class="text-blue">R$ 39.812</strong></div>
+
+    <div class="fluxo-row out"><span>💊 Compra de frasco Tirze (estoque)</span><strong class="text-red">− R$ 21.750</strong></div>
+    <div class="fluxo-row out"><span>🏥 Aluguel consultório (CEO Barra + Metropolitano)</span><strong class="text-red">− R$ 4.600</strong></div>
+    <div class="fluxo-row out"><span>📋 Amanda (sua secretária)</span><strong class="text-red">− R$ 2.305</strong></div>
+    <div class="fluxo-row out"><span>📊 Impostos PJ</span><strong class="text-red">− R$ 2.413</strong></div>
+    <div class="fluxo-row out"><span>🧴 Insumos (descarpack, agulhas, álcool)</span><strong class="text-red">− R$ 1.200</strong></div>
+    <div class="fluxo-row out"><span>📦 Outros (boleto parcelado)</span><strong class="text-red">− R$ 1.157</strong></div>
+    <div class="fluxo-row out"><span>📸 Marketing / Rafaela filmagem</span><strong class="text-red">− R$ 797</strong></div>
+    <div class="fluxo-row out"><span>💻 Software (SmartClinic + outros)</span><strong class="text-red">− R$ 617</strong></div>
+    <div class="fluxo-row out"><span>🧾 Contador</span><strong class="text-red">− R$ 600</strong></div>
+    <div class="fluxo-row out"><span>🤝 Parceiros + Seguros</span><strong class="text-red">− R$ 726</strong></div>
+    <div class="fluxo-row" style="background:var(--surface2); border-left:3px solid var(--red);"><span><strong>SUBTOTAL SAIU</strong></span><strong class="text-red">R$ 36.165</strong></div>
+
+    <div class="fluxo-row final"><span>💰 SOBROU LÍQUIDO PRA VOCÊ</span><strong>R$ 3.647</strong></div>
+  </div>
+
+  <div class="callout">
+    <h3>📌 Importante entender</h3>
+    <p style="font-size:0.95rem;">O custo fixo do consultório (aluguel + Amanda + impostos + marketing + insumos + contador + software) soma <strong>R$ 14.415/mês</strong>. Esse valor existe independente de quantos pacientes você atende. Ele só "se paga" quando o seu faturamento for grande o suficiente <strong>e</strong> quando cada atendimento contribuir pra ele.</p>
+    <p style="font-size:0.95rem; margin-top:0.6rem;">Em Abril você fez ~80 atendimentos (Tirze + consultas). Isso significa que <strong>cada atendimento tem que pagar pelo menos R$ 180 só pra cobrir a estrutura</strong> — antes de qualquer lucro pra você.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 03. O problema escondido -->
+<section>
+  <div class="section-label">03 — Onde está o problema</div>
+  <h2 class="section-title">A aplicação Tirze do paciente Tiago dá prejuízo</h2>
+  <p class="section-desc">Lembra que pra paciente do Tiago você cobra R$ 240 a aplicação (vs R$ 360 do Particular, porque dá 33% de desconto)? Quando entra o custo real do consultório, esse R$ 240 não cobre nem a estrutura.</p>
+
+  <div class="compare">
+    <div class="compare-card now">
+      <h4>Aplicação dose 7,5mg — Particular</h4>
+      <div class="fluxo">
+        <div class="fluxo-row in"><span>Paciente paga</span><strong class="text-green">+ R$ 360</strong></div>
+        <div class="fluxo-row out"><span>Custo da dose (1/8 do frasco)</span><strong class="text-red">− R$ 42</strong></div>
+        <div class="fluxo-row out"><span>Imposto (13%)</span><strong class="text-red">− R$ 47</strong></div>
+        <div class="fluxo-row out"><span>Estrutura consultório</span><strong class="text-red">− R$ 180</strong></div>
+        <div class="fluxo-row final"><span>Sobra pra você</span><strong>R$ 90 ✓</strong></div>
+      </div>
+      <p style="margin-top:0.75rem; font-size:0.9rem; color:var(--text2);">Margem 25%. Apertado, mas positivo.</p>
+    </div>
+
+    <div class="compare-card" style="border-top:3px solid var(--red);">
+      <h4>Aplicação dose 7,5mg — <span class="text-red">Paciente Tiago</span></h4>
+      <div class="fluxo">
+        <div class="fluxo-row in"><span>Paciente paga</span><strong class="text-green">+ R$ 240</strong></div>
+        <div class="fluxo-row out"><span>Custo da dose</span><strong class="text-red">− R$ 42</strong></div>
+        <div class="fluxo-row out"><span>Imposto (13%)</span><strong class="text-red">− R$ 31</strong></div>
+        <div class="fluxo-row out"><span>Estrutura consultório</span><strong class="text-red">− R$ 180</strong></div>
+        <div class="fluxo-row final" style="background:var(--red-dim); border-left:3px solid var(--red);"><span>Você PERDE</span><strong class="text-red">− R$ 13</strong></div>
+      </div>
+      <p style="margin-top:0.75rem; font-size:0.9rem; color:var(--text2);">E ainda divide o "lucro" 50/50 com o Tiago. Prejuízo dobrado.</p>
+    </div>
+  </div>
+
+  <div class="alert alert-orange">
+    <div class="alert-icon">💡</div>
+    <div>
+      <strong>Por que isso não aparecia na tabela antiga?</strong> A tabela de 08/05 usou markup 200% sobre o custo do FRASCO (R$ 120 × 3 = R$ 360). Ela considerou só o "frasco × 3", não o aluguel, secretária, impostos, marketing. Por isso parecia justa no papel mas não fechava na prática.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 04. O que muda em breve -->
+<section>
+  <div class="section-label">04 — Por que urgência</div>
+  <h2 class="section-title">O próximo pedido vai custar 47% mais caro</h2>
+  <p class="section-desc">A nota Formédica 276539 (R$ 50.385, recebida em 03/06) foi o ÚLTIMO pedido com o preço antigo do Tiago. Depois dele acabar, o frasco que você comprava por R$ 340 vai pra R$ 500 (em qualquer fornecedor que sobrar).</p>
+
+  <div class="card">
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Fornecedor</th>
+            <th class="text-right">Frasco 20mg</th>
+            <th class="text-right">vs antigo R$ 340</th>
+            <th>Observação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-good">
+            <td><strong>Formédica COM Tiago (até hoje)</strong></td>
+            <td class="text-right text-green bold">R$ 340</td>
+            <td class="text-right text-green">base</td>
+            <td class="text-text2">Acaba quando o estoque de Junho terminar</td>
+          </tr>
+          <tr>
+            <td>Cosmo (alternativo)</td>
+            <td class="text-right">R$ 400</td>
+            <td class="text-right text-orange">+18%</td>
+            <td class="text-text2">A testar qualidade</td>
+          </tr>
+          <tr>
+            <td>Terapêutica (já comprou em 27/05)</td>
+            <td class="text-right">R$ 481</td>
+            <td class="text-right text-orange">+42%</td>
+            <td class="text-text2">Qualidade conhecida</td>
+          </tr>
+          <tr class="row-bad">
+            <td><strong>Formédica SEM Tiago</strong></td>
+            <td class="text-right text-red bold">R$ 550 – 750</td>
+            <td class="text-right text-red">+62% a +121%</td>
+            <td class="text-text2">Depende do volume da compra</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="alert alert-accent">
+    <div class="alert-icon">⏳</div>
+    <div>
+      <strong>Você tem ~1 ano pra se preparar.</strong> O estoque atual de 58 frascos (seu, do pedido 276539) dura ~12 meses no ritmo de hoje. Esse é o tempo que você tem pra subir os preços com calma, conversar com o Tiago, testar o melhor fornecedor e migrar a tabela sem susto.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 05. Linha do tempo -->
+<section>
+  <div class="section-label">05 — O caminho daqui pra frente</div>
+  <h2 class="section-title">Como sair desse ponto sem trauma</h2>
+
+  <div class="timeline">
+    <div class="tl-item past">
+      <div class="tl-date">21 / Maio / 2026</div>
+      <h4>Decisão de sair do acordo com o Tiago</h4>
+      <p style="color:var(--text2); font-size:0.93rem;">Após a ligação tensa dele em 20/05 cobrando o "giro de capital", você concluiu que a paz não vale o estresse. Decisão consolidada.</p>
+    </div>
+
+    <div class="tl-item past">
+      <div class="tl-date">27 / Maio / 2026</div>
+      <h4>Diversificação de fornecedor — Terapêutica</h4>
+      <p style="color:var(--text2); font-size:0.93rem;">Primeira compra fora do esquema Tiago. 15 frascos a R$ 481 cada. Testando alternativas ANTES do estoque Formédica acabar.</p>
+    </div>
+
+    <div class="tl-item past">
+      <div class="tl-date">03 / Junho / 2026</div>
+      <h4>Chegou a NF 276539 — último pedido antigo</h4>
+      <p style="color:var(--text2); font-size:0.93rem;">Você aportou R$ 20k, Tiago aportou R$ 30k. Você ficou com 58 frascos de 20mg, Tiago ficou com 7×20mg + 20×40mg + 15×60mg. <strong>Esse é o último pedido com preço de R$ 340.</strong></p>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Junho / Julho 2026 — AGORA</div>
+      <h4>Reorganização de preço + conversa com o Tiago</h4>
+      <p style="color:var(--text2); font-size:0.93rem;">Você sobe a tabela de aplicação no consultório (corrige o prejuízo da dose Tiago). Conversa com ele explicando que o próximo pedido será mais caro e o split antigo não cabe mais. Negocia uma comissão de indicação.</p>
+    </div>
+
+    <div class="tl-item future">
+      <div class="tl-date">Próximos 2-3 meses</div>
+      <h4>Testar Cosmo, validar Pharma North</h4>
+      <p style="color:var(--text2); font-size:0.93rem;">Você manda amostra da Cosmo pra Laysa testar. Acompanha o Pharma North (que disse "frasco de 20mg só mês que vem"). Decide qual será o novo fornecedor principal.</p>
+    </div>
+
+    <div class="tl-item future">
+      <div class="tl-date">~Maio / 2027 (1 ano)</div>
+      <h4>Estoque atual acaba — tabela nova entra de vez</h4>
+      <p style="color:var(--text2); font-size:0.93rem;">Quando os 58 frascos de R$ 340 acabarem, você já está com fornecedor estável, preço novo (R$ 1.300-1.500/frasco), e o Tiago já entendeu o modelo de comissão. Sem trauma.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 06. Tabela de preços recomendada -->
+<section>
+  <div class="section-label">06 — A nova tabela</div>
+  <h2 class="section-title">Quanto cobrar pra ter saúde financeira</h2>
+  <p class="section-desc">Preços calculados pra cobrir custo do frasco + imposto + estrutura do consultório + lucro líquido de 25-30% (padrão saudável de procedimento médico premium).</p>
+
+  <div class="card">
+    <h3 style="font-family:var(--font-display); font-size:1.2rem; margin-bottom:1rem; color:var(--accent);">🧴 Frasco completo (paciente leva pra casa)</h3>
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Apresentação</th>
+            <th class="text-right">Custo (novo)</th>
+            <th class="text-right">Hoje cobra</th>
+            <th class="text-right text-accent">Recomendado</th>
+            <th class="text-right">Sobra pra você</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>20mg</strong> (4ml × 5mg/ml)</td>
+            <td class="text-right text-red">R$ 500</td>
+            <td class="text-right text-text2">R$ 1.020</td>
+            <td class="text-right text-accent bold">R$ 1.400</td>
+            <td class="text-right text-green bold">R$ 438 (31%)</td>
+          </tr>
+          <tr>
+            <td><strong>40mg</strong> (4ml × 10mg/ml)</td>
+            <td class="text-right text-red">R$ 815</td>
+            <td class="text-right text-text2">R$ 2.010</td>
+            <td class="text-right text-accent bold">R$ 2.600</td>
+            <td class="text-right text-green bold">R$ 822 (32%)</td>
+          </tr>
+          <tr>
+            <td><strong>60mg</strong> (4ml × 15mg/ml)</td>
+            <td class="text-right text-red">R$ 1.050</td>
+            <td class="text-right text-text2">R$ 2.850</td>
+            <td class="text-right text-accent bold">R$ 3.400</td>
+            <td class="text-right text-green bold">R$ 1.090 (32%)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="font-family:var(--font-display); font-size:1.2rem; margin-bottom:1rem; color:var(--accent);">💉 Aplicação no consultório (você aplica)</h3>
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Dose</th>
+            <th class="text-right">Hoje (Particular)</th>
+            <th class="text-right text-accent">Recomendado Particular</th>
+            <th class="text-right text-red">Hoje (Tiago)</th>
+            <th class="text-right text-accent">Recomendado Tiago</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>2,5mg</strong></td>
+            <td class="text-right text-text2">R$ 120</td>
+            <td class="text-right text-accent bold">R$ 280</td>
+            <td class="text-right text-text2">R$ 80</td>
+            <td class="text-right text-accent bold">R$ 280</td>
+          </tr>
+          <tr>
+            <td><strong>5mg</strong></td>
+            <td class="text-right text-text2">R$ 240</td>
+            <td class="text-right text-accent bold">R$ 380</td>
+            <td class="text-right text-text2">R$ 160</td>
+            <td class="text-right text-accent bold">R$ 380</td>
+          </tr>
+          <tr class="row-good">
+            <td><strong>7,5mg</strong> (dose padrão)</td>
+            <td class="text-right text-text2">R$ 360</td>
+            <td class="text-right text-accent bold">R$ 450</td>
+            <td class="text-right text-text2">R$ 240</td>
+            <td class="text-right text-accent bold">R$ 450</td>
+          </tr>
+          <tr>
+            <td><strong>10mg</strong></td>
+            <td class="text-right text-text2">—</td>
+            <td class="text-right text-accent bold">R$ 580</td>
+            <td class="text-right text-text2">—</td>
+            <td class="text-right text-accent bold">R$ 580</td>
+          </tr>
+          <tr>
+            <td><strong>15mg</strong></td>
+            <td class="text-right text-text2">—</td>
+            <td class="text-right text-accent bold">R$ 850</td>
+            <td class="text-right text-text2">—</td>
+            <td class="text-right text-accent bold">R$ 850</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.85rem; color:var(--text2); margin-top:1rem;">⭐ Recomendação: <strong>preço único</strong> de aplicação (Particular = Tiago). O motivo: o custo do consultório é igual em qualquer paciente. O "desconto Tiago" era pra dividir lucro com ele do frasco — não faz sentido replicar no serviço de aplicação. <strong>O Tiago continua sendo remunerado por indicação (R$ 50-100/paciente que indicar)</strong>.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 07. Cenário final -->
+<section>
+  <div class="section-label">07 — O cenário projetado</div>
+  <h2 class="section-title">Quanto vai sobrar pra você depois da mudança</h2>
+  <p class="section-desc">Premissa: mesmo volume atual (80 atendimentos/mês), só com os preços recomendados aplicados.</p>
+
+  <div class="compare">
+    <div class="compare-card now">
+      <h4>HOJE (com Tiago, preços antigos)</h4>
+      <div class="fluxo">
+        <div class="fluxo-row in"><span>Receita consultório</span><strong class="text-green">R$ 39.812</strong></div>
+        <div class="fluxo-row out"><span>Custo Tirze</span><strong class="text-red">− R$ 21.750</strong></div>
+        <div class="fluxo-row out"><span>Estrutura + imposto</span><strong class="text-red">− R$ 14.415</strong></div>
+        <div class="fluxo-row final" style="background:var(--red-dim); border-left:3px solid var(--red);"><span>Sobra</span><strong class="text-red">R$ 3.647</strong></div>
+      </div>
+      <p style="margin-top:0.75rem; font-size:0.92rem; color:var(--text2);">~R$ 44k/ano sobra do consultório próprio.</p>
+    </div>
+
+    <div class="compare-card future">
+      <h4>FUTURO (sem Tiago, tabela nova)</h4>
+      <div class="fluxo">
+        <div class="fluxo-row in"><span>Receita consultório (mesma)</span><strong class="text-green">R$ 56.000</strong></div>
+        <div class="fluxo-row out"><span>Custo Tirze (mais caro)</span><strong class="text-red">− R$ 16.000</strong></div>
+        <div class="fluxo-row out"><span>Estrutura + imposto + comissão Tiago</span><strong class="text-red">− R$ 17.500</strong></div>
+        <div class="fluxo-row final" style="background:var(--green-dim); border-left:3px solid var(--green);"><span>Sobra</span><strong class="text-green">R$ 22.500</strong></div>
+      </div>
+      <p style="margin-top:0.75rem; font-size:0.92rem; color:var(--text2);">~R$ 270k/ano sobra. <strong>6× mais que hoje.</strong></p>
+    </div>
+  </div>
+
+  <div class="alert alert-green">
+    <div class="alert-icon">✨</div>
+    <div>
+      <strong>Você está deixando ~R$ 18.800/mês na mesa hoje.</strong> Isso é dinheiro que existe — só não está chegando até você porque a tabela velha não cobre seu custo real e o split com Tiago consome o que sobra. A boa notícia é que <strong>esse dinheiro não depende de mais pacientes</strong>. Depende só de subir o preço e mudar a relação com o Tiago.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 08. O que decidir agora -->
+<section>
+  <div class="section-label">08 — Decisões pra fechar</div>
+  <h2 class="section-title">3 perguntas, e estamos prontas</h2>
+
+  <div class="card">
+    <ol style="padding-left:1.5rem; line-height:2;">
+      <li><strong>Você concorda em subir o frasco 20mg de R$ 1.020 pra R$ 1.400?</strong><br>
+      <span style="color:var(--text2); font-size:0.9rem;">Sobe 37%. Justifica pelo aumento do fornecedor. Mantém margem 31%.</span></li>
+
+      <li><strong>Você concorda em unificar a aplicação no consultório a R$ 450 (dose 7,5mg)?</strong><br>
+      <span style="color:var(--text2); font-size:0.9rem;">Hoje Particular R$ 360 / Tiago R$ 240. Recomendado: preço único R$ 450 (sobe 25% no Particular, 87% no Tiago). Tiago vira "comissão de indicação" — não tem mais split do serviço.</span></li>
+
+      <li><strong>Quanto pagar pro Tiago de comissão por paciente indicado?</strong><br>
+      <span style="color:var(--text2); font-size:0.9rem;">Recomendação: R$ 100 por paciente que vier por indicação dele e fizer aplicação no consultório. Ele aceita ou não — mas o frasco mantém o split antigo até acabar o estoque.</span></li>
+    </ol>
+  </div>
+
+  <div class="callout">
+    <h3>🎯 Próximo passo</h3>
+    <p style="font-size:0.95rem;">Quando você confirmar essas 3 decisões, montamos o material pra você apresentar pro Tiago (que mostra só o que ele precisa saber sobre o frasco e a comissão — sem expor sua matemática interna). Depois atualizamos a calculadora do dashboard com a tabela nova e a Amanda já passa a cobrar dos pacientes novos.</p>
+  </div>
+</section>
+
+<div class="footer">
+  <div class="brand">GW9 Capital</div>
+  <div>Diagnóstico Tirzepatida · Dra. Marcella Cabral · Junho 2026</div>
+  <div style="margin-top:0.5rem;">Estruturado por Laysa Corrêa, CFP® com Kamylla — Compliance &amp; Processos</div>
+</div>
+
+</body>
+</html>

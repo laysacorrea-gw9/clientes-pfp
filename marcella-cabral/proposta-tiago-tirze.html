@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tirzepatida — Atualização do Modelo de Parceria — Dr. Thiago + Dra. Marcella</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0f14;
+  --surface: #141820;
+  --surface2: #1a2030;
+  --accent: #c9a55c;
+  --accent2: #e8c97a;
+  --accent-dim: rgba(201,165,92,0.15);
+  --red: #e85d5d;
+  --red-dim: rgba(232,93,93,0.12);
+  --green: #5dbe8a;
+  --green-dim: rgba(93,190,138,0.12);
+  --blue: #5d8ee8;
+  --blue-dim: rgba(93,142,232,0.12);
+  --orange: #e8a55d;
+  --orange-dim: rgba(232,165,93,0.12);
+  --text: #e8e4dd;
+  --text2: #9b978f;
+  --text3: #5e5b55;
+  --border: rgba(201,165,92,0.1);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { background:var(--bg); color:var(--text); font-family:var(--font-body); line-height:1.65; }
+::selection { background:var(--accent); color:var(--bg); }
+
+.hero { min-height:55vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:3rem 2rem; position:relative; }
+.hero::before { content:''; position:absolute; inset:-50%; background:radial-gradient(ellipse at 30% 50%, rgba(201,165,92,0.06) 0%, transparent 50%); animation: glow 15s ease infinite; }
+@keyframes glow { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-3%,2%)} }
+.hero-label { font-size:0.75rem; letter-spacing:4px; text-transform:uppercase; color:var(--accent); margin-bottom:1.5rem; opacity:0; animation: fadeUp 0.8s 0.3s forwards; }
+.hero h1 { font-family:var(--font-display); font-size:clamp(2rem,4.8vw,3.2rem); font-weight:700; max-width:900px; opacity:0; animation: fadeUp 0.8s 0.5s forwards; line-height:1.2; }
+.hero h1 span { color:var(--accent); font-style:italic; }
+.hero-sub { font-size:1.05rem; color:var(--text2); margin-top:1.5rem; max-width:680px; opacity:0; animation: fadeUp 0.8s 0.7s forwards; }
+.hero-date { margin-top:2rem; font-size:0.78rem; color:var(--text3); letter-spacing:2px; text-transform:uppercase; opacity:0; animation: fadeUp 0.8s 0.9s forwards; }
+@keyframes fadeUp { to{opacity:1;transform:translateY(0)} from{opacity:0;transform:translateY(20px)} }
+
+section { padding:3rem 2rem; max-width:1100px; margin:auto; }
+.section-label { font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:0.5rem; font-weight:500; }
+.section-title { font-family:var(--font-display); font-size:clamp(1.6rem,3.5vw,2.3rem); font-weight:600; margin-bottom:0.5rem; }
+.section-desc { color:var(--text2); font-size:0.98rem; max-width:720px; margin-bottom:2rem; }
+
+.card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.75rem; margin-bottom:1.5rem; }
+
+.tabela-wrap { overflow-x:auto; border:1px solid var(--border); border-radius:12px; }
+table { width:100%; border-collapse:collapse; font-size:0.92rem; min-width:520px; }
+th { padding:1rem 1.25rem; text-align:left; font-size:0.7rem; letter-spacing:1.5px; text-transform:uppercase; background:var(--surface); color:var(--text3); border-bottom:1px solid var(--border); font-weight:500; }
+td { padding:0.95rem 1.25rem; border-bottom:1px solid rgba(255,255,255,0.04); }
+tr:hover td { background:rgba(201,165,92,0.03); }
+.text-right { text-align:right; }
+.text-center { text-align:center; }
+.text-red { color:var(--red); }
+.text-green { color:var(--green); }
+.text-accent { color:var(--accent); }
+.text-blue { color:var(--blue); }
+.text-orange { color:var(--orange); }
+.text-text2 { color:var(--text2); }
+.bold { font-weight:600; }
+.row-old { background:rgba(232,165,93,0.05); }
+.row-new { background:rgba(93,190,138,0.05); }
+
+.alert { padding:1.5rem; border-radius:12px; margin:1.5rem 0; display:flex; gap:1rem; align-items:flex-start; }
+.alert-accent { background:var(--accent-dim); border:1px solid rgba(201,165,92,0.3); }
+.alert-green { background:var(--green-dim); border:1px solid rgba(93,190,138,0.3); }
+.alert-orange { background:var(--orange-dim); border:1px solid rgba(232,165,93,0.3); }
+.alert-icon { font-size:1.5rem; flex-shrink:0; }
+.alert strong { color:var(--text); }
+
+.divider { height:1px; background:linear-gradient(to right, transparent, var(--border), transparent); margin:3rem auto; max-width:1000px; }
+
+.callout { background:linear-gradient(135deg, var(--surface) 0%, rgba(201,165,92,0.05) 100%); border-left:4px solid var(--accent); padding:1.5rem 1.75rem; border-radius:0 12px 12px 0; margin:1.5rem 0; }
+.callout h3 { font-family:var(--font-display); font-size:1.2rem; margin-bottom:0.5rem; color:var(--accent); }
+
+.footer { text-align:center; padding:4rem 2rem; color:var(--text3); font-size:0.8rem; border-top:1px solid var(--border); margin-top:3rem; }
+.footer .brand { font-family:var(--font-display); font-style:italic; font-size:1.3rem; color:var(--accent); margin-bottom:0.5rem; }
+
+/* Card de fase */
+.fase { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:2rem; margin-bottom:1.5rem; position:relative; }
+.fase-label { position:absolute; top:-13px; left:24px; background:var(--accent); color:var(--bg); padding:0.35rem 1rem; font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; border-radius:20px; font-weight:600; }
+.fase.f1 { border-top:4px solid var(--orange); }
+.fase.f2 { border-top:4px solid var(--green); }
+.fase h3 { font-family:var(--font-display); font-size:1.4rem; margin-bottom:0.5rem; margin-top:0.5rem; }
+.fase .periodo { font-size:0.85rem; color:var(--text2); margin-bottom:1rem; letter-spacing:1px; text-transform:uppercase; }
+
+/* Quote */
+.quote { background:var(--surface); border-left:4px solid var(--accent); padding:1.5rem 2rem; margin:2rem 0; font-style:italic; font-family:var(--font-display); font-size:1.1rem; color:var(--text); border-radius:0 12px 12px 0; }
+.quote::before { content:'"'; color:var(--accent); font-size:3rem; line-height:0; vertical-align:-1rem; margin-right:0.5rem; font-family:Georgia, serif; }
+
+@media(max-width:768px) {
+  section { padding:2rem 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">Parceria Tirzepatida · Atualização do Modelo</div>
+  <h1>Tiago, precisamos <span>conversar sobre o próximo pedido</span></h1>
+  <p class="hero-sub">O mercado de Tirzepatida mudou nas últimas semanas. Quero te apresentar de forma clara o que vou ter que ajustar daqui pra frente, mantendo o respeito pelo que construímos juntos.</p>
+  <div class="hero-date">Junho 2026 · Dra. Marcella Cabral</div>
+</div>
+
+<!-- 01. Contexto -->
+<section>
+  <div class="section-label">01 — O que aconteceu no mercado</div>
+  <h2 class="section-title">O preço do frasco subiu — em todos os fornecedores</h2>
+  <p class="section-desc">Nas últimas semanas fiz orçamento com 4 fornecedores diferentes pra entender o cenário pós-pedido 276539. A realidade é a mesma em todos: o frasco que comprávamos por R$ 340 com o seu volume não existe mais nesse preço pra mim sozinha.</p>
+
+  <div class="card">
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Fornecedor</th>
+            <th class="text-right">Frasco 20mg</th>
+            <th class="text-right">Variação</th>
+            <th>Disponibilidade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-old">
+            <td><strong>Formédica + volume Tiago</strong></td>
+            <td class="text-right text-accent bold">R$ 340</td>
+            <td class="text-right text-text2">base atual</td>
+            <td class="text-text2">Acaba quando o estoque do pedido 276539 terminar</td>
+          </tr>
+          <tr>
+            <td>Cosmo</td>
+            <td class="text-right">R$ 400</td>
+            <td class="text-right text-orange">+18%</td>
+            <td class="text-text2">Testando qualidade</td>
+          </tr>
+          <tr>
+            <td>Terapêutica</td>
+            <td class="text-right">R$ 481</td>
+            <td class="text-right text-orange">+42%</td>
+            <td class="text-text2">Comprovado em compra recente</td>
+          </tr>
+          <tr>
+            <td><strong>Formédica sem o volume Tiago</strong></td>
+            <td class="text-right text-red bold">R$ 550 – 750</td>
+            <td class="text-right text-red">+62% a +121%</td>
+            <td class="text-text2">Depende do volume da minha compra</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="alert alert-accent">
+    <div class="alert-icon">📌</div>
+    <div>
+      <strong>O preço de R$ 340 só era viável com o seu poder de compra.</strong> Sem o volume da sua operação, qualquer fornecedor cobra de mim entre R$ 400 e R$ 750 pelo mesmo frasco. Essa é a realidade que vou enfrentar quando o estoque do pedido 276539 acabar.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 02. Reconhecimento -->
+<section>
+  <div class="section-label">02 — Sobre o nosso modelo até hoje</div>
+  <h2 class="section-title">O que sempre funcionou bem entre nós</h2>
+
+  <div class="card">
+    <p style="margin-bottom:1rem;">Quando começamos, o modelo era simples e justo: você bancava o capital do frasco (R$ 340 do seu bolso), eu fazia a aplicação no meu consultório, e dividíamos os R$ 1.020 cobrados do paciente em três partes iguais:</p>
+
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Quem aportava</th>
+            <th>O que aportava</th>
+            <th class="text-right">Recebia do paciente</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Você</strong></td>
+            <td>R$ 340 (custo do frasco) + indicação do paciente</td>
+            <td class="text-right text-accent bold">R$ 340 + R$ 340 = R$ 680</td>
+          </tr>
+          <tr>
+            <td><strong>Eu</strong></td>
+            <td>Consulta + aplicação + estrutura do consultório</td>
+            <td class="text-right text-accent bold">R$ 340</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top:1.25rem;">Esse modelo funcionou bem porque <strong>os dois aportavam algo proporcional</strong>: você capital, eu serviço. E ambos saímos ganhando.</p>
+  </div>
+
+  <div class="alert alert-orange">
+    <div class="alert-icon">⚠️</div>
+    <div>
+      <strong>O que mudou — e por isso preciso ajustar.</strong> Com o aumento do fornecedor, o custo do frasco vai pra R$ 500-550 quando eu comprar sozinha. Manter os mesmos R$ 340 fixos pra cada um do split antigo não fecha mais a conta. Precisamos repensar a relação pra que continue justa pros dois.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 03. Proposta -->
+<section>
+  <div class="section-label">03 — A minha proposta</div>
+  <h2 class="section-title">Dois momentos, dois modelos</h2>
+  <p class="section-desc">A transição vai ser gradual. O estoque atual de Junho dura aproximadamente 1 ano, então temos tempo. Quero dividir em duas fases bem claras:</p>
+
+  <!-- FASE 1 -->
+  <div class="fase f1">
+    <div class="fase-label">Fase 1 — agora até ~Maio/2027</div>
+    <h3>Estoque do pedido 276539 — modelo antigo se mantém</h3>
+    <div class="periodo">Período: ~12 meses · Enquanto durar o estoque que já compramos</div>
+
+    <p style="margin-bottom:1rem;">Os 42 frascos que você adquiriu nesse pedido (7×20mg + 20×40mg + 15×60mg) continuam sendo <strong>seus</strong>. Quando um paciente seu vier aplicar, eu uso o seu estoque e mantenho exatamente o split que sempre fizemos:</p>
+
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th class="text-right">Você</th>
+            <th class="text-right">Eu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-old">
+            <td>Por frasco vendido a R$ 1.020</td>
+            <td class="text-right text-accent bold">R$ 680<br><span style="font-size:0.8rem; color:var(--text2); font-weight:400;">(R$ 340 custo + R$ 340 lucro)</span></td>
+            <td class="text-right">R$ 340</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top:1rem; font-size:0.95rem;"><strong>Nada muda nessa fase.</strong> Você continua recebendo exatamente como antes. Eu continuo aplicando. Quem aportou capital, ganha capital.</p>
+  </div>
+
+  <!-- FASE 2 -->
+  <div class="fase f2">
+    <div class="fase-label">Fase 2 — quando o estoque acabar</div>
+    <h3>Novo pedido com fornecedor mais caro — modelo de indicação</h3>
+    <div class="periodo">Período: a partir de ~Maio/2027 · Após o estoque atual</div>
+
+    <p style="margin-bottom:1rem;">Quando eu precisar comprar o próximo lote sozinha (custo R$ 500-550 por frasco), o modelo do split em três partes iguais não cabe mais — porque você não estará aportando o capital do frasco. Mas eu quero manter você na operação como <strong>parceiro de indicação</strong>:</p>
+
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th class="text-right">Você</th>
+            <th class="text-right">Eu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-new">
+            <td>Por frasco vendido (novo preço R$ 1.400)</td>
+            <td class="text-right text-green bold">R$ 100<br><span style="font-size:0.8rem; color:var(--text2); font-weight:400;">comissão de indicação</span></td>
+            <td class="text-right">R$ 1.300<br><span style="font-size:0.8rem; color:var(--text2);">(R$ 500 custo + R$ 800 lucro/estrutura)</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top:1rem; font-size:0.95rem;">Você indica o paciente. Eu compro o frasco, atendo, aplico, faço o seguimento. Você recebe <strong>R$ 100 por cada paciente que vier por você</strong> — sem aportar nada, sem se preocupar com estoque, sem giro de capital.</p>
+
+    <div class="alert alert-green" style="margin-top:1rem;">
+      <div class="alert-icon">✓</div>
+      <div>
+        <strong>Por que esse valor.</strong> R$ 100 por paciente é uma comissão de indicação de ~7% sobre o preço de venda. É um valor justo de mercado pra quem indica sem aportar capital nem operar. Em medicina particular, comissões de indicação variam entre 5% e 15% — escolhi um valor central que reconhece sua importância na captação.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 04. O que isso significa pra você -->
+<section>
+  <div class="section-label">04 — O que muda na prática pra você</div>
+  <h2 class="section-title">Mais previsibilidade, menos giro de capital</h2>
+
+  <div class="card">
+    <p>Você levantou em Maio (na nossa última conversa) que o giro de capital de R$ 60k te incomodava. Esse novo modelo resolve isso:</p>
+
+    <ul style="margin-top:1.25rem; padding-left:1.5rem; line-height:2.2;">
+      <li>📦 <strong>Você não compra mais frasco</strong> — eu cuido do estoque sozinha. Sem desembolso, sem giro.</li>
+      <li>💰 <strong>Sem capital travado</strong> — todo o dinheiro do frasco vira meu risco (e da minha operação). Você não imobiliza nada.</li>
+      <li>🎯 <strong>Recebimento limpo</strong> — R$ 100 por paciente indicado, pagamento direto, sem cálculo de divisão.</li>
+      <li>🧠 <strong>Você foca no que faz bem</strong> — capta paciente, indica. Eu cuido do resto.</li>
+      <li>🤝 <strong>A parceria continua</strong> — só muda o formato, não o vínculo.</li>
+    </ul>
+  </div>
+
+  <div class="callout">
+    <h3>🔄 E os pacientes que você já tem em tratamento?</h3>
+    <p style="font-size:0.95rem;">Quem está no meio do tratamento atual continua no preço/modelo antigo. Não vou trocar regra com paciente em curso — não é bom pra você nem pra mim. A tabela nova entra só pra pacientes novos que iniciarem após esgotarmos o estoque do pedido 276539.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 05. Resumo -->
+<section>
+  <div class="section-label">05 — Resumo da proposta</div>
+  <h2 class="section-title">O que pediria que você considerasse</h2>
+
+  <div class="card">
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Tópico</th>
+            <th>Hoje (Fase 1)</th>
+            <th>Depois (Fase 2)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Quem compra o frasco</strong></td>
+            <td class="text-text2">Você (com o seu volume)</td>
+            <td>Eu (sozinha, fornecedor novo)</td>
+          </tr>
+          <tr>
+            <td><strong>Custo do frasco</strong></td>
+            <td class="text-text2">R$ 340</td>
+            <td>R$ 500-550</td>
+          </tr>
+          <tr>
+            <td><strong>Preço ao paciente (frasco)</strong></td>
+            <td class="text-text2">R$ 1.020</td>
+            <td>R$ 1.400</td>
+          </tr>
+          <tr>
+            <td><strong>Você recebe por frasco</strong></td>
+            <td class="text-accent bold">R$ 680</td>
+            <td class="text-green bold">R$ 100 (comissão)</td>
+          </tr>
+          <tr>
+            <td><strong>Seu capital aportado</strong></td>
+            <td class="text-text2">R$ 340/frasco</td>
+            <td class="text-green">R$ 0</td>
+          </tr>
+          <tr>
+            <td><strong>Seu risco</strong></td>
+            <td class="text-text2">Capital travado em estoque</td>
+            <td class="text-green">Zero</td>
+          </tr>
+          <tr>
+            <td><strong>Início</strong></td>
+            <td class="text-text2">Já vigente</td>
+            <td>Quando o estoque atual acabar (~Maio/2027)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="quote">
+    Tiago, a nossa parceria nunca foi só sobre o frasco. Foi sobre confiança, sobre você ter visto valor no meu trabalho e me trazer paciente, sobre eu ter visto valor no seu paciente e cuidado dele com o mesmo carinho que cuido dos meus. Quero manter isso. Esse novo modelo é só uma forma de continuarmos sem que o aumento do mercado coloque qualquer um de nós na posição difícil em que você esteve em Maio.
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 06. Próximos passos -->
+<section>
+  <div class="section-label">06 — Próximos passos</div>
+  <h2 class="section-title">Como seguir daqui</h2>
+
+  <div class="card">
+    <ol style="padding-left:1.5rem; line-height:2.2;">
+      <li>Você lê esse material com calma.</li>
+      <li>Se tiver dúvida ou contraproposta, conversamos — sem pressa.</li>
+      <li>Quando alinharmos, formalizamos em um documento simples (mais ou menos um termo de parceria com a comissão de indicação).</li>
+      <li>Fase 1 segue como está. Fase 2 entra automaticamente quando o estoque acabar.</li>
+    </ol>
+  </div>
+
+  <div class="alert alert-accent">
+    <div class="alert-icon">💬</div>
+    <div>
+      <strong>Estou aberta pra ajustar.</strong> Esse documento é uma proposta, não uma decisão unilateral. Se você acha que a comissão deveria ser diferente, ou tem outra forma de continuar parceiro, vamos sentar e conversar. O que não dá é manter o R$ 340 fixo de antes — porque o mercado não permite mais isso pra mim sozinha.
+    </div>
+  </div>
+</section>
+
+<div class="footer">
+  <div class="brand">Dra. Marcella Cabral</div>
+  <div>Proposta de Atualização da Parceria · Junho 2026</div>
+  <div style="margin-top:0.5rem;">Documento preparado pra discussão com Dr. Thiago</div>
+</div>
+
+</body>
+</html>
