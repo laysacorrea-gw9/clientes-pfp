@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tirzepatida — Atualização do Modelo de Parceria — Dr. Thiago + Dra. Marcella</title>
+<title>Tirzepatida — Conversa sobre o próximo capítulo da nossa parceria — Dr. Thiago + Dra. Marcella</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -82,7 +82,6 @@ tr:hover td { background:rgba(201,165,92,0.03); }
 .footer { text-align:center; padding:4rem 2rem; color:var(--text3); font-size:0.8rem; border-top:1px solid var(--border); margin-top:3rem; }
 .footer .brand { font-family:var(--font-display); font-style:italic; font-size:1.3rem; color:var(--accent); margin-bottom:0.5rem; }
 
-/* Card de fase */
 .fase { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:2rem; margin-bottom:1.5rem; position:relative; }
 .fase-label { position:absolute; top:-13px; left:24px; background:var(--accent); color:var(--bg); padding:0.35rem 1rem; font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; border-radius:20px; font-weight:600; }
 .fase.f1 { border-top:4px solid var(--orange); }
@@ -90,9 +89,13 @@ tr:hover td { background:rgba(201,165,92,0.03); }
 .fase h3 { font-family:var(--font-display); font-size:1.4rem; margin-bottom:0.5rem; margin-top:0.5rem; }
 .fase .periodo { font-size:0.85rem; color:var(--text2); margin-bottom:1rem; letter-spacing:1px; text-transform:uppercase; }
 
-/* Quote */
 .quote { background:var(--surface); border-left:4px solid var(--accent); padding:1.5rem 2rem; margin:2rem 0; font-style:italic; font-family:var(--font-display); font-size:1.1rem; color:var(--text); border-radius:0 12px 12px 0; }
 .quote::before { content:'"'; color:var(--accent); font-size:3rem; line-height:0; vertical-align:-1rem; margin-right:0.5rem; font-family:Georgia, serif; }
+
+.exemplo-card { background:linear-gradient(135deg, var(--surface) 0%, rgba(93,190,138,0.03) 100%); border:1px solid rgba(93,190,138,0.2); border-radius:14px; padding:1.5rem; margin:1.5rem 0; }
+.exemplo-card h4 { font-family:var(--font-display); font-size:1.1rem; margin-bottom:1rem; color:var(--green); }
+.exemplo-row { display:flex; justify-content:space-between; align-items:center; padding:0.6rem 0; border-bottom:1px solid rgba(255,255,255,0.04); }
+.exemplo-row:last-child { border-bottom:none; padding-top:0.8rem; margin-top:0.3rem; border-top:1px solid var(--border); font-weight:600; font-size:1.05rem; }
 
 @media(max-width:768px) {
   section { padding:2rem 1.25rem; }
@@ -102,13 +105,13 @@ tr:hover td { background:rgba(201,165,92,0.03); }
 <body>
 
 <div class="hero">
-  <div class="hero-label">Parceria Tirzepatida · Atualização do Modelo</div>
-  <h1>Tiago, precisamos <span>conversar sobre o próximo pedido</span></h1>
-  <p class="hero-sub">O mercado de Tirzepatida mudou nas últimas semanas. Quero te apresentar de forma clara o que vou ter que ajustar daqui pra frente, mantendo o respeito pelo que construímos juntos.</p>
+  <div class="hero-label">Parceria Tirzepatida · Próximos Passos</div>
+  <h1>Tiago, vamos conversar <span>de igual pra igual</span> sobre como seguir</h1>
+  <p class="hero-sub">O mercado de Tirzepatida mudou nas últimas semanas e isso me obriga a repensar como vou operar daqui pra frente. Quero te apresentar de forma clara e respeitosa o que precisa ajustar — preservando tudo de bom que construímos juntos.</p>
   <div class="hero-date">Junho 2026 · Dra. Marcella Cabral</div>
 </div>
 
-<!-- 01. Contexto -->
+<!-- 01. O contexto -->
 <section>
   <div class="section-label">01 — O que aconteceu no mercado</div>
   <h2 class="section-title">O preço do frasco subiu — em todos os fornecedores</h2>
@@ -122,7 +125,7 @@ tr:hover td { background:rgba(201,165,92,0.03); }
             <th>Fornecedor</th>
             <th class="text-right">Frasco 20mg</th>
             <th class="text-right">Variação</th>
-            <th>Disponibilidade</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -130,10 +133,10 @@ tr:hover td { background:rgba(201,165,92,0.03); }
             <td><strong>Formédica + volume Tiago</strong></td>
             <td class="text-right text-accent bold">R$ 340</td>
             <td class="text-right text-text2">base atual</td>
-            <td class="text-text2">Acaba quando o estoque do pedido 276539 terminar</td>
+            <td class="text-text2">Acaba quando o estoque do 276539 terminar</td>
           </tr>
           <tr>
-            <td>Cosmo</td>
+            <td>Cosmo (alternativo)</td>
             <td class="text-right">R$ 400</td>
             <td class="text-right text-orange">+18%</td>
             <td class="text-text2">Testando qualidade</td>
@@ -145,7 +148,7 @@ tr:hover td { background:rgba(201,165,92,0.03); }
             <td class="text-text2">Comprovado em compra recente</td>
           </tr>
           <tr>
-            <td><strong>Formédica sem o volume Tiago</strong></td>
+            <td><strong>Formédica sozinha</strong></td>
             <td class="text-right text-red bold">R$ 550 – 750</td>
             <td class="text-right text-red">+62% a +121%</td>
             <td class="text-text2">Depende do volume da minha compra</td>
@@ -165,10 +168,10 @@ tr:hover td { background:rgba(201,165,92,0.03); }
 
 <div class="divider"></div>
 
-<!-- 02. Reconhecimento -->
+<!-- 02. Sobre o modelo antigo -->
 <section>
-  <div class="section-label">02 — Sobre o nosso modelo até hoje</div>
-  <h2 class="section-title">O que sempre funcionou bem entre nós</h2>
+  <div class="section-label">02 — Como funcionava entre nós</div>
+  <h2 class="section-title">O modelo que sempre teve dois aportes proporcionais</h2>
 
   <div class="card">
     <p style="margin-bottom:1rem;">Quando começamos, o modelo era simples e justo: você bancava o capital do frasco (R$ 340 do seu bolso), eu fazia a aplicação no meu consultório, e dividíamos os R$ 1.020 cobrados do paciente em três partes iguais:</p>
@@ -203,16 +206,16 @@ tr:hover td { background:rgba(201,165,92,0.03); }
   <div class="alert alert-orange">
     <div class="alert-icon">⚠️</div>
     <div>
-      <strong>O que mudou — e por isso preciso ajustar.</strong> Com o aumento do fornecedor, o custo do frasco vai pra R$ 500-550 quando eu comprar sozinha. Manter os mesmos R$ 340 fixos pra cada um do split antigo não fecha mais a conta. Precisamos repensar a relação pra que continue justa pros dois.
+      <strong>Hoje, com o frasco subindo 50-100% de preço e o custo da minha estrutura crescendo, esse split fixo não cabe mais.</strong> Manter R$ 340 fixos pra cada um significa que eu vou ficar trabalhando pra pagar o aluguel e a Amanda enquanto o lucro real fica todo do lado do capital. Precisamos repensar pra que continue justo pros dois.
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- 03. Proposta -->
+<!-- 03. A proposta em fases -->
 <section>
-  <div class="section-label">03 — A minha proposta</div>
+  <div class="section-label">03 — A proposta</div>
   <h2 class="section-title">Dois momentos, dois modelos</h2>
   <p class="section-desc">A transição vai ser gradual. O estoque atual de Junho dura aproximadamente 1 ano, então temos tempo. Quero dividir em duas fases bem claras:</p>
 
@@ -243,69 +246,58 @@ tr:hover td { background:rgba(201,165,92,0.03); }
       </table>
     </div>
 
-    <p style="margin-top:1rem; font-size:0.95rem;"><strong>Nada muda nessa fase.</strong> Você continua recebendo exatamente como antes. Eu continuo aplicando. Quem aportou capital, ganha capital.</p>
+    <p style="margin-top:1rem; font-size:0.95rem;"><strong>Nada muda nessa fase pros seus pacientes atuais.</strong> Você continua recebendo exatamente como antes. Eu continuo aplicando. Quem aportou capital, ganha capital.</p>
   </div>
 
   <!-- FASE 2 -->
   <div class="fase f2">
     <div class="fase-label">Fase 2 — quando o estoque acabar</div>
-    <h3>Novo pedido com fornecedor mais caro — modelo de indicação</h3>
+    <h3>Novo modelo: minha tabela fixa + você cobra sua comissão</h3>
     <div class="periodo">Período: a partir de ~Maio/2027 · Após o estoque atual</div>
 
-    <p style="margin-bottom:1rem;">Quando eu precisar comprar o próximo lote sozinha (custo R$ 500-550 por frasco), o modelo do split em três partes iguais não cabe mais — porque você não estará aportando o capital do frasco. Mas eu quero manter você na operação como <strong>parceiro de indicação</strong>:</p>
+    <p style="margin-bottom:1rem;">Quando eu precisar comprar o próximo lote sozinha (custo R$ 500-550 por frasco), o split em três partes iguais não funciona mais — porque você não estará aportando o capital. Em vez de eu ficar pagando uma comissão fixa de R$ 340 (que sai do meu lucro), <strong>vou organizar minha tabela em padrão profissional</strong>:</p>
 
-    <div class="tabela-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th class="text-right">Você</th>
-            <th class="text-right">Eu</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="row-new">
-            <td>Por frasco vendido (novo preço R$ 1.400)</td>
-            <td class="text-right text-green bold">R$ 100<br><span style="font-size:0.8rem; color:var(--text2); font-weight:400;">comissão de indicação</span></td>
-            <td class="text-right">R$ 1.300<br><span style="font-size:0.8rem; color:var(--text2);">(R$ 500 custo + R$ 800 lucro/estrutura)</span></td>
-          </tr>
-        </tbody>
-      </table>
+    <ul style="padding-left:1.5rem; line-height:2; margin-bottom:1rem;">
+      <li>📊 <strong>Minha cobrança é fixa</strong>: consulta + aplicação + repasse do custo da medicação. Esse valor é meu mínimo profissional — cobre minha estrutura (aluguel + secretária + marketing + imposto + meu trabalho).</li>
+      <li>💰 <strong>Você decide quanto quer cobrar de comissão</strong> e adiciona em cima do meu preço, cobrando direto do seu paciente. Sem precisar passar pelo meu caixa.</li>
+      <li>🎯 <strong>Você tem autonomia total</strong> — quer ganhar R$ 50? R$ 100? R$ 200? Decide você, cobra do paciente, fica direto contigo.</li>
+    </ul>
+
+    <div class="exemplo-card">
+      <h4>📋 Exemplo prático — Paciente seu vai aplicar 4 doses (1 frasco)</h4>
+      <div class="exemplo-row"><span>Consulta (avaliação clínica)</span><strong class="text-accent">R$ 550</strong></div>
+      <div class="exemplo-row"><span>4 doses 7,5mg × R$ 340 (minha tabela)</span><strong class="text-accent">R$ 1.360</strong></div>
+      <div class="exemplo-row"><span>Subtotal — pra mim</span><strong class="text-accent">R$ 1.910</strong></div>
+      <div class="exemplo-row"><span>Sua comissão (você define) — ex: R$ 100</span><strong class="text-green">R$ 100</strong></div>
+      <div class="exemplo-row"><span>Paciente paga total</span><strong>R$ 2.010</strong></div>
     </div>
 
-    <p style="margin-top:1rem; font-size:0.95rem;">Você indica o paciente. Eu compro o frasco, atendo, aplico, faço o seguimento. Você recebe <strong>R$ 100 por cada paciente que vier por você</strong> — sem aportar nada, sem se preocupar com estoque, sem giro de capital.</p>
-
-    <div class="alert alert-green" style="margin-top:1rem;">
-      <div class="alert-icon">✓</div>
-      <div>
-        <strong>Por que esse valor.</strong> R$ 100 por paciente é uma comissão de indicação de ~7% sobre o preço de venda. É um valor justo de mercado pra quem indica sem aportar capital nem operar. Em medicina particular, comissões de indicação variam entre 5% e 15% — escolhi um valor central que reconhece sua importância na captação.
-      </div>
-    </div>
+    <p style="font-size:0.95rem;"><strong>Sua comissão de R$ 100 é só exemplo.</strong> Você pode cobrar R$ 200, R$ 300, ou o que considerar justo pela sua indicação e relação com o paciente. O paciente paga e divide o pagamento: você fica com sua parte direto, eu fico com a minha.</p>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- 04. O que isso significa pra você -->
+<!-- 04. O que muda pra você -->
 <section>
-  <div class="section-label">04 — O que muda na prática pra você</div>
-  <h2 class="section-title">Mais previsibilidade, menos giro de capital</h2>
+  <div class="section-label">04 — Por que esse modelo é bom pra você também</div>
+  <h2 class="section-title">Mais autonomia, menos giro de capital, sem stress</h2>
 
   <div class="card">
-    <p>Você levantou em Maio (na nossa última conversa) que o giro de capital de R$ 60k te incomodava. Esse novo modelo resolve isso:</p>
+    <p>Você levantou em Maio (na nossa última conversa) que o giro de capital de R$ 60k te incomodava. Esse novo modelo resolve isso e ainda te dá liberdade:</p>
 
     <ul style="margin-top:1.25rem; padding-left:1.5rem; line-height:2.2;">
       <li>📦 <strong>Você não compra mais frasco</strong> — eu cuido do estoque sozinha. Sem desembolso, sem giro.</li>
       <li>💰 <strong>Sem capital travado</strong> — todo o dinheiro do frasco vira meu risco (e da minha operação). Você não imobiliza nada.</li>
-      <li>🎯 <strong>Recebimento limpo</strong> — R$ 100 por paciente indicado, pagamento direto, sem cálculo de divisão.</li>
-      <li>🧠 <strong>Você foca no que faz bem</strong> — capta paciente, indica. Eu cuido do resto.</li>
+      <li>🎯 <strong>Você define seu ganho</strong> — não fica refém de nenhum split que eu definir. O que você cobrar do paciente é seu.</li>
+      <li>🧠 <strong>Foca no que você faz bem</strong> — capta paciente, indica, mantém relação. Eu cuido da operação clínica.</li>
       <li>🤝 <strong>A parceria continua</strong> — só muda o formato, não o vínculo.</li>
     </ul>
   </div>
 
   <div class="callout">
     <h3>🔄 E os pacientes que você já tem em tratamento?</h3>
-    <p style="font-size:0.95rem;">Quem está no meio do tratamento atual continua no preço/modelo antigo. Não vou trocar regra com paciente em curso — não é bom pra você nem pra mim. A tabela nova entra só pra pacientes novos que iniciarem após esgotarmos o estoque do pedido 276539.</p>
+    <p style="font-size:0.95rem;">Quem está no meio do tratamento atual continua no preço/modelo da Fase 1 (split antigo R$ 680 pra você, R$ 340 pra mim). Não vou trocar regra com paciente em curso — não é bom pra você nem pra mim. A tabela nova entra só pra pacientes novos que iniciarem após esgotarmos o estoque do pedido 276539.</p>
   </div>
 </section>
 
@@ -313,8 +305,8 @@ tr:hover td { background:rgba(201,165,92,0.03); }
 
 <!-- 05. Resumo -->
 <section>
-  <div class="section-label">05 — Resumo da proposta</div>
-  <h2 class="section-title">O que pediria que você considerasse</h2>
+  <div class="section-label">05 — Resumo lado a lado</div>
+  <h2 class="section-title">Antes × Depois</h2>
 
   <div class="card">
     <div class="tabela-wrap">
@@ -322,8 +314,8 @@ tr:hover td { background:rgba(201,165,92,0.03); }
         <thead>
           <tr>
             <th>Tópico</th>
-            <th>Hoje (Fase 1)</th>
-            <th>Depois (Fase 2)</th>
+            <th>Fase 1 — Hoje</th>
+            <th>Fase 2 — Após estoque acabar</th>
           </tr>
         </thead>
         <tbody>
@@ -338,24 +330,24 @@ tr:hover td { background:rgba(201,165,92,0.03); }
             <td>R$ 500-550</td>
           </tr>
           <tr>
-            <td><strong>Preço ao paciente (frasco)</strong></td>
-            <td class="text-text2">R$ 1.020</td>
-            <td>R$ 1.400</td>
-          </tr>
-          <tr>
-            <td><strong>Você recebe por frasco</strong></td>
-            <td class="text-accent bold">R$ 680</td>
-            <td class="text-green bold">R$ 100 (comissão)</td>
-          </tr>
-          <tr>
             <td><strong>Seu capital aportado</strong></td>
             <td class="text-text2">R$ 340/frasco</td>
-            <td class="text-green">R$ 0</td>
+            <td class="text-green bold">R$ 0</td>
+          </tr>
+          <tr>
+            <td><strong>Como você ganha</strong></td>
+            <td class="text-accent">Split R$ 680 (fixo)</td>
+            <td class="text-green">Comissão livre cobrada do paciente</td>
+          </tr>
+          <tr>
+            <td><strong>Quem define o quanto você ganha</strong></td>
+            <td class="text-text2">Acordo entre nós</td>
+            <td class="text-green bold">Você decide sozinho</td>
           </tr>
           <tr>
             <td><strong>Seu risco</strong></td>
             <td class="text-text2">Capital travado em estoque</td>
-            <td class="text-green">Zero</td>
+            <td class="text-green bold">Zero</td>
           </tr>
           <tr>
             <td><strong>Início</strong></td>
@@ -368,7 +360,7 @@ tr:hover td { background:rgba(201,165,92,0.03); }
   </div>
 
   <div class="quote">
-    Tiago, a nossa parceria nunca foi só sobre o frasco. Foi sobre confiança, sobre você ter visto valor no meu trabalho e me trazer paciente, sobre eu ter visto valor no seu paciente e cuidado dele com o mesmo carinho que cuido dos meus. Quero manter isso. Esse novo modelo é só uma forma de continuarmos sem que o aumento do mercado coloque qualquer um de nós na posição difícil em que você esteve em Maio.
+    Tiago, a nossa parceria nunca foi só sobre o frasco. Foi sobre confiança, sobre você ter visto valor no meu trabalho e me trazer paciente, sobre eu ter visto valor no seu paciente e cuidado dele com o mesmo carinho que cuido dos meus. Quero manter isso. Esse novo modelo é só uma forma de continuarmos sem que o aumento do mercado coloque qualquer um de nós na posição difícil em que você esteve em Maio. E ainda te dá mais liberdade do que você tinha antes.
   </div>
 </section>
 
@@ -376,22 +368,22 @@ tr:hover td { background:rgba(201,165,92,0.03); }
 
 <!-- 06. Próximos passos -->
 <section>
-  <div class="section-label">06 — Próximos passos</div>
-  <h2 class="section-title">Como seguir daqui</h2>
+  <div class="section-label">06 — Como seguir</div>
+  <h2 class="section-title">Próximos passos</h2>
 
   <div class="card">
     <ol style="padding-left:1.5rem; line-height:2.2;">
-      <li>Você lê esse material com calma.</li>
-      <li>Se tiver dúvida ou contraproposta, conversamos — sem pressa.</li>
-      <li>Quando alinharmos, formalizamos em um documento simples (mais ou menos um termo de parceria com a comissão de indicação).</li>
-      <li>Fase 1 segue como está. Fase 2 entra automaticamente quando o estoque acabar.</li>
+      <li><strong>Você lê esse material com calma.</strong></li>
+      <li><strong>Se tiver dúvida ou contraproposta, conversamos</strong> — sem pressa.</li>
+      <li><strong>Quando alinharmos, formalizamos</strong> em um documento simples (mais ou menos um termo de parceria com a comissão de indicação).</li>
+      <li><strong>Fase 1 segue como está.</strong> Fase 2 entra automaticamente quando o estoque acabar.</li>
     </ol>
   </div>
 
-  <div class="alert alert-accent">
+  <div class="alert alert-green">
     <div class="alert-icon">💬</div>
     <div>
-      <strong>Estou aberta pra ajustar.</strong> Esse documento é uma proposta, não uma decisão unilateral. Se você acha que a comissão deveria ser diferente, ou tem outra forma de continuar parceiro, vamos sentar e conversar. O que não dá é manter o R$ 340 fixo de antes — porque o mercado não permite mais isso pra mim sozinha.
+      <strong>Estou aberta pra ajustar.</strong> Esse documento é uma proposta, não uma decisão unilateral. Se você acha que o formato da Fase 2 deveria ser diferente, ou tem outra forma de continuar parceiro, vamos sentar e conversar. O que não dá é manter o R$ 340 fixo de antes — porque o mercado não permite mais isso pra mim sozinha.
     </div>
   </div>
 </section>
