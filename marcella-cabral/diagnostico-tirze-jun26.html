@@ -209,9 +209,119 @@ tr:hover td { background:rgba(201,165,92,0.03); }
 
 <div class="divider"></div>
 
-<!-- 02. Por que está assim -->
+<!-- 02. O que ela cobra HOJE -->
 <section>
-  <div class="section-label">02 — Por que está assim</div>
+  <div class="section-label">02 — O que você cobra hoje</div>
+  <h2 class="section-title">Sua tabela atual (dados reais das suas planilhas)</h2>
+  <p class="section-desc">Cruzamos as 2 planilhas de controle suas (pacientes Tiago + pacientes Particular). Esses são os valores que você efetivamente cobra hoje — não estimativa.</p>
+
+  <div class="card">
+    <h3 style="font-family:var(--font-display); font-size:1.2rem; margin-bottom:1rem; color:var(--accent);">💉 Por DOSE individual</h3>
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo de paciente</th>
+            <th class="text-right">Média cobrada</th>
+            <th class="text-right">Faixa praticada</th>
+            <th class="text-right">Casos analisados</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Paciente Tiago</strong></td>
+            <td class="text-right text-accent bold">R$ 117</td>
+            <td class="text-right text-text2">R$ 88 — R$ 138</td>
+            <td class="text-right text-text2">52 cobranças</td>
+          </tr>
+          <tr>
+            <td><strong>Paciente Particular</strong></td>
+            <td class="text-right text-accent bold">R$ 170</td>
+            <td class="text-right text-text2">R$ 137 — R$ 198</td>
+            <td class="text-right text-text2">~20 cobranças</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.85rem; color:var(--text2); margin-top:0.75rem;">⭐ Particular paga em média <strong>R$ 53 a mais</strong> por dose que paciente do Tiago (porque tem o desconto do split).</p>
+  </div>
+
+  <div class="card">
+    <h3 style="font-family:var(--font-display); font-size:1.2rem; margin-bottom:1rem; color:var(--accent);">🩺 Por CONSULTA (avaliação clínica)</h3>
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th class="text-right">Valor</th>
+            <th class="text-right">Cobranças em Abril</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Antigo / Pacientes Tiago</strong></td>
+            <td class="text-right text-text2">R$ 200</td>
+            <td class="text-right text-text2">19 cobranças</td>
+          </tr>
+          <tr>
+            <td><strong>Novo padrão</strong></td>
+            <td class="text-right text-accent bold">R$ 390</td>
+            <td class="text-right text-text2">7 cobranças</td>
+          </tr>
+          <tr>
+            <td><strong>Pontual</strong></td>
+            <td class="text-right text-text2">R$ 450</td>
+            <td class="text-right text-text2">1 cobrança</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.85rem; color:var(--text2); margin-top:0.75rem;">⭐ Você já está em transição (subindo R$ 200 → R$ 390). 26% dos pacientes já pagam o novo preço.</p>
+  </div>
+
+  <div class="card">
+    <h3 style="font-family:var(--font-display); font-size:1.2rem; margin-bottom:1rem; color:var(--accent);">📋 Visita típica de paciente (consulta + doses juntas)</h3>
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Cenário</th>
+            <th class="text-right">Conta</th>
+            <th class="text-right">Total visita</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-bad">
+            <td>Paciente Tiago vem aplicar <strong>1 dose</strong></td>
+            <td class="text-right text-text2">R$ 117 + R$ 200</td>
+            <td class="text-right text-red bold">R$ 317</td>
+          </tr>
+          <tr class="row-mid">
+            <td>Paciente Tiago vem aplicar <strong>4 doses</strong> + consulta</td>
+            <td class="text-right text-text2">R$ 468 + R$ 200</td>
+            <td class="text-right text-orange bold">R$ 668</td>
+          </tr>
+          <tr class="row-mid">
+            <td>Paciente Particular vem aplicar <strong>1 dose</strong> + consulta</td>
+            <td class="text-right text-text2">R$ 170 + R$ 390</td>
+            <td class="text-right text-orange bold">R$ 560</td>
+          </tr>
+          <tr class="row-good">
+            <td>Paciente Particular vem aplicar <strong>4 doses</strong> + consulta</td>
+            <td class="text-right text-text2">R$ 680 + R$ 390</td>
+            <td class="text-right text-green bold">R$ 1.070</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 03. Por que está assim -->
+<section>
+  <div class="section-label">03 — Por que está sobrando pouco</div>
   <h2 class="section-title">Custo da sua estrutura é maior do que você cobra</h2>
   <p class="section-desc">A matemática simples: você atendeu 35 pacientes em Abril. Cada paciente, só de estrutura (aluguel, Amanda, marketing, imposto), custa R$ 412. Cobrar menos que isso por visita = trabalhar de graça pra pagar fornecedor.</p>
 
@@ -220,52 +330,47 @@ tr:hover td { background:rgba(201,165,92,0.03); }
       <table>
         <thead>
           <tr>
-            <th>Tipo de cobrança</th>
-            <th class="text-right">Cobra hoje</th>
-            <th class="text-right">Custo estrutura</th>
-            <th class="text-right">Sobra por atend</th>
+            <th>Cenário</th>
+            <th class="text-right">Você cobra</th>
+            <th class="text-right">− Custo estrutura</th>
+            <th class="text-right">Sobra real</th>
           </tr>
         </thead>
         <tbody>
           <tr class="row-bad">
-            <td><strong>1 dose 2,5mg Particular</strong></td>
-            <td class="text-right">R$ 138</td>
+            <td>Paciente Tiago vem aplicar <strong>1 dose</strong></td>
+            <td class="text-right">R$ 317</td>
             <td class="text-right text-red">R$ 412</td>
-            <td class="text-right text-red bold">−R$ 274</td>
-          </tr>
-          <tr class="row-bad">
-            <td><strong>1 dose 7,5mg Particular</strong></td>
-            <td class="text-right">R$ 188</td>
-            <td class="text-right text-red">R$ 412</td>
-            <td class="text-right text-red bold">−R$ 224</td>
-          </tr>
-          <tr class="row-bad">
-            <td><strong>1 consulta R$ 390</strong></td>
-            <td class="text-right">R$ 390</td>
-            <td class="text-right text-red">R$ 412</td>
-            <td class="text-right text-red bold">−R$ 22</td>
+            <td class="text-right text-red bold">−R$ 95 🚨</td>
           </tr>
           <tr class="row-mid">
-            <td><strong>Consulta + 1 dose (visita típica nova)</strong></td>
-            <td class="text-right">R$ 528</td>
+            <td>Paciente Tiago + 4 doses + consulta</td>
+            <td class="text-right">R$ 668</td>
             <td class="text-right text-red">R$ 412</td>
-            <td class="text-right text-orange bold">+R$ 116</td>
+            <td class="text-right text-orange bold">+R$ 256</td>
+          </tr>
+          <tr class="row-mid">
+            <td>Particular + 1 dose + consulta</td>
+            <td class="text-right">R$ 560</td>
+            <td class="text-right text-red">R$ 412</td>
+            <td class="text-right text-orange bold">+R$ 148</td>
           </tr>
           <tr class="row-good">
-            <td><strong>Consulta + 4 doses (visita típica antiga)</strong></td>
-            <td class="text-right">R$ 942</td>
+            <td>Particular + 4 doses + consulta</td>
+            <td class="text-right">R$ 1.070</td>
             <td class="text-right text-red">R$ 412</td>
-            <td class="text-right text-green bold">+R$ 530</td>
+            <td class="text-right text-green bold">+R$ 658</td>
           </tr>
         </tbody>
       </table>
     </div>
+    <p style="font-size:0.85rem; color:var(--text2); margin-top:0.75rem;">⚠️ Atenção: esses números NÃO descontam ainda o repasse de 50% pro Tiago nas doses dele. Quando entra esse desconto, o cenário Tiago fica ainda pior.</p>
   </div>
 
   <div class="alert alert-orange">
     <div class="alert-icon">⚠️</div>
     <div>
-      <strong>O que está te salvando hoje é o paciente que leva 4-5 doses por visita.</strong> Esse paciente paga R$ 900-1.100 numa visita só (consulta + várias doses) — e isso cobre o R$ 412 da estrutura com folga. Mas o paciente que vem só pra aplicar 1 dose individual (R$ 138) está te dando prejuízo direto. Isso explica por que algumas semanas você está no positivo e outras no negativo: depende do MIX de paciente.
+      <strong>O que está te salvando hoje é o paciente que leva 4-5 doses por visita.</strong> Esse paciente paga R$ 900-1.100 numa visita só (consulta + várias doses) — e isso cobre o R$ 412 da estrutura com folga. Mas o paciente que vem só pra aplicar 1 dose individual (Tiago R$ 317) está te dando prejuízo direto. Isso explica por que algumas semanas você está no positivo e outras no negativo: depende do MIX de paciente.
     </div>
   </div>
 </section>
@@ -274,7 +379,7 @@ tr:hover td { background:rgba(201,165,92,0.03); }
 
 <!-- 03. O plano -->
 <section>
-  <div class="section-label">03 — O plano de transição</div>
+  <div class="section-label">04 — O plano de transição</div>
   <h2 class="section-title">4 fases para sair do prejuízo, lucrar e se posicionar premium</h2>
   <p class="section-desc">A ideia não é subir tudo de uma vez (paciente foge). É subir gradualmente, justificando: primeiro pra cobrir custos (sobreviver), depois pra ter lucro real, depois pra alinhar com o mercado premium da Barra.</p>
 
@@ -319,7 +424,7 @@ tr:hover td { background:rgba(201,165,92,0.03); }
 
 <!-- 04. Tabela de preços por fase -->
 <section>
-  <div class="section-label">04 — A tabela em cada fase</div>
+  <div class="section-label">05 — A tabela em cada fase</div>
   <h2 class="section-title">Quanto você passa a cobrar em cada etapa</h2>
   <p class="section-desc">Cobrança separada: consulta de um lado, aplicação (dose) de outro. Paciente entende e paga em momentos diferentes.</p>
 
@@ -458,7 +563,7 @@ tr:hover td { background:rgba(201,165,92,0.03); }
 
 <!-- 05. Projeção financeira -->
 <section>
-  <div class="section-label">05 — Quanto sobra em cada fase</div>
+  <div class="section-label">06 — Quanto sobra em cada fase</div>
   <h2 class="section-title">A sobra cresce de R$ 3.647 → R$ 35.000</h2>
   <p class="section-desc">Premissa: mesmo volume de Abril (35 atendimentos/mês). Não precisa atender mais paciente — só precisa cobrar o justo.</p>
 
@@ -541,7 +646,7 @@ tr:hover td { background:rgba(201,165,92,0.03); }
 
 <!-- 06. Linha do tempo -->
 <section>
-  <div class="section-label">06 — Como implementar</div>
+  <div class="section-label">07 — Como implementar</div>
   <h2 class="section-title">Cronograma de transição (sem perder paciente)</h2>
 
   <div class="timeline">
@@ -575,7 +680,7 @@ tr:hover td { background:rgba(201,165,92,0.03); }
 
 <!-- 07. Decisões -->
 <section>
-  <div class="section-label">07 — Decisões pra fechar</div>
+  <div class="section-label">08 — Decisões pra fechar</div>
   <h2 class="section-title">3 perguntas e estamos prontas pra começar</h2>
 
   <div class="card">
