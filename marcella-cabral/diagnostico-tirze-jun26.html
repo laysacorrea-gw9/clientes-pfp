@@ -216,34 +216,119 @@ tr:hover td { background:rgba(201,165,92,0.03); }
   <p class="section-desc">Cruzamos as 2 planilhas de controle suas (pacientes Tiago + pacientes Particular). Esses são os valores que você efetivamente cobra hoje — não estimativa.</p>
 
   <div class="card">
-    <h3 style="font-family:var(--font-display); font-size:1.2rem; margin-bottom:1rem; color:var(--accent);">💉 Por DOSE individual</h3>
+    <h3 style="font-family:var(--font-display); font-size:1.2rem; margin-bottom:1rem; color:var(--accent);">💉 Por DOSE individual (valores reais das planilhas)</h3>
     <div class="tabela-wrap">
       <table>
         <thead>
           <tr>
-            <th>Tipo de paciente</th>
-            <th class="text-right">Média cobrada</th>
-            <th class="text-right">Faixa praticada</th>
-            <th class="text-right">Casos analisados</th>
+            <th>Dose</th>
+            <th class="text-right">Tiago (média)</th>
+            <th class="text-right">Particular (média)</th>
+            <th class="text-right">Diferença</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>Paciente Tiago</strong></td>
-            <td class="text-right text-accent bold">R$ 117</td>
-            <td class="text-right text-text2">R$ 88 — R$ 138</td>
-            <td class="text-right text-text2">52 cobranças</td>
+            <td><strong>1,25mg</strong></td>
+            <td class="text-right">R$ 81</td>
+            <td class="text-right text-text2">— (raro)</td>
+            <td class="text-right text-text2">—</td>
           </tr>
           <tr>
-            <td><strong>Paciente Particular</strong></td>
-            <td class="text-right text-accent bold">R$ 170</td>
-            <td class="text-right text-text2">R$ 137 — R$ 198</td>
-            <td class="text-right text-text2">~20 cobranças</td>
+            <td><strong>2,5mg</strong></td>
+            <td class="text-right">R$ 130</td>
+            <td class="text-right text-accent bold">R$ 178</td>
+            <td class="text-right text-green">+R$ 48</td>
+          </tr>
+          <tr>
+            <td><strong>3,75mg</strong></td>
+            <td class="text-right">R$ 194</td>
+            <td class="text-right text-accent bold">R$ 222</td>
+            <td class="text-right text-green">+R$ 28</td>
+          </tr>
+          <tr>
+            <td><strong>5mg</strong></td>
+            <td class="text-right">R$ 242</td>
+            <td class="text-right text-accent bold">R$ 249</td>
+            <td class="text-right text-green">+R$ 7</td>
+          </tr>
+          <tr>
+            <td><strong>7,5mg</strong></td>
+            <td class="text-right text-text2">— (raro)</td>
+            <td class="text-right text-text2">R$ 180 (Pallermo familiar)</td>
+            <td class="text-right text-text2">—</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p style="font-size:0.85rem; color:var(--text2); margin-top:0.75rem;">⭐ Particular paga em média <strong>R$ 53 a mais</strong> por dose que paciente do Tiago (porque tem o desconto do split).</p>
+    <p style="font-size:0.85rem; color:var(--text2); margin-top:0.75rem;">⭐ Particular paga consistentemente mais do que Tiago — mas a diferença é menor do que poderia ser. Em algumas doses (5mg) quase não há diferença, o que mostra que mesmo paciente Particular está pagando preço "Tiago".</p>
+  </div>
+
+  <div class="card">
+    <h3 style="font-family:var(--font-display); font-size:1.2rem; margin-bottom:1rem; color:var(--accent);">🧴 Por FRASCO completo (paciente leva pra casa)</h3>
+    <div class="tabela-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Paciente</th>
+            <th class="text-right">Frasco</th>
+            <th class="text-right">Valor cobrado</th>
+            <th>Quando</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Eduardo Camilo</td>
+            <td class="text-right text-text2">60mg</td>
+            <td class="text-right">R$ 1.392</td>
+            <td class="text-text2">Preço mais antigo</td>
+          </tr>
+          <tr>
+            <td>Eduarda Camilo</td>
+            <td class="text-right text-text2">60mg</td>
+            <td class="text-right">R$ 1.392</td>
+            <td class="text-text2">Família</td>
+          </tr>
+          <tr>
+            <td><strong>Thais Gusmão</strong></td>
+            <td class="text-right text-text2">60mg</td>
+            <td class="text-right text-accent">R$ 2.000</td>
+            <td class="text-text2">Particular</td>
+          </tr>
+          <tr>
+            <td><strong>Daniele Gusmão</strong></td>
+            <td class="text-right text-text2">90mg</td>
+            <td class="text-right text-accent">R$ 2.200</td>
+            <td class="text-text2">Particular</td>
+          </tr>
+          <tr>
+            <td>Carolina de Paula (SP)</td>
+            <td class="text-right text-text2">60mg</td>
+            <td class="text-right text-accent bold">R$ 2.657</td>
+            <td class="text-text2">Preço subindo ⬆️</td>
+          </tr>
+          <tr>
+            <td>Alessandro Sá (Brasília)</td>
+            <td class="text-right text-text2">60mg</td>
+            <td class="text-right text-accent bold">R$ 3.305</td>
+            <td class="text-text2">Preço novo</td>
+          </tr>
+          <tr class="row-good">
+            <td>Wellington Mata (Tiago)</td>
+            <td class="text-right text-text2">20mg</td>
+            <td class="text-right text-accent">R$ 1.102</td>
+            <td class="text-text2">Tiago</td>
+          </tr>
+          <tr class="row-good">
+            <td><strong>Claudio Povoa (Tiago)</strong></td>
+            <td class="text-right text-text2">60mg</td>
+            <td class="text-right text-accent bold">R$ 3.300</td>
+            <td class="text-text2">Tiago</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.85rem; color:var(--text2); margin-top:0.75rem;">⭐ Você JÁ ESTÁ subindo o preço do frasco 60mg: pacientes antigos pagaram R$ 1.392, intermediários R$ 2.000-2.200, recentes R$ 2.657-3.305. <strong>O caminho está certo — só precisamos consolidar essa tabela em padrão único.</strong></p>
   </div>
 
   <div class="card">
@@ -292,24 +377,29 @@ tr:hover td { background:rgba(201,165,92,0.03); }
         </thead>
         <tbody>
           <tr class="row-bad">
-            <td>Paciente Tiago vem aplicar <strong>1 dose</strong></td>
-            <td class="text-right text-text2">R$ 117 + R$ 200</td>
-            <td class="text-right text-red bold">R$ 317</td>
+            <td>Paciente Tiago vem aplicar <strong>4 doses 2,5mg</strong> + consulta</td>
+            <td class="text-right text-text2">4×R$ 130 + R$ 200</td>
+            <td class="text-right text-red bold">R$ 720</td>
           </tr>
           <tr class="row-mid">
-            <td>Paciente Tiago vem aplicar <strong>4 doses</strong> + consulta</td>
-            <td class="text-right text-text2">R$ 468 + R$ 200</td>
-            <td class="text-right text-orange bold">R$ 668</td>
+            <td>Paciente Tiago aplica <strong>5 doses 1,25mg</strong> + consulta</td>
+            <td class="text-right text-text2">5×R$ 81 + R$ 200</td>
+            <td class="text-right text-orange bold">R$ 605</td>
           </tr>
           <tr class="row-mid">
-            <td>Paciente Particular vem aplicar <strong>1 dose</strong> + consulta</td>
-            <td class="text-right text-text2">R$ 170 + R$ 390</td>
-            <td class="text-right text-orange bold">R$ 560</td>
+            <td>Paciente Particular vem aplicar <strong>4 doses 3,75mg</strong> + consulta</td>
+            <td class="text-right text-text2">4×R$ 222 + R$ 390</td>
+            <td class="text-right text-orange bold">R$ 1.278</td>
           </tr>
           <tr class="row-good">
-            <td>Paciente Particular vem aplicar <strong>4 doses</strong> + consulta</td>
-            <td class="text-right text-text2">R$ 680 + R$ 390</td>
-            <td class="text-right text-green bold">R$ 1.070</td>
+            <td>Paciente Particular vem aplicar <strong>4 doses 5mg</strong> + consulta</td>
+            <td class="text-right text-text2">4×R$ 249 + R$ 390</td>
+            <td class="text-right text-green bold">R$ 1.386</td>
+          </tr>
+          <tr class="row-good">
+            <td><strong>Particular compra frasco 60mg + 1 consulta</strong></td>
+            <td class="text-right text-text2">R$ 2.149 + R$ 390</td>
+            <td class="text-right text-green bold">R$ 2.539 ⭐</td>
           </tr>
         </tbody>
       </table>
@@ -338,33 +428,39 @@ tr:hover td { background:rgba(201,165,92,0.03); }
         </thead>
         <tbody>
           <tr class="row-bad">
-            <td>Paciente Tiago vem aplicar <strong>1 dose</strong></td>
-            <td class="text-right">R$ 317</td>
+            <td>Paciente Tiago + 4 doses 2,5mg + consulta</td>
+            <td class="text-right">R$ 720</td>
             <td class="text-right text-red">R$ 412</td>
-            <td class="text-right text-red bold">−R$ 95 🚨</td>
+            <td class="text-right text-orange bold">+R$ 308</td>
           </tr>
           <tr class="row-mid">
-            <td>Paciente Tiago + 4 doses + consulta</td>
-            <td class="text-right">R$ 668</td>
+            <td>Paciente Tiago + 5 doses 1,25mg + consulta</td>
+            <td class="text-right">R$ 605</td>
             <td class="text-right text-red">R$ 412</td>
-            <td class="text-right text-orange bold">+R$ 256</td>
+            <td class="text-right text-orange bold">+R$ 193</td>
           </tr>
           <tr class="row-mid">
-            <td>Particular + 1 dose + consulta</td>
-            <td class="text-right">R$ 560</td>
+            <td>Particular + 4 doses 3,75mg + consulta</td>
+            <td class="text-right">R$ 1.278</td>
             <td class="text-right text-red">R$ 412</td>
-            <td class="text-right text-orange bold">+R$ 148</td>
+            <td class="text-right text-green bold">+R$ 866</td>
           </tr>
           <tr class="row-good">
-            <td>Particular + 4 doses + consulta</td>
-            <td class="text-right">R$ 1.070</td>
+            <td>Particular + 4 doses 5mg + consulta</td>
+            <td class="text-right">R$ 1.386</td>
             <td class="text-right text-red">R$ 412</td>
-            <td class="text-right text-green bold">+R$ 658</td>
+            <td class="text-right text-green bold">+R$ 974</td>
+          </tr>
+          <tr class="row-good">
+            <td><strong>Particular compra frasco 60mg + consulta ⭐</strong></td>
+            <td class="text-right">R$ 2.539</td>
+            <td class="text-right text-red">R$ 412</td>
+            <td class="text-right text-green bold">+R$ 2.127 ⭐</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p style="font-size:0.85rem; color:var(--text2); margin-top:0.75rem;">⚠️ Atenção: esses números NÃO descontam ainda o repasse de 50% pro Tiago nas doses dele. Quando entra esse desconto, o cenário Tiago fica ainda pior.</p>
+    <p style="font-size:0.85rem; color:var(--text2); margin-top:0.75rem;">⚠️ Atenção: esses números NÃO descontam ainda o REPASSE 50% pro Tiago nas vendas dele. Cada R$ 308 que sobra de paciente Tiago vira ~R$ 154 reais pra você (resto vai pra ele). E não desconta o custo do frasco/medicação ainda. <strong>Conclusão: frasco completo Particular = melhor cenário disparado.</strong></p>
   </div>
 
   <div class="alert alert-orange">
@@ -385,11 +481,11 @@ tr:hover td { background:rgba(201,165,92,0.03); }
 
   <div class="compare">
     <div class="compare-card future">
-      <h4>🟢 Modelo FRASCO completo (1 paciente, 60 dias de tratamento)</h4>
+      <h4>🟢 Modelo FRASCO completo (1 paciente Particular, ~60 dias)</h4>
       <div class="fluxo">
         <div class="fluxo-row in"><span>1 consulta inicial</span><strong class="text-green">R$ 390</strong></div>
-        <div class="fluxo-row in"><span>1 frasco 60mg (8 doses 7,5mg)</span><strong class="text-green">R$ 2.000</strong></div>
-        <div class="fluxo-row out"><span>− Custo do frasco</span><strong class="text-red">− R$ 950</strong></div>
+        <div class="fluxo-row in"><span>1 frasco 60mg (Thais R$ 2.000)</span><strong class="text-green">R$ 2.000</strong></div>
+        <div class="fluxo-row out"><span>− Custo do frasco (com Tiago)</span><strong class="text-red">− R$ 950</strong></div>
         <div class="fluxo-row out"><span>− Estrutura (2 visitas)</span><strong class="text-red">− R$ 824</strong></div>
         <div class="fluxo-row final" style="background:var(--green-dim); border-left:3px solid var(--green);"><span>Sobra pra você</span><strong class="text-green">R$ 616</strong></div>
       </div>
@@ -397,34 +493,39 @@ tr:hover td { background:rgba(201,165,92,0.03); }
     </div>
 
     <div class="compare-card now">
-      <h4>🔴 Modelo DOSE individual (mesmo paciente, mesmas 8 doses, 60 dias)</h4>
+      <h4>🔴 Modelo DOSE individual (mesma medicação repartida)</h4>
       <div class="fluxo">
-        <div class="fluxo-row in"><span>2 consultas (a cada 30 dias)</span><strong class="text-green">R$ 780</strong></div>
-        <div class="fluxo-row in"><span>8 doses 7,5mg × R$ 188</span><strong class="text-green">R$ 1.504</strong></div>
-        <div class="fluxo-row out"><span>− Custo das doses (1 frasco)</span><strong class="text-red">− R$ 950</strong></div>
-        <div class="fluxo-row out"><span>− Estrutura (8 visitas)</span><strong class="text-red">− R$ 3.296</strong></div>
-        <div class="fluxo-row final" style="background:var(--red-dim); border-left:3px solid var(--red);"><span>Sobra pra você</span><strong class="text-red">− R$ 1.962</strong></div>
+        <div class="fluxo-row in"><span>2 consultas Particular (R$ 390)</span><strong class="text-green">R$ 780</strong></div>
+        <div class="fluxo-row in"><span>4 doses 5mg × R$ 249 (Particular)</span><strong class="text-green">R$ 996</strong></div>
+        <div class="fluxo-row out"><span>− Custo do frasco usado</span><strong class="text-red">− R$ 950</strong></div>
+        <div class="fluxo-row out"><span>− Estrutura (4 visitas)</span><strong class="text-red">− R$ 1.648</strong></div>
+        <div class="fluxo-row final" style="background:var(--red-dim); border-left:3px solid var(--red);"><span>Sobra pra você</span><strong class="text-red">− R$ 822</strong></div>
       </div>
-      <p style="margin-top:0.75rem; font-size:0.9rem; color:var(--text2);"><strong>8 visitas em 60 dias</strong> (1 aplicação por semana). Estrutura é cobrada 8 vezes. Resultado: prejuízo de quase R$ 2 mil.</p>
+      <p style="margin-top:0.75rem; font-size:0.9rem; color:var(--text2);"><strong>4 visitas em 60 dias</strong> (1 aplicação a cada 15 dias). Estrutura é cobrada 4 vezes. Mesmo cobrando R$ 249 a dose, dá prejuízo.</p>
     </div>
   </div>
 
   <div class="alert alert-green">
     <div class="alert-icon">💎</div>
     <div>
-      <strong>Diferença líquida no MESMO paciente, MESMA medicação: R$ 2.578 por tratamento de 60 dias.</strong> O frasco é melhor pra você (1 visita em vez de 8) E pra paciente (não precisa voltar toda semana, tem o frasco em casa). É a estratégia que <strong>tem que virar o padrão pra todo paciente novo</strong>.
+      <strong>Diferença líquida no MESMO paciente Particular, MESMA medicação: R$ 1.438 por tratamento de 60 dias.</strong> O frasco é melhor pra você (1 visita em vez de 4) E pra paciente (não precisa voltar tanto, tem o frasco em casa). É a estratégia que <strong>tem que virar o padrão pra todo paciente novo Particular</strong>.
     </div>
   </div>
 
   <div class="card" style="margin-top:1.5rem;">
-    <h3 style="font-family:var(--font-display); font-size:1.2rem; margin-bottom:1rem; color:var(--accent);">💡 Como apresentar pro paciente novo</h3>
-    <p style="margin-bottom:1rem;">Em vez de "quanto custa uma dose", você muda a conversa:</p>
+    <h3 style="font-family:var(--font-display); font-size:1.2rem; margin-bottom:1rem; color:var(--accent);">💡 Você JÁ está fazendo isso — só precisa consolidar</h3>
+    <p style="margin-bottom:1rem;">Olhando os 6 frascos completos que você vendeu pra Particular nos últimos meses, dá pra ver a evolução:</p>
+    <ul style="padding-left:1.5rem; line-height:2; font-size:0.95rem;">
+      <li><strong>Mais antigos:</strong> Eduardo/Eduarda Camilo a R$ 1.392 (próximo do custo)</li>
+      <li><strong>Intermediários:</strong> Thais R$ 2.000 / Daniele R$ 2.200</li>
+      <li><strong>Mais recentes:</strong> Carolina R$ 2.657 / Alessandro R$ 3.305 ⭐</li>
+    </ul>
+    <p style="margin-top:1rem;"><strong>Você já chegou a R$ 3.305 num paciente Particular (Alessandro).</strong> Ou seja, a tabela nova já existe na prática — só falta padronizar pra todo paciente Particular novo entrar nesse padrão.</p>
     <div class="quote" style="margin:1rem 0;">
-      Pro seu tratamento de Tirzepatida de 60 dias, eu trabalho com dois formatos:
-      <br>(1) você compra o frasco completo aqui R$ 2.000 e aplica em casa (mais cômodo, mais barato no total), ou
-      <br>(2) você vem aqui aplicar semanalmente e paga por dose. Qual prefere?
+      Pro seu tratamento de Tirzepatida, eu trabalho com dois formatos:
+      <br>(1) você compra o frasco completo aqui (R$ 2.500-3.300 dependendo do tamanho) e aplica em casa — mais cômodo, sem precisar voltar toda semana, ou
+      <br>(2) você vem aqui aplicar e paga por dose. Qual prefere?
     </div>
-    <p style="margin-top:0.75rem; font-size:0.95rem;">Maioria escolhe o frasco quando entende a vantagem de comodidade. Quem não tem dinheiro pra pagar de uma vez fica na dose — mas é minoria. <strong>Apresentar frasco como PRIMEIRA opção muda o jogo.</strong></p>
   </div>
 
   <div class="callout">
